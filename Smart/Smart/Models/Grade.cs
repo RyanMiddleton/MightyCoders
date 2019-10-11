@@ -13,6 +13,9 @@ namespace Smart.Models
         public int Id { get; set; }
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
+        [Required]
+        [Display(Name = "Assessment")]
+        public int AssessmentId { get; set; }
         [ForeignKey("AssessmentId")]
         public virtual Assessment Assessment { get; set; }
         public double Score { get; set; }

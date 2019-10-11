@@ -11,8 +11,13 @@ namespace Smart.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "Term")]
+        public int TermId { get; set; }
         [ForeignKey("TermId")]
         public virtual Term Term { get; set; }
+        public string ClassName { get; set; }
+        public string InstructorName { get; set; } 
         public virtual ICollection<Assessment> Assessments { get; set; }
     }
 }

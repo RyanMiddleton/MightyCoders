@@ -25,7 +25,7 @@ namespace Smart.Models
         public byte[] Photo { get; set; }
         [Required]
         public string Status { get; set; }
-        public enum EStatus { Applicant, Student, Withdrawn, Graduate }
+        public enum EStatus { Applicant, Enrolled, Withdrawn, Graduate }
         public int PublicSchoolLevel { get; set; } // not sure how they do their grades yet
         [Display(Name = "Date of Birth")]
         public DateTime DOB { get; set; }
@@ -37,6 +37,6 @@ namespace Smart.Models
         public string Village { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }
-
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }
