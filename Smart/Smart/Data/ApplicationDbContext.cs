@@ -20,6 +20,5 @@ namespace Smart.Data
         public DbSet<Term> Term { get; set; }
         public DbSet<Attendance> Attendance { get; set; }
         public DbSet<Note> Note { get; set; }
-        public DbSet<NoteType> NoteType { get; set; }
     }
 }
