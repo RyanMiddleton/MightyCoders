@@ -480,3 +480,6 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/aspnetcore,visualstudio
 
 *.lock 
+Smart/.vs/Smart/v16/Server/sqlite3/storage.ide
+Smart/.vs/Smart/v16/Server/sqlite3/storage.ide-shm
+Smart/.vs/Smart/v16/Server/sqlite3/storage.ide-wal
