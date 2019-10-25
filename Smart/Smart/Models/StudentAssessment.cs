@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace Smart.Models
 {
-    public class Grade
+    public class StudentAssessment
     {
         [Key]
-        public int Id { get; set; }
-        [ForeignKey("StudentId")]
-        public virtual Student Student { get; set; }
         [Required]
         [Display(Name = "Assessment")]
         public int AssessmentId { get; set; }
-        [ForeignKey("AssessmentId")]
         public virtual Assessment Assessment { get; set; }
-        public double Score { get; set; }
+        [Key]
+        [Required]
+        public int StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public virtual Student Student { get; set; }
+        public double PointsAwarded { get; set; } 
+        public string Comments { get; set; }
     }
 }

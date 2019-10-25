@@ -10,18 +10,22 @@ namespace Smart.Models
     public class Attendance
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
         [Display(Name = "Student")]
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
         [Required]
-        [Display(Name = "Term")]
-        public int TermId { get; set; }
-        [ForeignKey("TermId")]
-        public virtual Term Term { get; set; }
-        public bool Attended { get; set; }
+        [Display(Name = "Class")]
+        public int ClassId { get; set; }
+        [ForeignKey("ClassId")]
+        public virtual Class Class { get; set; }
         public DateTime Date { get; set; }
+        public DateTime TimeIn { get; set; }
+        public DateTime TimeOut { get; set; }
+        [Required]
+        [Display(Name = "Attendance Status")]
+        public int AttendanceStatusId { get; set; }
+        [ForeignKey("AttendanceStatusId")]
+        public virtual AttendanceStatus AttendanceStatus { get; set; }
     }
 }
