@@ -18,8 +18,10 @@ namespace Smart.Models
         [Display(Name = "User")]
         public int UserId { get; set; }
         // public virtual User User { get; set; }
+        [Required]
+        public int NoteTypeId { get; set; }
+        public NoteType NoteType { get; set; }
 
         public string Text { get; set; }
-        public string Type { get; set; }
     }
 }

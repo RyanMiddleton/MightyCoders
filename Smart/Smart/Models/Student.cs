@@ -32,8 +32,11 @@ namespace Smart.Models
         public byte[] Photo { get; set; }
         [Required]
         public int StudentStatusId { get; set; }
-        public virtual ICollection<Grade> Grades { get; set; }
+        public StudentStatus StudentStatus { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<ApplicantRating> ApplicantRatings { get; set; }
+        public virtual ICollection<File> Files { get; set; }
+
     }
 }
