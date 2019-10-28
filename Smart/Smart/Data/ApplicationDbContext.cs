@@ -14,7 +14,6 @@ namespace Smart.Data
         {
         }
         public DbSet<Student> Student { get; set; }
-        public DbSet<Grade> Grade { get; set; }
         public DbSet<Assessment> Assessment { get; set; }
         public DbSet<Class> Class { get; set; }
         public DbSet<Term> Term { get; set; }
