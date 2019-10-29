@@ -46,6 +46,7 @@ namespace Smart.Data
                 .HasKey(c => new { c.ClassId, c.ScheduleId });
             modelBuilder.Entity<ClassInstructor>()
                 .HasKey(c => new { c.ClassId, c.UserId });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
