@@ -29,6 +29,5 @@ namespace Smart.Models
         public int ScoreAssigned { get; set; }
         public DateTime DateTime { get; set; }
         public string Comment { get; set; }
-
     }
 }

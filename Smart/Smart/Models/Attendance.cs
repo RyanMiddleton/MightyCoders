@@ -26,6 +26,6 @@ namespace Smart.Models
         [Display(Name = "Attendance Status")]
         public int AttendanceStatusId { get; set; }
         [ForeignKey("AttendanceStatusId")]
-        public virtual AttendanceStatus AttendanceStatus { get; set; }
+        public AttendanceStatus AttendanceStatus { get; set; }
     }
 }

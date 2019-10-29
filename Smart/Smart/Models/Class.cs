@@ -24,5 +24,6 @@ namespace Smart.Models
         public int Capacity { get; set; }
         public virtual ICollection<ClassInstructor> ClassInstructors { get; set; }
         public virtual ICollection<Assessment> Assessments { get; set; }
+        public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }
     }
 }

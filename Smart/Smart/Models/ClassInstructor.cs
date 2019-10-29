@@ -14,6 +14,5 @@ namespace Smart.Models
         [ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
         public int UserId { get; set; } // will add this as PK/FK when identities are setup
-
     }
 }
