@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-Smart-325010B8-E818-4FE6-AEDD-A059B7EEF99B")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-Smart-1E3CF847-575B-49FB-BB2C-E3BF00B599D5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Smart")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
