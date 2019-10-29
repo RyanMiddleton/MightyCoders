@@ -10,14 +10,20 @@ namespace Smart.Models
     public class Class
     {
         [Key]
-        public int Id { get; set; }
+        public int ClassId { get; set; }
+        [Required]
+        [Display(Name = "Course")]
+        public int CourseId { get; set; }
+        [ForeignKey("CourseId")]
+        public virtual Course Course { get; set; }
         [Required]
         [Display(Name = "Term")]
         public int TermId { get; set; }
         [ForeignKey("TermId")]
         public virtual Term Term { get; set; }
-        public string ClassName { get; set; }
-        public string InstructorName { get; set; } 
+        public int Capacity { get; set; }
+        public virtual ICollection<ClassInstructor> ClassInstructors { get; set; }
         public virtual ICollection<Assessment> Assessments { get; set; }
+        public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }
     }
 }

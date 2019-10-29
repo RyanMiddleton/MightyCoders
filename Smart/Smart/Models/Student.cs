@@ -9,13 +9,20 @@ namespace Smart.Models
     public class Student
     {
         [Key]
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Date of Birth")]
+        public DateTime DOB { get; set; }
+        public string Address { get; set; }
+        public string Village { get; set; }
+        public double GpsLongitude { get; set; } 
+        public double GpsLatitude { get; set; }
+        public int PublicSchoolLevel { get; set; }
         [Display(Name = "Guardian Name")]
         public string GuardianName { get; set; }
         [Display(Name = "Guardian Type")]
@@ -24,19 +31,12 @@ namespace Smart.Models
         public string Phone { get; set; }
         public byte[] Photo { get; set; }
         [Required]
-        public string Status { get; set; }
-        public enum EStatus { Applicant, Enrolled, Withdrawn, Graduate }
-        public int PublicSchoolLevel { get; set; } // not sure how they do their grades yet
-        [Display(Name = "Date of Birth")]
-        public DateTime DOB { get; set; }
-        public double Longitude { get; set; } // I'll look into a good way to store gps location
-        public double Latitude { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string AddressLine3 { get; set; }
-        public string Village { get; set; }
-        public virtual ICollection<Grade> Grades { get; set; }
+        public int StudentStatusId { get; set; }
+        public StudentStatus StudentStatus { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<ApplicantRating> ApplicantRatings { get; set; }
+        public virtual ICollection<File> Files { get; set; }
+
     }
 }

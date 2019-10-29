@@ -7,18 +7,12 @@ using System.Threading.Tasks;
 
 namespace Smart.Models
 {
-    public class Assessment
+    public class ClassInstructor
     {
         [Key]
-        public int AssessmentId { get; set; }
-        [Required]
-        [Display(Name = "Class")]
         public int ClassId { get; set; }
         [ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int PointsPossible { get; set; }
-        public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
+        public int UserId { get; set; } // will add this as PK/FK when identities are setup
     }
 }
