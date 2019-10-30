@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jake\\Documents\\GitHub\\cs4790-dot-net-core\\MightyCoders\\Smart\\Smart\\Smart.csproj": {}
+    "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jake\\Documents\\GitHub\\cs4790-dot-net-core\\MightyCoders\\Smart\\Smart\\Smart.csproj": {
+    "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jake\\Documents\\GitHub\\cs4790-dot-net-core\\MightyCoders\\Smart\\Smart\\Smart.csproj",
+        "projectUniqueName": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
         "projectName": "Smart",
-        "projectPath": "C:\\Users\\Jake\\Documents\\GitHub\\cs4790-dot-net-core\\MightyCoders\\Smart\\Smart\\Smart.csproj",
-        "packagesPath": "C:\\Users\\Jake\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jake\\Documents\\GitHub\\cs4790-dot-net-core\\MightyCoders\\Smart\\Smart\\obj\\",
+        "projectPath": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
+        "packagesPath": "C:\\Users\\dalto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Jake\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dalto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[3.0.0, )"
             }
           },
           "imports": [
