@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Smart.Models;
+using Smart.Utility;
 
 namespace Smart.Areas.Identity.Pages.Account
 {
@@ -19,17 +21,20 @@ namespace Smart.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -73,21 +78,44 @@ namespace Smart.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    UserName = Input.Email,
+                    Email = Input.Email
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    // The very first time
+                    if (!await _roleManager.RoleExistsAsync(SD.AdminUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.InstructorUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.InstructorUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.SocialWorkerUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.SocialWorkerUser));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.RaterUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.RaterUser));
+                    }
+                    await _userManager.AddToRoleAsync(user, SD.AdminUser);
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: Request.Scheme);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { userId = user.Id, code = code },
+                    //    protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
