@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart", "Smart\Smart.csproj", "{49A24F29-60BF-4DBB-8673-9C9E320309B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart", "Smart\Smart.csproj", "{DE3C04F3-1B18-4818-A289-4ED233791DAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{49A24F29-60BF-4DBB-8673-9C9E320309B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49A24F29-60BF-4DBB-8673-9C9E320309B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49A24F29-60BF-4DBB-8673-9C9E320309B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49A24F29-60BF-4DBB-8673-9C9E320309B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3C04F3-1B18-4818-A289-4ED233791DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3C04F3-1B18-4818-A289-4ED233791DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3C04F3-1B18-4818-A289-4ED233791DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3C04F3-1B18-4818-A289-4ED233791DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {062E5468-3F69-41D8-BA52-B8D3F02C564F}
+		SolutionGuid = {E3BB14F0-1F87-4FD4-BA57-C7D6D2513626}
 	EndGlobalSection
 EndGlobal
