@@ -361,10 +361,10 @@ namespace Smart.Data
             // Seeding Attendance Start
             var attendances = new Attendance[]
             {
-                new Attendance { StudentId = students[0].StudentId, ClassId = classes[0].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("12:00:00"), TimeOut = DateTime.Parse("13:00:00"), AttendanceStatusId = attendanceStatuses[0].AttendanceStatusId },
-                new Attendance { StudentId = students[1].StudentId, ClassId = classes[1].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("14:00:00"), TimeOut = DateTime.Parse("15:00:00"), AttendanceStatusId = attendanceStatuses[1].AttendanceStatusId },
-                new Attendance { StudentId = students[2].StudentId, ClassId = classes[2].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("15:00:00"), TimeOut = DateTime.Parse("16:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId },
-                new Attendance { StudentId = students[3].StudentId, ClassId = classes[3].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("16:00:00"), TimeOut = DateTime.Parse("17:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId }
+                new Attendance { StudentId = students[0].StudentId, ClassId = classes[0].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("12:00:00"), AttendanceStatusId = attendanceStatuses[0].AttendanceStatusId },
+                new Attendance { StudentId = students[1].StudentId, ClassId = classes[1].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("14:00:00"), AttendanceStatusId = attendanceStatuses[1].AttendanceStatusId },
+                new Attendance { StudentId = students[2].StudentId, ClassId = classes[2].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("15:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId },
+                new Attendance { StudentId = students[3].StudentId, ClassId = classes[3].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("16:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId }
             };
 
             foreach (Attendance s in attendances)

@@ -25,7 +25,6 @@ namespace Smart.Data
         public DbSet<StudentClass> StudentClass { get; set; }
         public DbSet<Term> Term { get; set; }
         public DbSet<Class> Class { get; set; }
-        public DbSet<ClassInstructor> ClassInstructor { get; set; }
         public DbSet<Course> Course { get; set; }
         public DbSet<Attendance> Attendance { get; set; }
         public DbSet<AttendanceStatus> AttendanceStatus { get; set; }
@@ -45,8 +44,6 @@ namespace Smart.Data
                 .HasKey(c => new { c.AssessmentId, c.StudentId });
             modelBuilder.Entity<ClassSchedule>()
                 .HasKey(c => new { c.ClassId, c.ScheduleId });
-            modelBuilder.Entity<ClassInstructor>()
-                .HasKey(c => new { c.ClassId, c.UserId });
             base.OnModelCreating(modelBuilder);
         }
     }
