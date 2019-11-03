@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,8 +17,9 @@ namespace Smart.Models
         public virtual Student Student { get; set; }
         [Required]
         [Display(Name = "User")]
-        public int UserId { get; set; }
-        // public virtual User User { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]
         [Display(Name = "Rating Criteria")]
         public int RatingCriteriaId { get; set; }

@@ -198,10 +198,10 @@ namespace Smart.Data
             // Seeding Note Start 
             var notes = new Note[]
             {
-                new Note { StudentId = students[0].StudentId, UserId = 2, NoteTypeId = noteTypes[0].NoteTypeId, Text = "Note on Applicaition" },
-                new Note { StudentId = students[1].StudentId, UserId = 2, NoteTypeId = noteTypes[1].NoteTypeId, Text = "Note from Instructor" },
-                new Note { StudentId = students[2].StudentId, UserId = 2, NoteTypeId = noteTypes[2].NoteTypeId, Text = "Note from Social Worker" },
-                new Note { StudentId = students[3].StudentId, UserId = 2, NoteTypeId = noteTypes[3].NoteTypeId, Text = "Note about rating of applicant" }
+                new Note { StudentId = students[0].StudentId, UserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id, NoteTypeId = noteTypes[0].NoteTypeId, Text = "Note on Applicaition" },
+                new Note { StudentId = students[1].StudentId, UserId = context.ApplicationUser.Single(i => i.LastName == "White").Id, NoteTypeId = noteTypes[1].NoteTypeId, Text = "Note from Instructor" },
+                new Note { StudentId = students[2].StudentId, UserId = context.ApplicationUser.Single(i => i.LastName == "Freeman").Id, NoteTypeId = noteTypes[2].NoteTypeId, Text = "Note from Social Worker" },
+                new Note { StudentId = students[3].StudentId, UserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id, NoteTypeId = noteTypes[3].NoteTypeId, Text = "Note about rating of applicant" }
             };
 
             foreach (Note s in notes)
@@ -245,10 +245,10 @@ namespace Smart.Data
             // Seeding ApplicantRating Start
             var applicantRatings = new ApplicantRating[]
             {
-                new ApplicantRating { StudentId = students[0].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[0].TermId, ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Great student"},
-                new ApplicantRating { StudentId = students[1].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[0].RatingCriteriaId, TermId = terms[1].TermId, ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "Low income student with great potential"},
-                new ApplicantRating { StudentId = students[2].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[2].RatingCriteriaId, TermId = terms[2].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Hard working student"},
-                new ApplicantRating { StudentId = students[3].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[3].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Perfect grades in public school"}
+                new ApplicantRating { StudentId = students[0].StudentId, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[0].TermId, ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Great student", UserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new ApplicantRating { StudentId = students[1].StudentId, RatingCriteriaId = ratingCriterias[0].RatingCriteriaId, TermId = terms[1].TermId, ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "Low income student with great potential", UserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new ApplicantRating { StudentId = students[2].StudentId, RatingCriteriaId = ratingCriterias[2].RatingCriteriaId, TermId = terms[2].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Hard working student", UserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new ApplicantRating { StudentId = students[3].StudentId, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[3].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Perfect grades in public school", UserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id }
             };
 
             foreach (ApplicantRating s in applicantRatings)
@@ -279,12 +279,12 @@ namespace Smart.Data
             // Seeding Class Start
             var classes = new Class[]
             {
-                new Class { CourseId = courses[0].CourseId, TermId = terms[0].TermId, Capacity = 15}, // need to add instructor
-                new Class { CourseId = courses[1].CourseId, TermId = terms[1].TermId, Capacity = 20},
-                new Class { CourseId = courses[2].CourseId, TermId = terms[2].TermId, Capacity = 15},
-                new Class { CourseId = courses[3].CourseId, TermId = terms[0].TermId, Capacity = 25},
-                new Class { CourseId = courses[4].CourseId, TermId = terms[0].TermId, Capacity = 25},
-                new Class { CourseId = courses[5].CourseId, TermId = terms[0].TermId, Capacity = 25}
+                new Class { CourseId = courses[0].CourseId, TermId = terms[0].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[1].CourseId, TermId = terms[1].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[2].CourseId, TermId = terms[2].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[3].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[4].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[5].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id }
             };
 
             foreach (Class s in classes)
@@ -309,7 +309,6 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding StudentClass End
-
 
             // Seeding Assessment Start
             var assessments = new Assessment[]
