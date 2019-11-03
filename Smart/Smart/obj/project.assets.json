@@ -8207,6 +8207,7 @@
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -8233,6 +8234,7 @@
       "path": "runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -12498,7 +12500,6 @@
       "path": "system.threading.tasks.parallel/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12944,11 +12945,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
+      "projectUniqueName": "C:\\Users\\dalto\\source\\repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
       "projectName": "Smart",
-      "projectPath": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
+      "projectPath": "C:\\Users\\dalto\\source\\repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\Smart.csproj",
       "packagesPath": "C:\\Users\\dalto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dalto\\Source\\Repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\obj\\",
+      "outputPath": "C:\\Users\\dalto\\source\\repos\\RyanMiddleton\\MightyCoders\\Smart\\Smart\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
