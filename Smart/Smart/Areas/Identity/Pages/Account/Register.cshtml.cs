@@ -87,23 +87,6 @@ namespace Smart.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    // The very first time
-                    if (!await _roleManager.RoleExistsAsync(SD.AdminUser))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminUser));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.InstructorUser))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.InstructorUser));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.SocialWorkerUser))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.SocialWorkerUser));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.RaterUser))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.RaterUser));
-                    }
                     await _userManager.AddToRoleAsync(user, SD.AdminUser);
                     _logger.LogInformation("User created a new account with password.");
 

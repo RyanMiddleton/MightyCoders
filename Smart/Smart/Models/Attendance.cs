@@ -21,7 +21,6 @@ namespace Smart.Models
         public virtual Class Class { get; set; }
         public DateTime Date { get; set; }
         public DateTime TimeIn { get; set; }
-        public DateTime TimeOut { get; set; }
         [Required]
         [Display(Name = "Attendance Status")]
         public int AttendanceStatusId { get; set; }

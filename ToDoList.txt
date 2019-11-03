@@ -1,0 +1,52 @@
+1) Application Rating System
+-Application (By Term)
+    -Scan in (plus basuc electronic data like a name of application, etc)
+-Raters
+    -Individually Login & Rate Appliation on Criteria
+        -Income
+        -Academics
+        -Other Factors
+        -Comments/Notes
+-Reports
+    -Average Ratings(High to Low)
+-Status
+    -Accept, Reject, Waitlist --> Roll out ot next team?
+       |
+       --> copy to Student
+2) Student Management
+- Create, update
+- Socail Worker / Home visit notes
+- Attendence (Import by class/team)
+    -- and Update - Weekly?
+- Grades(Create, Update) by Assessment
+- Instructor Notes
+- Create Schedule (#3)
+- Generate Certificates
+3) Student Scheduel (By Term)
+- (9-3) Mon-Fri
+Manually enter (Block) Student's Public School Schedule
+Slot/Schedule English and IT courses on blank slots
+4) Reporting
+- By Individual Student
+- By Groups (All, Level1, Level2, etc)
+- Reports TBD
+5) Admin (DB)
+- Identity (Logins)
+- Classes
+- Assessments
+- Terms
+- Rating Criteria
+            (Seed Data Initially)
+6) Protugese Translation
+---Student---
+Fname
+Lname
+DOB
+Address (If Known)
+Village
+GPS Coordinates
+Public School Level
+Guardian Name
+Guardian Type
+Phone (If Known)
+Photo

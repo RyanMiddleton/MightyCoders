@@ -483,3 +483,5 @@ MigrationBackup/
 Smart/.vs/Smart/v16/Server/sqlite3/storage.ide
 Smart/.vs/Smart/v16/Server/sqlite3/storage.ide-shm
 Smart/.vs/Smart/v16/Server/sqlite3/storage.ide-wal
+
+Smart/Smart/obj/

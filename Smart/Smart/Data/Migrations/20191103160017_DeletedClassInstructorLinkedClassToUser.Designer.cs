@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.Data;
 
 namespace Smart.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191103160017_DeletedClassInstructorLinkedClassToUser")]
+    partial class DeletedClassInstructorLinkedClassToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,6 +193,8 @@ namespace Smart.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("Comment");
 
                     b.Property<DateTime>("DateTime");
@@ -203,18 +207,17 @@ namespace Smart.Data.Migrations
 
                     b.Property<int>("TermId");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("ApplicantRatingId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RatingCriteriaId");
 
                     b.HasIndex("StudentId");
 
                     b.HasIndex("TermId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ApplicantRating");
                 });
@@ -365,22 +368,23 @@ namespace Smart.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<int>("NoteTypeId");
 
                     b.Property<int>("StudentId");
 
                     b.Property<string>("Text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("NoteId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("NoteTypeId");
 
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Note");
                 });
@@ -629,6 +633,10 @@ namespace Smart.Data.Migrations
 
             modelBuilder.Entity("Smart.Models.ApplicantRating", b =>
                 {
+                    b.HasOne("Smart.Models.ApplicationUser")
+                        .WithMany("ApplicantRatings")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Smart.Models.RatingCriteria", "RatingCriteria")
                         .WithMany()
                         .HasForeignKey("RatingCriteriaId")
@@ -642,11 +650,6 @@ namespace Smart.Data.Migrations
                     b.HasOne("Smart.Models.Term", "Term")
                         .WithMany("ApplicantRatings")
                         .HasForeignKey("TermId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ApplicantRatings")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -721,6 +724,10 @@ namespace Smart.Data.Migrations
 
             modelBuilder.Entity("Smart.Models.Note", b =>
                 {
+                    b.HasOne("Smart.Models.ApplicationUser")
+                        .WithMany("Notes")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Smart.Models.NoteType", "NoteType")
                         .WithMany()
                         .HasForeignKey("NoteTypeId")
@@ -729,11 +736,6 @@ namespace Smart.Data.Migrations
                     b.HasOne("Smart.Models.Student", "Student")
                         .WithMany("Notes")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Notes")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

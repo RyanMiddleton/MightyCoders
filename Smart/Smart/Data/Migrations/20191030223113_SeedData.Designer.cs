@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.Data;
 
 namespace Smart.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191030223113_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,8 +205,7 @@ namespace Smart.Data.Migrations
 
                     b.Property<int>("TermId");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("ApplicantRatingId");
 
@@ -213,8 +214,6 @@ namespace Smart.Data.Migrations
                     b.HasIndex("StudentId");
 
                     b.HasIndex("TermId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ApplicantRating");
                 });
@@ -252,6 +251,8 @@ namespace Smart.Data.Migrations
 
                     b.Property<DateTime>("TimeIn");
 
+                    b.Property<DateTime>("TimeOut");
+
                     b.HasKey("StudentId");
 
                     b.HasIndex("AttendanceStatusId");
@@ -284,19 +285,28 @@ namespace Smart.Data.Migrations
 
                     b.Property<int>("CourseId");
 
-                    b.Property<string>("InstructorUserId");
-
                     b.Property<int>("TermId");
 
                     b.HasKey("ClassId");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("InstructorUserId");
-
                     b.HasIndex("TermId");
 
                     b.ToTable("Class");
+                });
+
+            modelBuilder.Entity("Smart.Models.ClassInstructor", b =>
+                {
+                    b.Property<int>("ClassId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("ClassId", "UserId");
+
+                    b.HasAlternateKey("ClassId");
+
+                    b.ToTable("ClassInstructor");
                 });
 
             modelBuilder.Entity("Smart.Models.ClassSchedule", b =>
@@ -371,16 +381,13 @@ namespace Smart.Data.Migrations
 
                     b.Property<string>("Text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<int>("UserId");
 
                     b.HasKey("NoteId");
 
                     b.HasIndex("NoteTypeId");
 
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Note");
                 });
@@ -643,11 +650,6 @@ namespace Smart.Data.Migrations
                         .WithMany("ApplicantRatings")
                         .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ApplicantRatings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Smart.Models.Assessment", b =>
@@ -683,13 +685,17 @@ namespace Smart.Data.Migrations
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Classes")
-                        .HasForeignKey("InstructorUserId");
-
                     b.HasOne("Smart.Models.Term", "Term")
                         .WithMany("Classes")
                         .HasForeignKey("TermId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Smart.Models.ClassInstructor", b =>
+                {
+                    b.HasOne("Smart.Models.Class", "Class")
+                        .WithMany("ClassInstructors")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -729,11 +735,6 @@ namespace Smart.Data.Migrations
                     b.HasOne("Smart.Models.Student", "Student")
                         .WithMany("Notes")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Notes")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
