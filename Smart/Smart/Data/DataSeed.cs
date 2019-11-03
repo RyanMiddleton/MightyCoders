@@ -13,7 +13,6 @@ namespace Smart.Data
         public static void Initialize(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             context.Database.EnsureCreated();
-            var _roleManager = roleManager;
 
             // Look for any students.
             if (context.Student.Any())
@@ -28,7 +27,7 @@ namespace Smart.Data
                 {
                     Name = SD.AdminUser
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             if (!roleManager.RoleExistsAsync(SD.InstructorUser).Result)
             {
@@ -36,7 +35,7 @@ namespace Smart.Data
                 {
                     Name = SD.InstructorUser
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             if (!roleManager.RoleExistsAsync(SD.RaterUser).Result)
             {
@@ -44,7 +43,7 @@ namespace Smart.Data
                 {
                     Name = SD.RaterUser
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             if (!roleManager.RoleExistsAsync(SD.SocialWorkerUser).Result)
             {
@@ -52,7 +51,7 @@ namespace Smart.Data
                 {
                     Name = SD.SocialWorkerUser
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             // Seeding Roles End
 
@@ -425,7 +424,7 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding Schedule End
-            
+
             // Seeding ClassSchedule Start
             var classSchedules = new ClassSchedule[]
             {
@@ -456,7 +455,7 @@ namespace Smart.Data
             {
                 new StudentPublicSchoolClass { StudentId = students[0].StudentId, CourseName = "Gym" },
                 new StudentPublicSchoolClass { StudentId = students[1].StudentId, CourseName = "Math" },
-                new StudentPublicSchoolClass { StudentId = students[2].StudentId, CourseName = "Cooking" } 
+                new StudentPublicSchoolClass { StudentId = students[2].StudentId, CourseName = "Cooking" }
             };
 
             foreach (StudentPublicSchoolClass s in studentPublicSchoolClasses)
@@ -481,42 +480,6 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding publicSchoolClassSchedules End
-
-            /*// Seeding Role Start
-            var roles = new Role[]
-            {
-                //new Role { Name = },
-                new Role { Name = "Instructor"},
-                new Role { Name = "Rater"},
-                new Role { Name = "Admin"}
-            };
-
-            foreach (Role s in roles)
-            {
-                context.Role.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding Role End*/
-
-            //context.SaveChanges();
-            // Seeding UserRole End
-
-
-            // Seeding User Start
-            //var users = new ApplicationUser[]
-            //{
-            //    new ApplicationUser { Email = "user1@mail.com", FirstName = "Aye", LastName = "User"},
-            //    new ApplicationUser { Email = "user2@mail.com", FirstName = "Ayesecond", LastName = "User"},
-            //    new ApplicationUser { Email = "user3@mail.com", FirstName = "Ayethird", LastName = "User"}
-            //};
-
-            //foreach (ApplicationUser s in users)
-            //{
-            //    context.ApplicationUser.Add(s);
-            //}
-            //context.SaveChanges();
-            // Seeding User End
-
         }
     }
 }
