@@ -113,30 +113,16 @@ namespace Smart.Data
             }
             // Seeding User End
 
-            // Seeding Term Start
-            var terms = new Term[]
-            {
-                new Term { Description = "Spring2020", StartDate = DateTime.Parse("2020-02-01"), EndDate = DateTime.Parse("2020-06-30"), TimeOfYear = 1},
-                new Term { Description = "Fall2020", StartDate = DateTime.Parse("2020-08-01"), EndDate = DateTime.Parse("2020-11-30"), TimeOfYear = 2},
-                new Term { Description = "Spring2021", StartDate = DateTime.Parse("2021-02-01"), EndDate = DateTime.Parse("2021-06-30"), TimeOfYear = 1},
-                new Term { Description = "Fall2021", StartDate = DateTime.Parse("2021-08-01"), EndDate = DateTime.Parse("2021-11-30"), TimeOfYear = 2},
-                //new Term { Description = , StartDate = , EndDate = , TimeOfYear = },
-            };
-
-            foreach (Term s in terms)
-            {
-                context.Term.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding Term End
-
             // Seeding StudentStatus Start
             var studentStatuses = new StudentStatus[]
             {
-                new StudentStatus { Description = "Applied"},
-                new StudentStatus { Description = "Accepted"},
-                new StudentStatus { Description = "Denied"},
-                new StudentStatus { Description = "Waitlisted"}
+                new StudentStatus { Description = "Applicant" },
+                new StudentStatus { Description = "Student" },
+                new StudentStatus { Description = "Graduate" },
+                new StudentStatus { Description = "Withdrew" },
+                new StudentStatus { Description = "Accepted" },
+                new StudentStatus { Description = "Denied" },
+                new StudentStatus { Description = "Waitlisted" }
             };
 
             foreach (StudentStatus s in studentStatuses)
@@ -150,9 +136,13 @@ namespace Smart.Data
             var students = new Student[]
            {
                 //new Student { FirstName = , LastName = , DOB = , Address = , Village = , GpsLatitude = , GpsLongitude = , EnrolledDate = , PublicSchoolLevel = , GuardianName = , GuardianType = , Phone = , Photo = , StudentStatusId =  },
-                new Student { FirstName = "Aye", LastName = "Student", DOB = DateTime.Parse("1999-01-02"), Address = "Aye Place 01", Village = "Aye Village", GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "James", GuardianType = "Father", Phone = "160-532-3452", Photo = null, StudentStatusId = 1},
-                new Student { FirstName = "Ayesecond", LastName = "Student", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village", GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Hela", GuardianType = "Father", Phone = "423-542-4231", Photo = null, StudentStatusId = 2 },
-                new Student { FirstName = "Ayethird", LastName = "Student", DOB = DateTime.Parse("2001-01-02"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId =  2}
+                new Student { FirstName = "Jame", LastName = "Smith", DOB = DateTime.Parse("1999-01-01"), Address = "Aye Place 01", Village = "Aye Village", GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "James", GuardianType = "Father", Phone = "160-532-3452", Photo = null, StudentStatusId = studentStatuses[0].StudentStatusId },
+                new Student { FirstName = "David", LastName = "Johnson", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village", GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Hela", GuardianType = "Father", Phone = "423-542-4231", Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId },
+                new Student { FirstName = "Christopher", LastName = "Williams", DOB = DateTime.Parse("2001-01-03"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[2].StudentStatusId },
+                new Student { FirstName = "George", LastName = "Jones", DOB = DateTime.Parse("2001-01-04"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[3].StudentStatusId },
+                new Student { FirstName = "Ronald", LastName = "Brown", DOB = DateTime.Parse("2001-01-05"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[4].StudentStatusId },
+                new Student { FirstName = "John", LastName = "Davis", DOB = DateTime.Parse("2001-01-06"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[5].StudentStatusId },
+                new Student { FirstName = "Corey", LastName = "Wilson", DOB = DateTime.Parse("2001-01-07"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[6].StudentStatusId }
            };
 
             foreach (Student s in students)
@@ -162,27 +152,88 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Student End
 
-            // Seeding StudentAssessment Start
-            var studentAssessments = new StudentAssessment[]
+            // Seeding FileType Start
+            var fileTypes = new FileType[]
             {
-                new StudentAssessment { StudentId = 1, PointsAwarded = 100},
-                new StudentAssessment { StudentId = 2, PointsAwarded = 100},
-                new StudentAssessment { StudentId = 3, PointsAwarded = 100}
+                new FileType { Description = "Application"}
             };
 
-            foreach (StudentAssessment s in studentAssessments)
+            foreach (FileType s in fileTypes)
             {
-                context.StudentAssessment.Add(s);
+                context.FileType.Add(s);
             }
             context.SaveChanges();
-            // Seeding StudentAssessment End
+            // Seeding FileType End
+
+            // Seeding File Start
+            var files = new File[]
+            {
+                new File { StudentId = students[0].StudentId, Path = "PathToFile1", FileTypeId = fileTypes[0].FileTypeId },
+                new File { StudentId = students[1].StudentId, Path = "PathToFile2", FileTypeId = fileTypes[0].FileTypeId },
+                new File { StudentId = students[2].StudentId, Path = "PathToFile3", FileTypeId = fileTypes[0].FileTypeId },
+            };
+
+            foreach (File s in files)
+            {
+                context.File.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding File End
+
+            // Seeding NoteType Start
+            var noteTypes = new NoteType[]
+            {
+                new NoteType { Description = "ApplicationProcess" },
+                new NoteType { Description = "InstructorNote" },
+                new NoteType { Description = "SocialWorkerNote" },
+                new NoteType { Description = "Rating" }
+            };
+
+            foreach (NoteType s in noteTypes)
+            {
+                context.NoteType.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding NoteType End
+
+            // Seeding Note Start 
+            var notes = new Note[]
+            {
+                new Note { StudentId = students[0].StudentId, UserId = 2, NoteTypeId = noteTypes[0].NoteTypeId, Text = "Note on Applicaition" },
+                new Note { StudentId = students[1].StudentId, UserId = 2, NoteTypeId = noteTypes[1].NoteTypeId, Text = "Note from Instructor" },
+                new Note { StudentId = students[2].StudentId, UserId = 2, NoteTypeId = noteTypes[2].NoteTypeId, Text = "Note from Social Worker" },
+                new Note { StudentId = students[3].StudentId, UserId = 2, NoteTypeId = noteTypes[3].NoteTypeId, Text = "Note about rating of applicant" }
+            };
+
+            foreach (Note s in notes)
+            {
+                context.Note.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding Note End
+
+            // Seeding Term Start
+            var terms = new Term[]
+            {
+                new Term { Description = "Spring2020", StartDate = DateTime.Parse("2020-02-01"), EndDate = DateTime.Parse("2020-06-30"), TimeOfYear = 1},
+                new Term { Description = "Fall2020", StartDate = DateTime.Parse("2020-08-01"), EndDate = DateTime.Parse("2020-11-30"), TimeOfYear = 2},
+                new Term { Description = "Spring2021", StartDate = DateTime.Parse("2021-02-01"), EndDate = DateTime.Parse("2021-06-30"), TimeOfYear = 1},
+                new Term { Description = "Fall2021", StartDate = DateTime.Parse("2021-08-01"), EndDate = DateTime.Parse("2021-11-30"), TimeOfYear = 2}
+            };
+
+            foreach (Term s in terms)
+            {
+                context.Term.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding Term End
 
             // Seeding RatingCriteria Start
             var ratingCriterias = new RatingCriteria[]
             {
-                new RatingCriteria { Description = "ACritieria", MaxScore = 50},
-                new RatingCriteria { Description = "AnothaCritieria", MaxScore = 50}
-                //new RatingCriteria { Description = "", MaxScore = 50}
+                new RatingCriteria { Description = "Income", MaxScore = 50},
+                new RatingCriteria { Description = "Education", MaxScore = 50},
+                new RatingCriteria { Description = "Motivation", MaxScore = 50}
             };
 
             foreach (RatingCriteria s in ratingCriterias)
@@ -195,10 +246,10 @@ namespace Smart.Data
             // Seeding ApplicantRating Start
             var applicantRatings = new ApplicantRating[]
             {
-                new ApplicantRating { StudentId = 1, UserId = 1, RatingCriteriaId = 1, TermId = 1, ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Acomment"},
-                new ApplicantRating { StudentId = 2, UserId = 1, RatingCriteriaId = 2, TermId = 1, ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "comment"},
-                new ApplicantRating { StudentId = 3, UserId = 1, RatingCriteriaId = 1, TermId = 3, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Ahcomment"},
-
+                new ApplicantRating { StudentId = students[0].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[0].TermId, ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Great student"},
+                new ApplicantRating { StudentId = students[1].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[0].RatingCriteriaId, TermId = terms[1].TermId, ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "Low income student with great potential"},
+                new ApplicantRating { StudentId = students[2].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[2].RatingCriteriaId, TermId = terms[2].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Hard working student"},
+                new ApplicantRating { StudentId = students[3].StudentId, UserId = 1, RatingCriteriaId = ratingCriterias[1].RatingCriteriaId, TermId = terms[3].TermId, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Perfect grades in public school"}
             };
 
             foreach (ApplicantRating s in applicantRatings)
@@ -211,9 +262,12 @@ namespace Smart.Data
             // Seeding Course Start
             var courses = new Course[]
             {
-                new Course { Name = "Science"},
-                new Course { Name = "Math"},
-                new Course { Name = "English"},
+                new Course { Name = "ENG1"},
+                new Course { Name = "ENG2"},
+                new Course { Name = "ENG3"},
+                new Course { Name = "IT1"},
+                new Course { Name = "IT2"},
+                new Course { Name = "IT3"}
             };
 
             foreach (Course s in courses)
@@ -226,10 +280,12 @@ namespace Smart.Data
             // Seeding Class Start
             var classes = new Class[]
             {
-                new Class { CourseId = 1, TermId = 1, Capacity = 15},
-                new Class { CourseId = 2, TermId = 1, Capacity = 20},
-                new Class { CourseId = 3, TermId = 2, Capacity = 15},
-                new Class { CourseId = 1, TermId = 2, Capacity = 25},
+                new Class { CourseId = courses[0].CourseId, TermId = terms[0].TermId, Capacity = 15}, // need to add instructor
+                new Class { CourseId = courses[1].CourseId, TermId = terms[1].TermId, Capacity = 20},
+                new Class { CourseId = courses[2].CourseId, TermId = terms[2].TermId, Capacity = 15},
+                new Class { CourseId = courses[3].CourseId, TermId = terms[0].TermId, Capacity = 25},
+                new Class { CourseId = courses[4].CourseId, TermId = terms[0].TermId, Capacity = 25},
+                new Class { CourseId = courses[5].CourseId, TermId = terms[0].TermId, Capacity = 25}
             };
 
             foreach (Class s in classes)
@@ -242,10 +298,10 @@ namespace Smart.Data
             // Seeding StudentClass Start
             var studentClasses = new StudentClass[]
             {
-                new StudentClass { ClassId = 1, StudentId = 2},
-                new StudentClass { ClassId = 2, StudentId = 3},
-                new StudentClass { ClassId = 2, StudentId = 1},
-                new StudentClass { ClassId = 3, StudentId = 2},
+                new StudentClass { ClassId = classes[0].ClassId, StudentId = students[0].StudentId },
+                new StudentClass { ClassId = classes[1].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[2].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[3].ClassId, StudentId = students[3].StudentId }
             };
 
             foreach (StudentClass s in studentClasses)
@@ -259,10 +315,10 @@ namespace Smart.Data
             // Seeding Assessment Start
             var assessments = new Assessment[]
             {
-                new Assessment { ClassId = 1, Title = "Exam1", Description = "Difficult Exam" , PointsPossible = 100 },
-                new Assessment { ClassId = 1, Title = "Exam2", Description = "More Difficult Exam" , PointsPossible = 100 },
-                new Assessment { ClassId = 2, Title = "Exam1", Description = "Easy Exam" , PointsPossible = 100 },
-                new Assessment { ClassId = 2, Title = "Exam2", Description = "Less Easy Exam" , PointsPossible = 100 },
+                new Assessment { ClassId = classes[0].ClassId, Title = "Exam1", Description = "Begginer english test" , PointsPossible = 100 },
+                new Assessment { ClassId = classes[1].ClassId, Title = "Exam2", Description = "Medium difficulty english test" , PointsPossible = 100 },
+                new Assessment { ClassId = classes[2].ClassId, Title = "Exam3", Description = "Hard english test" , PointsPossible = 100 },
+                new Assessment { ClassId = classes[3].ClassId, Title = "Exam1", Description = "Type 30 words per minute" , PointsPossible = 100 },
             };
 
             foreach (Assessment s in assessments)
@@ -272,12 +328,28 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Assessment End
 
+            // Seeding StudentAssessment Start
+            var studentAssessments = new StudentAssessment[]
+            {
+                new StudentAssessment { StudentId = students[0].StudentId, AssessmentId = assessments[0].AssessmentId, PointsAwarded = 100},
+                new StudentAssessment { StudentId = students[1].StudentId, AssessmentId = assessments[1].AssessmentId, PointsAwarded = 100},
+                new StudentAssessment { StudentId = students[2].StudentId, AssessmentId = assessments[2].AssessmentId, PointsAwarded = 100},
+                new StudentAssessment { StudentId = students[3].StudentId, AssessmentId = assessments[3].AssessmentId, PointsAwarded = 100}
+            };
+
+            foreach (StudentAssessment s in studentAssessments)
+            {
+                context.StudentAssessment.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding StudentAssessment End
+
             // Seeding AttendanceStatus Start
             var attendanceStatuses = new AttendanceStatus[]
             {
                 new AttendanceStatus { Description = "On Time"},
                 new AttendanceStatus { Description = "Late"},
-                new AttendanceStatus { Description = "Absent"},
+                new AttendanceStatus { Description = "Absent"}
             };
 
             foreach (AttendanceStatus s in attendanceStatuses)
@@ -290,10 +362,10 @@ namespace Smart.Data
             // Seeding Attendance Start
             var attendances = new Attendance[]
             {
-                new Attendance { StudentId = 1, ClassId = 1, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("11:00:00"), TimeOut = DateTime.Parse("12:00:00"), AttendanceStatusId = 1 },
-                new Attendance { StudentId = 2, ClassId = 2, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("14:00:00"), TimeOut = DateTime.Parse("15:00:00"), AttendanceStatusId = 1 },
-                new Attendance { StudentId = 3, ClassId = 1, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("15:00:00"), TimeOut = DateTime.Parse("16:00:00"), AttendanceStatusId = 1 },
-                new Attendance { StudentId = 1, ClassId = 2, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("16:00:00"), TimeOut = DateTime.Parse("17:00:00"), AttendanceStatusId = 1 },
+                new Attendance { StudentId = students[0].StudentId, ClassId = classes[0].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("12:00:00"), TimeOut = DateTime.Parse("13:00:00"), AttendanceStatusId = attendanceStatuses[0].AttendanceStatusId },
+                new Attendance { StudentId = students[1].StudentId, ClassId = classes[1].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("14:00:00"), TimeOut = DateTime.Parse("15:00:00"), AttendanceStatusId = attendanceStatuses[1].AttendanceStatusId },
+                new Attendance { StudentId = students[2].StudentId, ClassId = classes[2].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("15:00:00"), TimeOut = DateTime.Parse("16:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId },
+                new Attendance { StudentId = students[3].StudentId, ClassId = classes[3].ClassId, Date = DateTime.Parse("2020-03-13"), TimeIn = DateTime.Parse("16:00:00"), TimeOut = DateTime.Parse("17:00:00"), AttendanceStatusId = attendanceStatuses[2].AttendanceStatusId }
             };
 
             foreach (Attendance s in attendances)
@@ -303,29 +375,73 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Attendance End
 
-            // Seeding ClassInstructor Start
-            var classInstructors = new ClassInstructor[]
+            // Seeding Schedule Start
+            var schedules = new Schedule[]
             {
-                new ClassInstructor { ClassId = 1, UserId = 2},
-                new ClassInstructor { ClassId = 2, UserId = 2},
-                new ClassInstructor { ClassId = 3, UserId = 1},
-                new ClassInstructor { ClassId = 4, UserId = 1},
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") }
             };
 
-            foreach (ClassInstructor s in classInstructors)
+            foreach (Schedule s in schedules)
             {
-                context.ClassInstructor.Add(s);
+                context.Schedule.Add(s);
             }
             context.SaveChanges();
-            // Seeding ClassInstructor End
-
+            // Seeding Schedule End
+            
             // Seeding ClassSchedule Start
             var classSchedules = new ClassSchedule[]
             {
-                new ClassSchedule { ClassId = 1, ScheduleId = 1},
-                new ClassSchedule { ClassId = 1, ScheduleId = 1},
-                new ClassSchedule { ClassId = 3, ScheduleId = 1},
-                new ClassSchedule { ClassId = 4, ScheduleId = 1}
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleId = schedules[0].ScheduleId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleId = schedules[1].ScheduleId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleId = schedules[2].ScheduleId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleId = schedules[3].ScheduleId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleId = schedules[4].ScheduleId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleId = schedules[5].ScheduleId },
+
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleId = schedules[6].ScheduleId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleId = schedules[7].ScheduleId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleId = schedules[8].ScheduleId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleId = schedules[9].ScheduleId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleId = schedules[10].ScheduleId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleId = schedules[11].ScheduleId },
             };
 
             foreach (ClassSchedule s in classSchedules)
@@ -335,70 +451,12 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding ClassSchedule End
 
-            // Seeding FileType Start
-            var fileTypes = new FileType[]
-            {
-                new FileType { Description = "Application"},
-            };
-
-            foreach (FileType s in fileTypes)
-            {
-                context.FileType.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding FileType End
-
-            // Seeding File Start
-            var files = new File[]
-            {
-                new File { StudentId = 1, Path = "PathToFile1", FileTypeId = 1},
-                new File { StudentId = 2, Path = "PathToFile2", FileTypeId = 1},
-                new File { StudentId = 3, Path = "PathToFile3", FileTypeId = 1},
-            };
-
-            foreach (File s in files)
-            {
-                context.File.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding File End
-
-            // Seeding NoteType Start
-            var noteTypes = new NoteType[]
-            {
-                new NoteType { Description = "ApplicationProcess"},
-                new NoteType { Description = "InstructorNote"},
-                new NoteType { Description = "SocialWorkerNote"},
-            };
-
-            foreach (NoteType s in noteTypes)
-            {
-                context.NoteType.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding NoteType End
-
-            // Seeding NoteType Start 
-            var notes = new Note[]
-            {
-                new Note { StudentId = 1, UserId = 2, NoteTypeId = 1, Text = "Note on Applicaition"},
-                new Note { StudentId = 2, UserId = 2, NoteTypeId = 2, Text = "Note from Instructor"},
-                new Note { StudentId = 3, UserId = 2, NoteTypeId = 2, Text = "Note from Instructor"},
-            };
-
-            foreach (Note s in notes)
-            {
-                context.Note.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding NoteType End
-
             // Seeding studentPublicSchoolClasses Start
             var studentPublicSchoolClasses = new StudentPublicSchoolClass[]
             {
-                new StudentPublicSchoolClass { StudentId = 1, CourseName = "Gym"},
-                new StudentPublicSchoolClass { StudentId = 2, CourseName = "Gym"},
-                new StudentPublicSchoolClass { StudentId = 3, CourseName = "Cooking"},
+                new StudentPublicSchoolClass { StudentId = students[0].StudentId, CourseName = "Gym" },
+                new StudentPublicSchoolClass { StudentId = students[1].StudentId, CourseName = "Math" },
+                new StudentPublicSchoolClass { StudentId = students[2].StudentId, CourseName = "Cooking" } 
             };
 
             foreach (StudentPublicSchoolClass s in studentPublicSchoolClasses)
@@ -408,28 +466,13 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding studentPublicSchoolClasses End
 
-            // Seeding Schedule Start
-            var schedules = new Schedule[]
-            {
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00")},
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00")},
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00")},
-            };
-
-            foreach (Schedule s in schedules)
-            {
-                context.Schedule.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding Schedule End
-
             // Seeding publicSchoolClassSchedules Start
             var publicSchoolClassSchedules = new PublicSchoolClassSchedule[]
             {
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = 1, ScheduleId = 1},
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = 2, ScheduleId = 1},
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = 3, ScheduleId = 2},
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = 3, ScheduleId = 2},
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[0].StudentPublicSchoolClassId, ScheduleId = schedules[12].ScheduleId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleId = schedules[13].ScheduleId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleId = schedules[14].ScheduleId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[2].StudentPublicSchoolClassId, ScheduleId = schedules[15].ScheduleId },
             };
 
             foreach (PublicSchoolClassSchedule s in publicSchoolClassSchedules)
@@ -455,8 +498,25 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Role End*/
 
-            context.SaveChanges();
+            //context.SaveChanges();
             // Seeding UserRole End
+
+
+            // Seeding User Start
+            //var users = new ApplicationUser[]
+            //{
+            //    new ApplicationUser { Email = "user1@mail.com", FirstName = "Aye", LastName = "User"},
+            //    new ApplicationUser { Email = "user2@mail.com", FirstName = "Ayesecond", LastName = "User"},
+            //    new ApplicationUser { Email = "user3@mail.com", FirstName = "Ayethird", LastName = "User"}
+            //};
+
+            //foreach (ApplicationUser s in users)
+            //{
+            //    context.ApplicationUser.Add(s);
+            //}
+            //context.SaveChanges();
+            // Seeding User End
+
         }
     }
 }
