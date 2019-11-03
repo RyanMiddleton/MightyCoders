@@ -1,4 +1,6 @@
-﻿using Smart.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Smart.Models;
+using Smart.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,108 @@ namespace Smart.Data
 {
     public class DataSeed
     {
-        public static void Initialize(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             context.Database.EnsureCreated();
+            var _roleManager = roleManager;
 
             // Look for any students.
             if (context.Student.Any())
             {
                 return;   // DB has been seeded
             }
+
+            // Seeding Roles Start
+            if (!roleManager.RoleExistsAsync(SD.AdminUser).Result)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = SD.AdminUser
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (!roleManager.RoleExistsAsync(SD.InstructorUser).Result)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = SD.InstructorUser
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (!roleManager.RoleExistsAsync(SD.RaterUser).Result)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = SD.RaterUser
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (!roleManager.RoleExistsAsync(SD.SocialWorkerUser).Result)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = SD.SocialWorkerUser
+                };
+                roleManager.CreateAsync(role);
+            }
+            // Seeding Roles End
+
+            // Seeding User Start
+            if (userManager.FindByEmailAsync("admin@mail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Morgan";
+                user.LastName = "Freeman";
+                user.UserName = "MorganFreeman";
+                user.Email = "admin@mail.com";
+                IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, SD.AdminUser).Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("instructor1@mail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "George";
+                user.LastName = "Feeny";
+                user.UserName = "Feeny";
+                user.Email = "instructor1@mail.com";
+                IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, SD.InstructorUser).Wait();
+                    userManager.AddToRoleAsync(user, SD.RaterUser).Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("instructor2@mail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Walter";
+                user.LastName = "White";
+                user.UserName = "Heisenberg";
+                user.Email = "instructor2@mail.com";
+                IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, SD.InstructorUser).Wait();
+                    userManager.AddToRoleAsync(user, SD.RaterUser).Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("socialworker@mail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Kenneth";
+                user.LastName = "Parcell";
+                user.UserName = "Kenny";
+                user.Email = "socialworkder@mail.com";
+                IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, SD.SocialWorkerUser).Wait();
+                }
+            }
+            // Seeding User End
 
             // Seeding Term Start
             var terms = new Term[]
@@ -34,21 +129,6 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding Term End
-
-            // Seeding User Start
-            var users = new ApplicationUser[]
-            {
-                new ApplicationUser { Email = "user1@mail.com", FirstName = "Aye", LastName = "User"},
-                new ApplicationUser { Email = "user2@mail.com", FirstName = "Ayesecond", LastName = "User"},
-                new ApplicationUser { Email = "user3@mail.com", FirstName = "Ayethird", LastName = "User"}
-            };
-
-            foreach (ApplicationUser s in users)
-            {
-                context.ApplicationUser.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding User End
 
             // Seeding StudentStatus Start
             var studentStatuses = new StudentStatus[]
