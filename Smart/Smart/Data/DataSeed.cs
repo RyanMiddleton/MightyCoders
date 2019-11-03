@@ -109,8 +109,8 @@ namespace Smart.Data
                 {
                     FirstName = "Kenneth",
                     LastName = "Parcell",
-                    UserName = "socialworkder@mail.com",
-                    Email = "socialworkder@mail.com"
+                    UserName = "socialworker@mail.com",
+                    Email = "socialworker@mail.com"
                 };
                 IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
                 if (result.Succeeded)
