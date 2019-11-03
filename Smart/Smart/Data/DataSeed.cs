@@ -58,11 +58,13 @@ namespace Smart.Data
             // Seeding User Start
             if (userManager.FindByEmailAsync("admin@mail.com").Result == null)
             {
-                ApplicationUser user = new ApplicationUser();
-                user.FirstName = "Morgan";
-                user.LastName = "Freeman";
-                user.UserName = "MorganFreeman";
-                user.Email = "admin@mail.com";
+                ApplicationUser user = new ApplicationUser
+                {
+                    FirstName = "Morgan",
+                    LastName = "Freeman",
+                    UserName = "admin@mail.com",
+                    Email = "admin@mail.com"
+                };
                 IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
                 if (result.Succeeded)
                 {
@@ -71,11 +73,13 @@ namespace Smart.Data
             }
             if (userManager.FindByEmailAsync("instructor1@mail.com").Result == null)
             {
-                ApplicationUser user = new ApplicationUser();
-                user.FirstName = "George";
-                user.LastName = "Feeny";
-                user.UserName = "Feeny";
-                user.Email = "instructor1@mail.com";
+                ApplicationUser user = new ApplicationUser
+                {
+                    FirstName = "George",
+                    LastName = "Feeny",
+                    UserName = "instructor1@mail.com",
+                    Email = "instructor1@mail.com"
+                };
                 IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
                 if (result.Succeeded)
                 {
@@ -85,11 +89,13 @@ namespace Smart.Data
             }
             if (userManager.FindByEmailAsync("instructor2@mail.com").Result == null)
             {
-                ApplicationUser user = new ApplicationUser();
-                user.FirstName = "Walter";
-                user.LastName = "White";
-                user.UserName = "Heisenberg";
-                user.Email = "instructor2@mail.com";
+                ApplicationUser user = new ApplicationUser
+                {
+                    FirstName = "Walter",
+                    LastName = "White",
+                    UserName = "instructor2@mail.com",
+                    Email = "instructor2@mail.com"
+                };
                 IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
                 if (result.Succeeded)
                 {
@@ -99,11 +105,13 @@ namespace Smart.Data
             }
             if (userManager.FindByEmailAsync("socialworker@mail.com").Result == null)
             {
-                ApplicationUser user = new ApplicationUser();
-                user.FirstName = "Kenneth";
-                user.LastName = "Parcell";
-                user.UserName = "Kenny";
-                user.Email = "socialworkder@mail.com";
+                ApplicationUser user = new ApplicationUser
+                {
+                    FirstName = "Kenneth",
+                    LastName = "Parcell",
+                    UserName = "socialworkder@mail.com",
+                    Email = "socialworkder@mail.com"
+                };
                 IdentityResult result = userManager.CreateAsync(user, "Secret123$").Result;
                 if (result.Succeeded)
                 {
@@ -134,7 +142,6 @@ namespace Smart.Data
             // Seeding Student Start
             var students = new Student[]
            {
-                //new Student { FirstName = , LastName = , DOB = , Address = , Village = , GpsLatitude = , GpsLongitude = , EnrolledDate = , PublicSchoolLevel = , GuardianName = , GuardianType = , Phone = , Photo = , StudentStatusId =  },
                 new Student { FirstName = "Jame", LastName = "Smith", DOB = DateTime.Parse("1999-01-01"), Address = "Aye Place 01", Village = "Aye Village", GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "James", GuardianType = "Father", Phone = "160-532-3452", Photo = null, StudentStatusId = studentStatuses[0].StudentStatusId },
                 new Student { FirstName = "David", LastName = "Johnson", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village", GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Hela", GuardianType = "Father", Phone = "423-542-4231", Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId },
                 new Student { FirstName = "Christopher", LastName = "Williams", DOB = DateTime.Parse("2001-01-03"), Address = "Aye Place 03", Village = "Aynotha Village", GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663", Photo = null, StudentStatusId = studentStatuses[2].StudentStatusId },
