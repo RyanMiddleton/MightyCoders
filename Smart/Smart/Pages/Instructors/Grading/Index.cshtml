@@ -1,0 +1,87 @@
+﻿@page "{id:int?}"
+@model Smart.Pages.Instructors.Grading.IndexModel
+
+@{
+    ViewData["Title"] = "Grading";
+}
+
+<h1>Grading</h1>
+
+<p>
+    <a asp-page="Create">Add New Grade</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Class ID
+            </th>
+            <th>
+                Assessment Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Points Possible
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GradingData.Assessments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Class.ClassId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PointsPossible)
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-assessmentId="@item.AssessmentId">View Assessments</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@if (Model.GradingData.StudentAssessments != null)
+{
+    <h3>Student Assessments</h3>
+    <table class="table">
+        <tr>
+            <th>Student ID</th>
+            <th>Points</th>
+            <th>Comments</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.GradingData.StudentAssessments)
+        {
+    <tr>
+        <td>
+            @item.StudentId
+        </td>
+        <td>
+            @item.PointsAwarded
+        </td>
+        <td>
+            @item.Comments
+        </td>
+        <td>
+            <a asp-page="./Edit" asp-route-studentAssessmentID="@item.AssessmentId">Edit Grade</a>
+        </td>
+    </tr>
+        }
+
+    </table>
+}

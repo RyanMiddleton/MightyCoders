@@ -1,0 +1,47 @@
+﻿@page
+@model Smart.Pages.Instructors.Grading.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Student Assessment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StudentAssessment.AssessmentId" class="control-label"></label>
+                <select asp-for="StudentAssessment.AssessmentId" class ="form-control" asp-items="ViewBag.AssessmentId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentAssessment.StudentId" class="control-label"></label>
+                <select asp-for="StudentAssessment.StudentId" class ="form-control" asp-items="ViewBag.StudentId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentAssessment.PointsAwarded" class="control-label"></label>
+                <input asp-for="StudentAssessment.PointsAwarded" class="form-control" />
+                <span asp-validation-for="StudentAssessment.PointsAwarded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentAssessment.Comments" class="control-label"></label>
+                <input asp-for="StudentAssessment.Comments" class="form-control" />
+                <span asp-validation-for="StudentAssessment.Comments" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
