@@ -14,10 +14,10 @@ namespace Smart.Models
         [Display(Name = "Assessment")]
         public int AssessmentId { get; set; }
         public virtual Assessment Assessment { get; set; }
-        [Key]
-        [Required]
+        //[Key]
+        //[Required]
         public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
+        //[ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
         public double PointsAwarded { get; set; } 
         public string Comments { get; set; }

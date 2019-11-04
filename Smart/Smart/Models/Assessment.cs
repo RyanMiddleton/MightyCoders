@@ -9,12 +9,12 @@ namespace Smart.Models
 {
     public class Assessment
     {
-        [Key]
+        //[Key]
         public int AssessmentId { get; set; }
-        [Required]
-        [Display(Name = "Class")]
+        //O[Required]
+        //[Display(Name = "Class")]
         public int ClassId { get; set; }
-        [ForeignKey("ClassId")]
+        //[ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

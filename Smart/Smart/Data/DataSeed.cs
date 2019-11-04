@@ -12,11 +12,11 @@ namespace Smart.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
+            /*// Look for any students.
             if (context.Student.Any())
             {
                 return;   // DB has been seeded
-            }
+            }*/
 
             // Seeding Term Start
             var terms = new Term[]
@@ -85,9 +85,9 @@ namespace Smart.Data
             // Seeding StudentAssessment Start
             var studentAssessments = new StudentAssessment[]
             {
-                new StudentAssessment { StudentId = 1, PointsAwarded = 100},
-                new StudentAssessment { StudentId = 2, PointsAwarded = 100},
-                new StudentAssessment { StudentId = 3, PointsAwarded = 100}
+                new StudentAssessment { PointsAwarded = 100},
+                new StudentAssessment { PointsAwarded = 100},
+                new StudentAssessment { PointsAwarded = 100}
             };
 
             foreach (StudentAssessment s in studentAssessments)
@@ -115,9 +115,9 @@ namespace Smart.Data
             // Seeding ApplicantRating Start
             var applicantRatings = new ApplicantRating[]
             {
-                new ApplicantRating { StudentId = 1, UserId = 1, RatingCriteriaId = 1, TermId = 1, ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Acomment"},
-                new ApplicantRating { StudentId = 2, UserId = 1, RatingCriteriaId = 2, TermId = 1, ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "comment"},
-                new ApplicantRating { StudentId = 3, UserId = 1, RatingCriteriaId = 1, TermId = 3, ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Ahcomment"},
+                new ApplicantRating {  /*UserId = 1, RatingCriteriaId = 1, TermId = 1,*/ ScoreAssigned = 48, DateTime = DateTime.Parse("2019-10-30"), Comment = "Acomment"},
+                new ApplicantRating {  /*UserId = 1, RatingCriteriaId = 2, TermId = 1, */ScoreAssigned = 47, DateTime = DateTime.Parse("2019-10-29"), Comment = "comment"},
+                new ApplicantRating { /*UserId = 1, RatingCriteriaId = 1, TermId = 3,*/ ScoreAssigned = 49, DateTime = DateTime.Parse("2019-10-28"), Comment = "Ahcomment"},
 
             };
 
@@ -146,10 +146,10 @@ namespace Smart.Data
             // Seeding Class Start
             var classes = new Class[]
             {
-                new Class { CourseId = 1, TermId = 1, Capacity = 15},
-                new Class { CourseId = 2, TermId = 1, Capacity = 20},
-                new Class { CourseId = 3, TermId = 2, Capacity = 15},
-                new Class { CourseId = 1, TermId = 2, Capacity = 25},
+                new Class { /*CourseId = 1, TermId = 1,*/ Capacity = 15},
+                new Class { /*CourseId = 2, TermId = 1,*/ Capacity = 20},
+                new Class { /*CourseId = 3, TermId = 2,*/ Capacity = 15},
+                new Class { /*CourseId = 1, TermId = 2,*/ Capacity = 25},
             };
 
             foreach (Class s in classes)
@@ -162,10 +162,10 @@ namespace Smart.Data
             // Seeding StudentClass Start
             var studentClasses = new StudentClass[]
             {
-                new StudentClass { ClassId = 1, StudentId = 2},
-                new StudentClass { ClassId = 2, StudentId = 3},
-                new StudentClass { ClassId = 2, StudentId = 1},
-                new StudentClass { ClassId = 3, StudentId = 2},
+                new StudentClass { StudentId = 3},
+                new StudentClass { StudentId = 2},
+                new StudentClass { StudentId = 2},
+                new StudentClass { StudentId = 1},
             };
 
             foreach (StudentClass s in studentClasses)

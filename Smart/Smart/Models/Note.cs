@@ -8,17 +8,17 @@ namespace Smart.Models
 {
     public class Note
     {
-        [Key]
+        //[Key]
         public int NoteId { get; set; }
-        [Required]
-        [Display(Name = "Student")]
+        //[Required]
+        //[Display(Name = "Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
-        [Required]
-        [Display(Name = "User")]
+        //[Required]
+        //[Display(Name = "User")]
         public int UserId { get; set; }
         // public virtual User User { get; set; }
-        [Required]
+        //[Required]
         public int NoteTypeId { get; set; }
         public NoteType NoteType { get; set; }
 

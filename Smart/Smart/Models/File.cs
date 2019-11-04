@@ -9,14 +9,14 @@ namespace Smart.Models
 {
     public class File
     {
-        [Key]
+        //[Key]
         public int FileId { get; set; }
-        [Display(Name = "Student")]
+        //[Display(Name = "Student")]
         public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
+        //[ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
         public string Path { get; set; }
-        [Required]
+        //[Required]
         public int FileTypeId { get; set; }
         public FileType FileType { get; set; }
     }

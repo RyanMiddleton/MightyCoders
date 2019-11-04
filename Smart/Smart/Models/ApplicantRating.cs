@@ -10,20 +10,20 @@ namespace Smart.Models
     {
         [Key]
         public int ApplicantRatingId { get; set; }
-        [Required]
-        [Display(Name = "Student")]
+        //[Required]
+        //[Display(Name = "Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
-        [Required]
-        [Display(Name = "User")]
+       // [Required]
+        //[Display(Name = "User")]
         public int UserId { get; set; }
         // public virtual User User { get; set; }
-        [Required]
-        [Display(Name = "Rating Criteria")]
+        //[Required]
+        //[Display(Name = "Rating Criteria")]
         public int RatingCriteriaId { get; set; }
         public RatingCriteria RatingCriteria { get; set; }
-        [Required]
-        [Display(Name = "Term")]
+        //[Required]
+        //[Display(Name = "Term")]
         public int TermId { get; set; }
         public virtual Term Term { get; set; }
         public int ScoreAssigned { get; set; }

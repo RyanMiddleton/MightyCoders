@@ -8,7 +8,7 @@ namespace Smart.Models
 {
     public class AttendanceStatus
     {
-        [Key]
+        //[Key]
         public int AttendanceStatusId { get; set; }
         public string Description { get; set; }
 
