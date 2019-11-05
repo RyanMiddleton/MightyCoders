@@ -395,52 +395,52 @@ namespace Smart.Data
             // Seeding Attendance End
 
             // Seeding Schedule Start
-            var schedules = new Schedule[]
+            var scheduleAvailabilities = new ScheduleAvailability[]
             {
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new Schedule { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
 
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new Schedule { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
 
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new Schedule { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
 
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new Schedule { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
 
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new Schedule { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") }
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") }
             };
 
-            foreach (Schedule s in schedules)
+            foreach (ScheduleAvailability s in scheduleAvailabilities)
             {
-                context.Schedule.Add(s);
+                context.ScheduleAvailability.Add(s);
             }
             context.SaveChanges();
             // Seeding Schedule End
@@ -448,19 +448,19 @@ namespace Smart.Data
             // Seeding ClassSchedule Start
             var classSchedules = new ClassSchedule[]
             {
-                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleId = schedules[0].ScheduleId },
-                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleId = schedules[1].ScheduleId },
-                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleId = schedules[2].ScheduleId },
-                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleId = schedules[3].ScheduleId },
-                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleId = schedules[4].ScheduleId },
-                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleId = schedules[5].ScheduleId },
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[0].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[1].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[2].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[3].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[4].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[5].ScheduleAvailabilityId },
 
-                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleId = schedules[6].ScheduleId },
-                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleId = schedules[7].ScheduleId },
-                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleId = schedules[8].ScheduleId },
-                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleId = schedules[9].ScheduleId },
-                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleId = schedules[10].ScheduleId },
-                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleId = schedules[11].ScheduleId },
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[6].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[7].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[8].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[9].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[10].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[11].ScheduleAvailabilityId },
             };
 
             foreach (ClassSchedule s in classSchedules)
@@ -488,10 +488,10 @@ namespace Smart.Data
             // Seeding publicSchoolClassSchedules Start
             var publicSchoolClassSchedules = new PublicSchoolClassSchedule[]
             {
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[0].StudentPublicSchoolClassId, ScheduleId = schedules[12].ScheduleId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleId = schedules[13].ScheduleId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleId = schedules[14].ScheduleId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[2].StudentPublicSchoolClassId, ScheduleId = schedules[15].ScheduleId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[0].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[12].ScheduleAvailabilityId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[13].ScheduleAvailabilityId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[14].ScheduleAvailabilityId },
+                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[2].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[15].ScheduleAvailabilityId },
             };
 
             foreach (PublicSchoolClassSchedule s in publicSchoolClassSchedules)
