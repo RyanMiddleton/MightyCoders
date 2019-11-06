@@ -31,7 +31,7 @@ namespace Smart.Data
         public DbSet<Assessment> Assessment { get; set; }
         public DbSet<StudentAssessment> StudentAssessment { get; set; }
         public DbSet<ClassSchedule> ClassSchedule { get; set; }
-        public DbSet<Schedule> Schedule { get; set; }
+        public DbSet<ScheduleAvailability> ScheduleAvailability { get; set; }
         public DbSet<PublicSchoolClassSchedule> PublicSchoolClassSchedule { get; set; }
         public DbSet<StudentPublicSchoolClass> StudentPublicSchoolClass { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
@@ -43,7 +43,7 @@ namespace Smart.Data
             modelBuilder.Entity<StudentAssessment>()
                 .HasKey(c => new { c.AssessmentId, c.StudentId });
             modelBuilder.Entity<ClassSchedule>()
-                .HasKey(c => new { c.ClassId, c.ScheduleId });
+                .HasKey(c => new { c.ClassId, c.ScheduleAvailabilityId });
             base.OnModelCreating(modelBuilder);
         }
     }
