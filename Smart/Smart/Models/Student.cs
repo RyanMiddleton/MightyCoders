@@ -20,10 +20,14 @@ namespace Smart.Models
         public DateTime DOB { get; set; }
         public string Address { get; set; }
         public string Village { get; set; }
-        public double GpsLongitude { get; set; } 
+        public double GpsLongitude { get; set; }
         public double GpsLatitude { get; set; }
         public int PublicSchoolLevel { get; set; }
-        //[Display(Name = "Guardian Name")]
+        [Display(Name = "English Level")]
+        public int EnglishLevel { get; set; }
+        [Display(Name = "IT Level")]
+        public int ITLevel { get; set; }
+        [Display(Name = "Guardian Name")]
         public string GuardianName { get; set; }
         //[Display(Name = "Guardian Type")]
         public string GuardianType { get; set; }

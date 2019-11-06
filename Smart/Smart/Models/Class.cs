@@ -21,8 +21,11 @@ namespace Smart.Models
         public int TermId { get; set; }
         //[ForeignKey("TermId")]
         public virtual Term Term { get; set; }
+        [Display(Name = "Instructor")]
+        public string InstructorUserId { get; set; }
+        [ForeignKey("InstructorUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public int Capacity { get; set; }
-        public virtual ICollection<ClassInstructor> ClassInstructors { get; set; }
         public virtual ICollection<Assessment> Assessments { get; set; }
         public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,9 @@ namespace Smart
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    DataSeed.Initialize(context);
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    DataSeed.Initialize(context, roleManager, userManager);
                 }
                 catch (Exception ex)
                 {
