@@ -10,7 +10,7 @@ using Smart.Models;
 
 namespace Smart.Pages.Students
 {
-    public class CreateModel : PageModel
+    public class CreateModel : StatusNameModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;
 
@@ -21,7 +21,7 @@ namespace Smart.Pages.Students
 
         public IActionResult OnGet()
         {
-        ViewData["StudentStatusId"] = new SelectList(_context.StudentStatus, "StudentStatusId", "StudentStatusId");
+            PopulateStatusDropDownList(_context);
             return Page();
         }
 
@@ -34,7 +34,6 @@ namespace Smart.Pages.Students
             {
                 return Page();
             }
-
             _context.Student.Add(Student);
             await _context.SaveChangesAsync();
 

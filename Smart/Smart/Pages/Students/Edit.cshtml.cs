@@ -11,7 +11,7 @@ using Smart.Models;
 
 namespace Smart.Pages.Students
 {
-    public class EditModel : PageModel
+    public class EditModel : StatusNameModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;
 
@@ -31,13 +31,14 @@ namespace Smart.Pages.Students
             }
 
             Student = await _context.Student
-                .Include(s => s.StudentStatus).FirstOrDefaultAsync(m => m.StudentId == id);
+                .Include(s => s.StudentStatus)
+                .FirstOrDefaultAsync(m => m.StudentId == id);
 
             if (Student == null)
             {
                 return NotFound();
             }
-           ViewData["StudentStatusId"] = new SelectList(_context.StudentStatus, "StudentStatusId", "StudentStatusId");
+            PopulateStatusDropDownList(_context);
             return Page();
         }
 
