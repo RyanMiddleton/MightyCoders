@@ -1,0 +1,24 @@
+﻿@page
+@model Smart.Pages.ClassSchedule.IndexModel
+@using Smart.Utility
+@{
+    ViewData["Title"] = "Class Schedule";
+}
+<h2>Class Schedule</h2>
+
+@{ 
+    var currentDay = 8;
+}
+
+@foreach (var schedule in Model.ScheduleAvailabilities)
+{
+    @if (currentDay != schedule.DayOfWeek)
+    {
+        SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)schedule.DayOfWeek;
+        currentDay = schedule.DayOfWeek;
+        <h5>@DayOfWeek</h5>
+    }
+    <div>
+        @Html.DisplayFor(s => schedule.StartTime) - @Html.DisplayFor(s => schedule.EndTime)
+    </div>
+}
