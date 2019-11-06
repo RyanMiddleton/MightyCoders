@@ -11,6 +11,6 @@ namespace Smart.Utility
         public const string InstructorUser = "Instructor";
         public const string SocialWorkerUser = "SocialWorker";
         public const string RaterUser = "Rater";
-        public enum EDayOfWeek { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+        public enum EDayOfWeek { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday }
     }
 }

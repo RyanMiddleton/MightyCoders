@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Utility;
 using Smart.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Smart.Pages.ClassSchedule
 {
@@ -21,11 +22,21 @@ namespace Smart.Pages.ClassSchedule
         }
 
         public IEnumerable<ScheduleAvailability> ScheduleAvailabilities { get; set; }
+        public List<SelectListItem> Classes { get; set; }
         public async Task OnGetAsync()
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
+            Classes = await _db.Class
+                               .Include(c => c.Course)
+                               .Include(c => c.ClassSchedules)
+                               .Select(c => new SelectListItem
+                               {
+                                   Value = c.ClassId.ToString(),
+                                   Text = c.Course.Name
+                               })
+                               .ToListAsync();
         }
     }
 }

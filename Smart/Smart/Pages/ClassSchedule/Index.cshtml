@@ -6,9 +6,11 @@
 }
 <h2>Class Schedule</h2>
 
-@{ 
+@{
     var currentDay = 8;
 }
+<select name="classId" id="ClassId"
+        asp-items="Model.Classes" class="form-control"></select>
 
 @foreach (var schedule in Model.ScheduleAvailabilities)
 {
