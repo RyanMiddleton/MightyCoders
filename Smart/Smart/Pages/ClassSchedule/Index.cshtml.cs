@@ -22,21 +22,41 @@ namespace Smart.Pages.ClassSchedule
         }
 
         public IEnumerable<ScheduleAvailability> ScheduleAvailabilities { get; set; }
+        [BindProperty]
         public List<SelectListItem> Classes { get; set; }
-        public async Task OnGetAsync()
+        [BindProperty]
+        public List<SelectListItem> Terms { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
-            Classes = await _db.Class
-                               .Include(c => c.Course)
-                               .Include(c => c.ClassSchedules)
-                               .Select(c => new SelectListItem
-                               {
-                                   Value = c.ClassId.ToString(),
-                                   Text = c.Course.Name
-                               })
-                               .ToListAsync();
+            Terms = await _db.Term
+                             .Select(t => new SelectListItem
+                             {
+                                 Value = t.TermId.ToString(),
+                                 Text = t.Description
+                             })
+                             .ToListAsync();
+                Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
+            if (termId != null)
+            {
+
+                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
+                selectedTerm.Selected = true;
+                Classes = await _db.Class
+                                   .Include(c => c.Course)
+                                   .Include(c => c.ClassSchedules)
+                                   .Where(t => t.TermId == termId)
+                                   .Select(c => new SelectListItem
+                                   {
+                                       Value = c.ClassId.ToString(),
+                                       Text = c.Course.Name
+                                   })
+                                   .ToListAsync();
+            }
+            return Page();
         }
     }
 }

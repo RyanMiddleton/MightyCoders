@@ -9,8 +9,14 @@
 @{
     var currentDay = 8;
 }
-<select name="classId" id="ClassId"
-        asp-items="Model.Classes" class="form-control"></select>
+<form method="get" asp-action="ClassSchedule/Index" id="TermForm">
+    <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+</form>
+
+@if (Model.Classes != null && Model.Classes.Count != 0)
+{
+    <select id="ClassId" asp-items="Model.Classes" class="form-control"></select>
+}
 
 @foreach (var schedule in Model.ScheduleAvailabilities)
 {
@@ -23,4 +29,14 @@
     <div>
         @Html.DisplayFor(s => schedule.StartTime) - @Html.DisplayFor(s => schedule.EndTime)
     </div>
+}
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#TermId').change(function () {
+                $('#TermForm').submit();
+            });
+        });
+    </script>
 }
