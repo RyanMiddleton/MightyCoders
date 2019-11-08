@@ -9,6 +9,7 @@ using Smart.Data;
 using Smart.Utility;
 using Smart.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Smart.Pages.ClassSchedule
 {
@@ -26,6 +27,8 @@ namespace Smart.Pages.ClassSchedule
         public List<SelectListItem> Classes { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
+        [BindProperty]
+        public int? SelectedScheduleId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
@@ -57,6 +60,19 @@ namespace Smart.Pages.ClassSchedule
                                    .ToListAsync();
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostScheduleClass(int classId, int scheduleAvailabilityId)
+        {
+            var newClassSchedule = new Models.ClassSchedule()
+            {
+                ClassId = classId,
+                ScheduleAvailabilityId = scheduleAvailabilityId
+            };
+
+            _db.ClassSchedule.Add(newClassSchedule);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

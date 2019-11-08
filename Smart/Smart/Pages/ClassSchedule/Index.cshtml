@@ -13,23 +13,26 @@
     <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
 </form>
 
-@if (Model.Classes != null && Model.Classes.Count != 0)
-{
-    <select id="ClassId" asp-items="Model.Classes" class="form-control"></select>
-}
-
-@foreach (var schedule in Model.ScheduleAvailabilities)
-{
-    @if (currentDay != schedule.DayOfWeek)
+<form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
+    @if (Model.Classes != null && Model.Classes.Count != 0)
     {
-        SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)schedule.DayOfWeek;
-        currentDay = schedule.DayOfWeek;
-        <h5>@DayOfWeek</h5>
+        <select name="classId" id="ClassId" asp-items="Model.Classes" class="form-control"></select>
     }
-    <div>
-        @Html.DisplayFor(s => schedule.StartTime) - @Html.DisplayFor(s => schedule.EndTime)
-    </div>
-}
+
+    @foreach (var schedule in Model.ScheduleAvailabilities)
+    {
+        @if (currentDay != schedule.DayOfWeek)
+        {
+            SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)schedule.DayOfWeek;
+            currentDay = schedule.DayOfWeek;
+            <h5>@DayOfWeek</h5>
+        }
+        <div>
+            @Html.DisplayFor(s => schedule.StartTime) - @Html.DisplayFor(s => schedule.EndTime)
+            <input class="btn btn-primary text-white addClassBtn" type="submit" asp-for="@schedule.ScheduleAvailabilityId" name="scheduleAvailabilityId" value="@schedule.ScheduleAvailabilityId"/>
+        </div>
+    }
+</form>
 
 @section Scripts{ 
     <script>
