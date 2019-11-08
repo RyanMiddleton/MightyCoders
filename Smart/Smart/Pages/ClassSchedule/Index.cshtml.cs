@@ -75,12 +75,15 @@ namespace Smart.Pages.ClassSchedule
             {
                 if (s.IsSelected)
                 {
-                    var newClassSchedule = new Models.ClassSchedule()
+                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.Id))
                     {
-                        ClassId = classId,
-                        ScheduleAvailabilityId = s.Id
-                    };
-                    _db.ClassSchedule.Add(newClassSchedule);
+                        var newClassSchedule = new Models.ClassSchedule()
+                        {
+                            ClassId = classId,
+                            ScheduleAvailabilityId = s.Id
+                        };
+                        _db.ClassSchedule.Add(newClassSchedule);
+                    }
                 }
             }
             await _db.SaveChangesAsync();
