@@ -9,15 +9,22 @@
     var currentDay = 8;
 }
 <div class="container">
-    <h2>Class Schedule</h2>
-    <form method="get" asp-action="ClassSchedule/Index" id="TermForm">
-        <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
-    </form>
+    
+    <div class="row">
+        <h2>Class Schedule</h2>
+    </div>
+        <form method="get" asp-action="ClassSchedule/Index" id="TermForm">
+            <div class="row">
+                <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+            </div>
+        </form>
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
         @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
         {
-            <select name="classId" id="ClassId" asp-items="Model.ClassSelectList" class="form-control"></select>
+            <div class="row">
+                <select name="classId" id="ClassId" asp-items="Model.ClassSelectList" class="form-control"></select>
+            </div>
         }
 
         @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)

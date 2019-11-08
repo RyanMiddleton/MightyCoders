@@ -81,7 +81,8 @@ namespace Smart.Pages.ClassSchedule
                 }
             }
             await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
+            return await OnGetAsync(termIdToRedirect);
         }
     }
 }
