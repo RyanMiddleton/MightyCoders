@@ -27,20 +27,12 @@ namespace Smart.Pages.ClassSchedule
         public List<SelectListItem> Classes { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
-        [BindProperty]
-        public List<Selected> SelectedScheduleIds { get; set; }
         
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
-            SelectedScheduleIds = new List<Selected>();
-            foreach (var sa in ScheduleAvailabilities)
-            {
-                SelectedScheduleIds.Add(new Selected { Id = sa.ScheduleAvailabilityId, IsSelected = false });
-            }
-
             Terms = await _db.Term
                              .Select(t => new SelectListItem
                              {
@@ -51,7 +43,6 @@ namespace Smart.Pages.ClassSchedule
                 Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
             if (termId != null)
             {
-
                 var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
                 selectedTerm.Selected = true;
                 Classes = await _db.Class
@@ -64,23 +55,22 @@ namespace Smart.Pages.ClassSchedule
                                        Text = c.Course.Name
                                    })
                                    .ToListAsync();
-
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostScheduleClass(int classId)
         {
-            foreach (var s in SelectedScheduleIds)
+            foreach (var s in ScheduleAvailabilities)
             {
-                if (s.IsSelected)
+                if (s.Selected)
                 {
-                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.Id))
+                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId))
                     {
                         var newClassSchedule = new Models.ClassSchedule()
                         {
                             ClassId = classId,
-                            ScheduleAvailabilityId = s.Id
+                            ScheduleAvailabilityId = s.ScheduleAvailabilityId
                         };
                         _db.ClassSchedule.Add(newClassSchedule);
                     }
