@@ -84,5 +84,15 @@ namespace Smart.Pages.ClassSchedule
             int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
             return await OnGetAsync(termIdToRedirect);
         }
+
+        public async Task<IActionResult> OnGetRemove(int classId, int scheduleId)
+        {
+            var classScheduleToDelete = _db.ClassSchedule.FirstOrDefault(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == scheduleId);
+            _db.ClassSchedule.Remove(classScheduleToDelete);
+            await _db.SaveChangesAsync();
+            int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
+            return await OnGetAsync(termIdToRedirect);
+        }
+
     }
 }

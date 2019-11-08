@@ -61,7 +61,9 @@
                         @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                         {
                             @:<li class="list-group-item">
-                                @:<div class="offset-1">@c.Course.Name</div>
+                                @:<div class="offset-1">@c.Course.Name
+                                      <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                  @:</div>
                             @:</li>
                         }
                     }
