@@ -8,15 +8,15 @@ namespace Smart.Models
 {
     public class Student
     {
-        //[Key]
+        [Key]
         public int StudentId { get; set; }
-        //[Required]
-        //[Display(Name = "First Name")]
+        [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        //[Required]
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        //[Display(Name = "Date of Birth")]
+        [Display(Name = "Date of Birth")]
         public DateTime DOB { get; set; }
         public string Address { get; set; }
         public string Village { get; set; }
@@ -29,12 +29,12 @@ namespace Smart.Models
         public int ITLevel { get; set; }
         [Display(Name = "Guardian Name")]
         public string GuardianName { get; set; }
-        //[Display(Name = "Guardian Type")]
+        [Display(Name = "Guardian Type")]
         public string GuardianType { get; set; }
-        //[Display(Name = "Phone Number")]
+        [Display(Name = "Phone Number")]
         public string Phone { get; set; }
         public byte[] Photo { get; set; }
-        //[Required]
+        [Required]
         public int StudentStatusId { get; set; }
         public StudentStatus StudentStatus { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }

@@ -9,10 +9,10 @@ namespace Smart.Models
 {
     public class Note
     {
-        //[Key]
+        [Key]
         public int NoteId { get; set; }
-        //[Required]
-        //[Display(Name = "Student")]
+        [Required]
+        [Display(Name = "Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
         [Required]

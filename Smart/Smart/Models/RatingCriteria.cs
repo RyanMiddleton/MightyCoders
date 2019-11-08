@@ -8,7 +8,7 @@ namespace Smart.Models
 {
     public class RatingCriteria
     {
-        //[Key]
+        [Key]
         public int RatingCriteriaId { get; set; }
         public string Description { get; set; }
         public int MaxScore { get; set; }

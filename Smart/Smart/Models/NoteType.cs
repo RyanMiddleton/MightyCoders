@@ -8,7 +8,7 @@ namespace Smart.Models
 {
     public class NoteType
     {
-        //[Key]
+        [Key]
         public int NoteTypeId { get; set; }
         public string Description { get; set; }
     }

@@ -8,7 +8,7 @@ namespace Smart.Models
 {
     public class FileType
     {
-        //[Key]
+        [Key]
         public int FileTypeId { get; set; }
         public string Description { get; set; }
     }
