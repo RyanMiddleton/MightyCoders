@@ -45,13 +45,18 @@
                     <input class="form-check-input" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
                     <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
                 </div>
-            @foreach (var c in Model.Classes)
+            @if (Model.Classes != null)
             {
-                @foreach (var cs in c.ClassSchedules)
+                @foreach (var c in Model.Classes)
                 {
-                    @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                    @foreach (var cs in c.ClassSchedules)
                     {
-                        @:<li class="list-group-item offset-1">@c.Course.Name</li>
+                        @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                        {
+                            @:<li class="list-group-item">
+                                @:<div class="offset-1">@c.Course.Name</div>
+                            @:</li>
+                        }
                     }
                 }
             }
