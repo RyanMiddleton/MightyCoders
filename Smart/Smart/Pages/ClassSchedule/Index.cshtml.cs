@@ -24,7 +24,8 @@ namespace Smart.Pages.ClassSchedule
         [BindProperty]
         public List<ScheduleAvailability> ScheduleAvailabilities { get; set; }
         [BindProperty]
-        public List<SelectListItem> Classes { get; set; }
+        public List<SelectListItem> ClassSelectList { get; set; }
+        public List<Class> Classes { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
         
@@ -49,12 +50,15 @@ namespace Smart.Pages.ClassSchedule
                                    .Include(c => c.Course)
                                    .Include(c => c.ClassSchedules)
                                    .Where(t => t.TermId == termId)
-                                   .Select(c => new SelectListItem
-                                   {
-                                       Value = c.ClassId.ToString(),
-                                       Text = c.Course.Name
-                                   })
                                    .ToListAsync();
+                ClassSelectList = Classes.ConvertAll(c =>
+                                         {
+                                              return new SelectListItem()
+                                              {
+                                                  Value = c.ClassId.ToString(),
+                                                  Text = c.Course.Name
+                                              };
+                                         });
             }
             return Page();
         }
