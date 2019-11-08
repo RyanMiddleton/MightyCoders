@@ -21,20 +21,26 @@ namespace Smart.Pages.ClassSchedule
         {
             _db = db;
         }
-
-        public IEnumerable<ScheduleAvailability> ScheduleAvailabilities { get; set; }
+        [BindProperty]
+        public List<ScheduleAvailability> ScheduleAvailabilities { get; set; }
         [BindProperty]
         public List<SelectListItem> Classes { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
         [BindProperty]
-        public int? SelectedScheduleId { get; set; }
-
+        public List<Selected> SelectedScheduleIds { get; set; }
+        
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
+            SelectedScheduleIds = new List<Selected>();
+            foreach (var sa in ScheduleAvailabilities)
+            {
+                SelectedScheduleIds.Add(new Selected { Id = sa.ScheduleAvailabilityId, IsSelected = false });
+            }
+
             Terms = await _db.Term
                              .Select(t => new SelectListItem
                              {
@@ -58,19 +64,25 @@ namespace Smart.Pages.ClassSchedule
                                        Text = c.Course.Name
                                    })
                                    .ToListAsync();
+
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostScheduleClass(int classId, int scheduleAvailabilityId)
+        public async Task<IActionResult> OnPostScheduleClass(int classId)
         {
-            var newClassSchedule = new Models.ClassSchedule()
+            foreach (var s in SelectedScheduleIds)
             {
-                ClassId = classId,
-                ScheduleAvailabilityId = scheduleAvailabilityId
-            };
-
-            _db.ClassSchedule.Add(newClassSchedule);
+                if (s.IsSelected)
+                {
+                    var newClassSchedule = new Models.ClassSchedule()
+                    {
+                        ClassId = classId,
+                        ScheduleAvailabilityId = s.Id
+                    };
+                    _db.ClassSchedule.Add(newClassSchedule);
+                }
+            }
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
