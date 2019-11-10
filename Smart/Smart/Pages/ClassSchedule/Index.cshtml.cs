@@ -32,6 +32,7 @@ namespace Smart.Pages.ClassSchedule
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
+                                              .OrderBy(t => t.StartTime)
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
             Terms = await _db.Term
