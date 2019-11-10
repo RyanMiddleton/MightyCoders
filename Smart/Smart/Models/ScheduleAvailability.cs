@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Smart.Models
 {
-    public class Schedule
+    public class ScheduleAvailability
     {
-        public int ScheduleId { get; set; }
+        public int ScheduleAvailabilityId { get; set; }
         public int DayOfWeek { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

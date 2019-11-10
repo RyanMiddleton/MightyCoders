@@ -9,7 +9,7 @@ namespace Smart.Models
     {
         public int ClassId { get; set; }
         public Class Class { get; set; }
-        public int ScheduleId { get; set; }
-        public Schedule Schedule { get; set; }
+        public int ScheduleAvailabilityId { get; set; }
+        public ScheduleAvailability ScheduleAvailability { get; set; }
     }
 }

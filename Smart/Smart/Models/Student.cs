@@ -29,6 +29,10 @@ namespace Smart.Models
         public double GpsLatitude { get; set; }
         [Display(Name = "Public School Level")]
         public int PublicSchoolLevel { get; set; }
+        [Display(Name = "English Level")]
+        public int EnglishLevel { get; set; }
+        [Display(Name = "IT Level")]
+        public int ITLevel { get; set; }
         [Display(Name = "Guardian Name")]
         public string GuardianName { get; set; }
         [Display(Name = "Guardian Type")]
