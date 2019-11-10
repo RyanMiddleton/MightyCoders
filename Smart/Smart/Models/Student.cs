@@ -19,7 +19,7 @@ namespace Smart.Models
         public string LastName { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime DOB { get; set; }
         public string Address { get; set; }
         public string Village { get; set; }

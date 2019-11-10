@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
 
-namespace Smart.Pages.Students
+namespace Smart.Pages.Applicants
 {
     public class IndexModel : PageModel
     {
@@ -20,14 +19,14 @@ namespace Smart.Pages.Students
             _context = context;
         }
 
-        public IList<Student> Student { get; set; }
+        public IList<Student> Student { get;set; }
 
-        
         public async Task OnGetAsync()
         {
             Student = await _context.Student
-                .OrderBy(s=> s.LastName)
-                .Include(s => s.StudentStatus).ToListAsync();
+                .Where(s=>s.StudentStatus.Description == "Applicant")
+                 .OrderBy(s => s.LastName)
+                 .Include(s => s.StudentStatus).ToListAsync();
         }
     }
 }
