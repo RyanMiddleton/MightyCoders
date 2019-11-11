@@ -1,20 +1,19 @@
 ﻿@page
 @model Smart.Pages.Users.IndexModel
 @{
-    ViewData["Title"] = "Instructors";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Instructors</h2>
+<h2>User Management</h2>
 
 <p>
-    <a asp-area="Identity" asp-page="/Account/Register">Create New</a>
+    <a asp-area="Identity" asp-page="/Account/Register"class="btn btn-info"><i class="fas fa-plus"></i> Register New User</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Users[0].LastName)</th>
             <th>@Html.DisplayNameFor(model => model.Users[0].FirstName)</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -30,10 +29,6 @@
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 
-                <td>
-                    <a asp-page="./Index" asp-route-id="@item.Id">Select</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                </td>
             </tr>
         }
     </tbody>
