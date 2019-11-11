@@ -4,17 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-<<<<<<< Updated upstream
 using Microsoft.EntityFrameworkCore;
 using Smart.Models;
-=======
->>>>>>> Stashed changes
 
 namespace Smart.Pages.Users
 {
     public class IndexModel : PageModel
     {
-<<<<<<< Updated upstream
         private readonly Smart.Data.ApplicationDbContext _context;
 
         public IndexModel(Smart.Data.ApplicationDbContext context)
@@ -29,10 +25,6 @@ namespace Smart.Pages.Users
                 .AsNoTracking()
                 .OrderBy(i => i.LastName)
                 .ToListAsync();
-=======
-        public void OnGet()
-        {
->>>>>>> Stashed changes
         }
     }
 }
