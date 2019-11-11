@@ -17,6 +17,13 @@ namespace Smart.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstName;
+            }
+        }
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]

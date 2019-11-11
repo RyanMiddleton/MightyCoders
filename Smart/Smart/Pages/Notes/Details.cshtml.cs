@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
 
-namespace Smart.Pages.Students
+namespace Smart.Pages.Notes
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Smart.Pages.Students
             _context = context;
         }
 
-        public Student Student { get; set; }
+        public Note Note { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,15 +28,12 @@ namespace Smart.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Student
-                .Include(s => s.StudentStatus)
-                .Include(e => e.Notes)
-                .ThenInclude(e => e.NoteType)
-                .Include(a => a.ApplicantRatings)
-                .ThenInclude(a => a.RatingCriteria)
-                .FirstOrDefaultAsync(m => m.StudentId == id);
+            Note = await _context.Note
+                .Include(n => n.ApplicationUser)
+                .Include(n => n.NoteType)
+                .Include(n => n.Student).FirstOrDefaultAsync(m => m.NoteId == id);
 
-            if (Student == null)
+            if (Note == null)
             {
                 return NotFound();
             }
