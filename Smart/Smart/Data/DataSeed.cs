@@ -14,11 +14,11 @@ namespace Smart.Data
         {
             context.Database.EnsureCreated();
 
-            /*// Look for any students.
+            // Look for any students.
             if (context.Student.Any())
             {
                 return;   // DB has been seeded
-            }*/
+            }
 
             // Seeding Roles Start
             if (!roleManager.RoleExistsAsync(SD.AdminUser).Result)
