@@ -18,7 +18,7 @@ namespace Smart.Pages.Users
             _context = context;
         }
 
-        public IEnumerable<ApplicationUser> Users { get; set; }
+        public IList<ApplicationUser> Users { get; set; }
         public async Task OnGetAsync(int? id)
         {
             Users = await _context.ApplicationUser
