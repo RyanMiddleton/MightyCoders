@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Smart.Data;
 using Smart.Models;
 
-namespace Smart.Pages.Instructors.Grading
+namespace Smart.Pages.Instructors.Classes
 {
     public class CreateModel : PageModel
     {
@@ -21,13 +21,14 @@ namespace Smart.Pages.Instructors.Grading
 
         public IActionResult OnGet()
         {
-        ViewData["AssessmentId"] = new SelectList(_context.Assessment, "AssessmentId", "AssessmentId");
-        ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FirstName");
+        ViewData["InstructorUserId"] = new SelectList(_context.ApplicationUser, "Id", "Id");
+        ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "CourseId");
+        ViewData["TermId"] = new SelectList(_context.Term, "TermId", "TermId");
             return Page();
         }
 
         [BindProperty]
-        public StudentAssessment StudentAssessment { get; set; }
+        public Class Class { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -36,7 +37,7 @@ namespace Smart.Pages.Instructors.Grading
                 return Page();
             }
 
-            _context.StudentAssessment.Add(StudentAssessment);
+            _context.Class.Add(Class);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

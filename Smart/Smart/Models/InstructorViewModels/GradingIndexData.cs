@@ -10,5 +10,6 @@ namespace Smart.Models.InstructorViewModels
         public IEnumerable<Assessment> Assessments { get; set; }
         public IEnumerable<Student> Students { get; set; }
         public IEnumerable<StudentAssessment> StudentAssessments { get; set; }
+        public IEnumerable<Class> Classes { get; set; }
     }
 }
