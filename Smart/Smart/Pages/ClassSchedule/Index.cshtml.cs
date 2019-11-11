@@ -94,6 +94,5 @@ namespace Smart.Pages.ClassSchedule
             int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
             return await OnGetAsync(termIdToRedirect);
         }
-
     }
 }

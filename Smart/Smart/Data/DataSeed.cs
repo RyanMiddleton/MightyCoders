@@ -142,25 +142,25 @@ namespace Smart.Data
             // Seeding Student Start
             var students = new Student[]
            {
-                new Student { FirstName = "Jame", LastName = "Smith", DOB = DateTime.Parse("1999-01-01"), Address = "Aye Place 01", Village = "Aye Village",
+                new Student { FirstName = "Abelina", LastName = "Abreu", DOB = DateTime.Parse("1999-01-01"), Address = "Aye Place 01", Village = "Aye Village",
                     GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "James", GuardianType = "Father", Phone = "160-532-3452",
                     Photo = null, StudentStatusId = studentStatuses[0].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
-                new Student { FirstName = "David", LastName = "Johnson", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village",
+                new Student { FirstName = "Abiba", LastName = "Macie", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village",
                     GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Hela", GuardianType = "Father", Phone = "423-542-4231",
                     Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 2, ITLevel = 2 },
-                new Student { FirstName = "Christopher", LastName = "Williams", DOB = DateTime.Parse("2001-01-03"), Address = "Aye Place 03", Village = "Aynotha Village",
+                new Student { FirstName = "Chamila", LastName = "Faife", DOB = DateTime.Parse("2001-01-03"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[2].StudentStatusId, EnglishLevel = 3, ITLevel = 3 },
-                new Student { FirstName = "George", LastName = "Jones", DOB = DateTime.Parse("2001-01-04"), Address = "Aye Place 03", Village = "Aynotha Village",
+                new Student { FirstName = "Clesia", LastName = "Camal", DOB = DateTime.Parse("2001-01-04"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[3].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
-                new Student { FirstName = "Ronald", LastName = "Brown", DOB = DateTime.Parse("2001-01-05"), Address = "Aye Place 03", Village = "Aynotha Village",
+                new Student { FirstName = "Elina", LastName = "Machel", DOB = DateTime.Parse("2001-01-05"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[4].StudentStatusId, EnglishLevel = 2, ITLevel = 2 },
-                new Student { FirstName = "John", LastName = "Davis", DOB = DateTime.Parse("2001-01-06"), Address = "Aye Place 03", Village = "Aynotha Village",
+                new Student { FirstName = "Eowyn", LastName = "Tamele", DOB = DateTime.Parse("2001-01-06"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[5].StudentStatusId, EnglishLevel = 3, ITLevel = 3 },
-                new Student { FirstName = "Corey", LastName = "Wilson", DOB = DateTime.Parse("2001-01-07"), Address = "Aye Place 03", Village = "Aynotha Village",
+                new Student { FirstName = "Genifa", LastName = "Campos", DOB = DateTime.Parse("2001-01-07"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[6].StudentStatusId, EnglishLevel = 1, ITLevel = 1 }
            };
