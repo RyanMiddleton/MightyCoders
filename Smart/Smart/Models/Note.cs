@@ -21,7 +21,9 @@ namespace Smart.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]
+        [Display(Name = "Note Type")]
         public int NoteTypeId { get; set; }
+        [Display(Name = "Note Type")]
         public NoteType NoteType { get; set; }
 
         public string Text { get; set; }

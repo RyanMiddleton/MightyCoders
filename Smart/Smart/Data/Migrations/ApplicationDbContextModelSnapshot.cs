@@ -15,7 +15,7 @@ namespace Smart.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -203,8 +203,7 @@ namespace Smart.Data.Migrations
 
                     b.Property<int>("TermId");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
                     b.HasKey("ApplicantRatingId");
 
@@ -650,8 +649,7 @@ namespace Smart.Data.Migrations
 
                     b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicantRatings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Smart.Models.Assessment", b =>

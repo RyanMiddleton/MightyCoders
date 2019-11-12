@@ -29,7 +29,12 @@ namespace Smart.Pages.Students
             }
 
             Student = await _context.Student
-                .Include(s => s.StudentStatus).FirstOrDefaultAsync(m => m.StudentId == id);
+                .Include(s => s.StudentStatus)
+                .Include(e => e.Notes)
+                .ThenInclude(e => e.NoteType)
+                .Include(a => a.ApplicantRatings)
+                .ThenInclude(a => a.RatingCriteria)
+                .FirstOrDefaultAsync(m => m.StudentId == id);
 
             if (Student == null)
             {

@@ -301,11 +301,28 @@ namespace Smart.Data
             var classes = new Class[]
             {
                 new Class { CourseId = courses[0].CourseId, TermId = terms[0].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
-                new Class { CourseId = courses[1].CourseId, TermId = terms[1].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
-                new Class { CourseId = courses[2].CourseId, TermId = terms[2].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[1].CourseId, TermId = terms[0].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[2].CourseId, TermId = terms[0].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
                 new Class { CourseId = courses[3].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
                 new Class { CourseId = courses[4].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
-                new Class { CourseId = courses[5].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id }
+                new Class { CourseId = courses[5].CourseId, TermId = terms[0].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+
+                new Class { CourseId = courses[1].CourseId, TermId = terms[1].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[2].CourseId, TermId = terms[1].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[3].CourseId, TermId = terms[1].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[4].CourseId, TermId = terms[1].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[5].CourseId, TermId = terms[1].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+
+                new Class { CourseId = courses[0].CourseId, TermId = terms[2].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[1].CourseId, TermId = terms[2].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[2].CourseId, TermId = terms[2].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[4].CourseId, TermId = terms[2].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[5].CourseId, TermId = terms[2].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+
+                new Class { CourseId = courses[1].CourseId, TermId = terms[3].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[2].CourseId, TermId = terms[3].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
+                new Class { CourseId = courses[4].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+                new Class { CourseId = courses[5].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id }
             };
 
             foreach (Class s in classes)

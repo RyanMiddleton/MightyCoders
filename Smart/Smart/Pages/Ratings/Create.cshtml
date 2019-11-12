@@ -1,0 +1,60 @@
+﻿@page
+@model Smart.Pages.Ratings.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ApplicantRating</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicantRating.StudentId" class="control-label"></label>
+                <select asp-for="ApplicantRating.StudentId" class="form-control" asp-items="ViewBag.StudentId">
+                    <option value="">-- Select Student --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantRating.RatingCriteria.Description" class="control-label"></label>
+                <select asp-for="ApplicantRating.RatingCriteriaId" class="form-control"
+                        asp-items="@Model.CriteriaNameSL">
+                    <option value="">-- Select Criteria --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantRating.TermId" class="control-label"></label>
+                <select asp-for="ApplicantRating.TermId" class="form-control" 
+                        asp-items="@Model.TermNameSL">
+                    <option value="">-- Select Term --</option>
+                </select>
+                <span asp-validation-for="ApplicantRating.TermId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantRating.ScoreAssigned" class="control-label"></label>
+                <input asp-for="ApplicantRating.ScoreAssigned" class="form-control" />
+                <span asp-validation-for="ApplicantRating.ScoreAssigned" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicantRating.Comment" class="control-label"></label>
+                @Html.TextAreaFor(a => a.ApplicantRating.Comment, new { @cols = "4", @rows = "4", style = "width:100%;" })
+                <span asp-validation-for="ApplicantRating.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

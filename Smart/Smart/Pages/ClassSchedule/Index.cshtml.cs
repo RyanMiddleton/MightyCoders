@@ -28,7 +28,7 @@ namespace Smart.Pages.ClassSchedule
         public List<Class> Classes { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
-
+        
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
@@ -42,7 +42,7 @@ namespace Smart.Pages.ClassSchedule
                                  Text = t.Description
                              })
                              .ToListAsync();
-            Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
+                Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
             if (termId != null)
             {
                 var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
@@ -53,13 +53,13 @@ namespace Smart.Pages.ClassSchedule
                                    .Where(t => t.TermId == termId)
                                    .ToListAsync();
                 ClassSelectList = Classes.ConvertAll(c =>
-                {
-                    return new SelectListItem()
-                    {
-                        Value = c.ClassId.ToString(),
-                        Text = c.Course.Name
-                    };
-                });
+                                         {
+                                              return new SelectListItem()
+                                              {
+                                                  Value = c.ClassId.ToString(),
+                                                  Text = c.Course.Name
+                                              };
+                                         });
             }
             return Page();
         }

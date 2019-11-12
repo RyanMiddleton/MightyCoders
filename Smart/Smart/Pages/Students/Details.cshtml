@@ -5,10 +5,14 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Student</h4>
+<h1>@Html.DisplayFor(model => model.Student.FullName)</h1>
+<div class="w12-bar w3-black">
+    <button class="w3-bar-item w3-button" onclick="openCity('London')">Details</button>
+    <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Notes</button>
+    <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Ratings</button>
+</div>
+<div id="London" class="w3-container city">
+    <h2>Details</h2>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -84,14 +88,85 @@
             @Html.DisplayFor(model => model.Student.Photo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.StudentStatus)
+            @Html.DisplayNameFor(model => model.Student.StudentStatus.Description)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.StudentStatus.StudentStatusId)
+            @Html.DisplayFor(model => model.Student.StudentStatus.Description)
         </dd>
     </dl>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Student.StudentId" class="btn btn-primary">Edit</a>
+        <a asp-page="./Index" class="btn btn-info">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Student.StudentId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div id="Paris" class="w3-container city" style="display:none">
+    <h2>Notes</h2>
+    @if (Model.Student.Notes.Count > 0)
+    {
+    <table class="table">
+        <tr>
+            <th>Note Type</th>
+            <th>Note</th>
+        </tr>
+        @foreach (var item in Model.Student.Notes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoteType.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+            </tr>
+        }
+    </table>
+    }
+    else
+    {
+        <p>No notes on Student</p>
+    }
 </div>
+<div id="Tokyo" class="w3-container city" style="display:none">
+    <h2>Ratings</h2>
+    @if (Model.Student.ApplicantRatings.Count() > 0)
+    {
+    <table class="table">
+        <tr>
+            <th>Rating Criterium</th>
+            <th>Rating(50)</th>
+        </tr>
+        @foreach (var item in Model.Student.ApplicantRatings)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RatingCriteria.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScoreAssigned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+    </tr>
+        }
+    </table>
+    }
+    else
+    {
+        <p>No Ratings for the Student</p>
+    }
+</div>
+
+
+
+<script>
+    function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+    }
+</script>

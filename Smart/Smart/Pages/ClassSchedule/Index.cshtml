@@ -1,5 +1,6 @@
-﻿
-@page
+
+﻿@page
+
 @model Smart.Pages.ClassSchedule.IndexModel
 @using Smart.Utility
 @{
@@ -10,15 +11,15 @@
     var currentDay = 8;
 }
 <div class="container">
-
+    
     <div class="row">
         <h2>Class Schedule</h2>
     </div>
-    <form method="get" asp-action="ClassSchedule/Index" id="TermForm">
-        <div class="row">
-            <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
-        </div>
-    </form>
+        <form method="get" id="TermForm">
+            <div class="row">
+                <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+            </div>
+        </form>
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
         @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
@@ -36,7 +37,7 @@
                 currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
                 @if (currentDay < 8)
                 {
-                    @:</ul>
+                        @:</ul>
                     @:</div>
                 }
                 @:<div class="card">
@@ -44,7 +45,7 @@
                         @:<h5>@DayOfWeek</h5>
                     @:</div>
                     @:<ul class="list-group list-group-flush">
-             }
+            }
             <li class="list-group-item">
                 <div class="d-inline">
                     @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
@@ -53,30 +54,30 @@
                     <input class="form-check-input" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
                     <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
                 </div>
-                @if (Model.Classes != null)
+            @if (Model.Classes != null)
+            {
+                @foreach (var c in Model.Classes)
                 {
-                    @foreach (var c in Model.Classes)
+                    @foreach (var cs in c.ClassSchedules)
                     {
-                        @foreach (var cs in c.ClassSchedules)
+                        @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                         {
-                            @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
-                            {
-                                @:<li class="list-group-item">
+                            @:<li class="list-group-item">
                                 @:<div class="offset-1">@c.Course.Name
-                                    <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
-                                    @:</div>
-                                @:</li>
-                        }
+                                      <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                  @:</div>
+                            @:</li>
                         }
                     }
                 }
-                </li>
             }
+            </li>
+        }
         <input class="btn btn-primary text-white" type="submit" value="Save" />
-        </form>
+    </form>
 </div>
 
-@section Scripts{
+@section Scripts{ 
     <script>
         $(document).ready(function () {
             $('#TermId').change(function () {

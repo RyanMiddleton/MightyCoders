@@ -1,0 +1,72 @@
+﻿@page
+@model Smart.Pages.Instructors.Grading.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Student Assessment</h4>
+<hr />
+
+        <h3>Student Assessments</h3>
+        <table class="table">
+            <tr>
+                <th>Student ID</th>
+                <th>Points</th>
+                <th>Comments</th>
+                <th></th>
+            </tr>
+
+    @*@foreach (var item in Model.GradingData.StudentAssessments)
+    {
+        <tr>
+            <td>
+                @item.StudentId
+            </td>
+            <td>
+                @item.PointsAwarded
+            </td>
+            <td>
+                @item.Comments
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-studentAssessmentID="@item.AssessmentId">Edit Grade</a>
+            </td>
+        </tr>
+            }*@
+
+        </table>
+    
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="StudentAssessment.AssessmentId" />
+                <input type="hidden" asp-for="StudentAssessment.StudentId" />
+                <div class="form-group">
+                    <label asp-for="StudentAssessment.PointsAwarded" class="control-label"></label>
+                    <input asp-for="StudentAssessment.PointsAwarded" class="form-control" />
+                    <span asp-validation-for="StudentAssessment.PointsAwarded" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StudentAssessment.Comments" class="control-label"></label>
+                    <input asp-for="StudentAssessment.Comments" class="form-control" />
+                    <span asp-validation-for="StudentAssessment.Comments" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+<div>
+    <a asp-page="./Index">Back to Class Selection</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

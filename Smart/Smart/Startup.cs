@@ -37,7 +37,7 @@ namespace Smart
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("LocalConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
             /*services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("ApplicationDbContext")));*/

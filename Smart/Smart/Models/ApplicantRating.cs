@@ -15,7 +15,6 @@ namespace Smart.Models
         [Display(Name = "Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
-        [Required]
         [Display(Name = "User")]
         public string UserId { get; set; }
         [ForeignKey("UserId")]
