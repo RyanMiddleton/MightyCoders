@@ -16,9 +16,11 @@ namespace Smart.Models
         public virtual Assessment Assessment { get; set; }
         [Key]
         [Required]
+        [Display(Name = "Student")]
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public virtual Student Student { get; set; }
+        [Display(Name = "Points Awarded")]
         public double PointsAwarded { get; set; } 
         public string Comments { get; set; }
     }
