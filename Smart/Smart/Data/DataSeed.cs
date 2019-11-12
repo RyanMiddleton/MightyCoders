@@ -216,7 +216,7 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding NoteType End
 
-            // Seeding Note Start 
+            // Seeding Note Start
             var notes = new Note[]
             {
                 new Note { StudentId = students[0].StudentId, UserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id, NoteTypeId = noteTypes[0].NoteTypeId, Text = "Note on Applicaition" },

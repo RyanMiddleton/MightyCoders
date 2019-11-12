@@ -9,6 +9,7 @@ namespace Smart.Models
 {
     public class ScheduleAvailability
     {
+        [Key]
         public int ScheduleAvailabilityId { get; set; }
         public int DayOfWeek { get; set; }
         [DataType(DataType.Time)]

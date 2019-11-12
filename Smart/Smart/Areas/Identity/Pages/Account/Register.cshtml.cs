@@ -75,6 +75,7 @@ namespace Smart.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            string role = Request.Form["UserRole"].ToString();
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
@@ -87,7 +88,33 @@ namespace Smart.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                    if (role == SD.InstructorUser)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.InstructorUser);
+                    }
+                    else
+                    {
+                        if (role == SD.SocialWorkerUser)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.SocialWorkerUser);
+                        }
+                        else
+                        {
+                            if (role == SD.RaterUser)
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.RaterUser);
+                            }
+                            else
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                                await _signInManager.SignInAsync(user, isPersistent: false);
+                                return LocalRedirect(returnUrl);
+                            }
+                        }
+                    }
+
+                    return RedirectToPage("/Users/Index");
+                    /*await _userManager.AddToRoleAsync(user, SD.AdminUser);
                     _logger.LogInformation("User created a new account with password.");
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -101,7 +128,7 @@ namespace Smart.Areas.Identity.Pages.Account
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect(returnUrl);*/
                 }
                 foreach (var error in result.Errors)
                 {

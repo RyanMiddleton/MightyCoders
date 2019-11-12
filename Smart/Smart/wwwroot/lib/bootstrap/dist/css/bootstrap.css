@@ -2528,6 +2528,30 @@ fieldset:disabled a.btn {
   border-color: #17a2b8;
 }
 
+.btn-applicant {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-students {
+    color: #fff;
+    background-color: #3ee44c;
+    border-color: #17a2b8;
+}
+
+.btn-reports {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-attendance {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
 .btn-info:hover {
   color: #fff;
   background-color: #138496;
