@@ -10,19 +10,26 @@
 }
 <div class="container">
     
-    <div class="row">
+    <div class="row py-3">
         <h2>Class Schedule</h2>
     </div>
-        <form method="get" id="TermForm">
-            <div class="row">
-                <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
-            </div>
-        </form>
+    <div class="row">
+        <h6>Select Term:</h6>
+    </div>
+    <form method="get" id="TermForm">
+        <div class="row pb-3">
+            <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+        </div>
+    </form>
+
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
         @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
         {
             <div class="row">
+                <h6>Select Class:</h6>
+            </div>
+            <div class="row pb-3">
                 <select name="classId" id="ClassId" asp-items="Model.ClassSelectList" class="form-control"></select>
             </div>
         }
@@ -37,6 +44,7 @@
                 {
                         @:</ul>
                     @:</div>
+                    @:<div class="pb-3"></div>
                 }
                 @:<div class="card">
                     @:<div class="card-header">
@@ -71,7 +79,7 @@
             }
             </li>
         }
-        <input class="btn btn-primary text-white" type="submit" value="Save" />
+        <input class="btn btn-primary text-white fixed-bottom ml-auto m-1 w-50" type="submit" value="Save" />
     </form>
 </div>
 
