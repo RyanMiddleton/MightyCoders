@@ -17,18 +17,8 @@ namespace Smart.Pages.Instructors.Grading
 {
     public class IndexModel : PageModel
     {
-        public class Person
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public int Age { get; set; }
-        }
         private readonly Smart.Data.ApplicationDbContext _context;
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    services.AddMvc();
-        //    services.AddAntiforgery(o => o.HeaderName = "RequestVerificationToken");
-        //}
+        public Assessment assessment { get; set; }
         public IndexModel(Smart.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -39,7 +29,11 @@ namespace Smart.Pages.Instructors.Grading
         public GradingIndexData GradingData { get; set; }
         [BindProperty]
         public List<SelectListItem> Classes { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? classId, List<StudentAssessment> studentAssessments)
+        [BindProperty]
+        public List<SelectListItem> Assessments { get; set; }
+        [BindProperty]
+        public int AssessmentId { get; set; }
+        public async Task<IActionResult> OnGetAsync(int? classId, int? selectedAssessId)
         {
             GradingData = new GradingIndexData();
             GradingData.Classes = await _context.Class.ToListAsync();
@@ -59,31 +53,44 @@ namespace Smart.Pages.Instructors.Grading
                 clsId = classId.Value;
                 try
                 {
-                    Assessment assessment = GradingData.Assessments.Where(a => a.ClassId == classId).Single();
-                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();
+                    Assessments = await _context.Assessment.Where(a => a.ClassId == clsId).Select(a =>
+                                new SelectListItem
+                                {
+                                    Value = a.AssessmentId.ToString(),
+                                    Text = a.Title.ToString()
+                                }).ToListAsync();
                 }
                 catch
                 {
                     clsId = 0;
                 }
+            }
 
+            if (selectedAssessId != null)
+            {
+                AssessmentId = selectedAssessId.Value;
+                try
+                {
+                    Assessment assessment = GradingData.Assessments.Where(a => a.AssessmentId == AssessmentId).Single();
+                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();
+                    AssessmentId = assessment.AssessmentId;
+                }
+                catch
+                {
+                    AssessmentId = 0;
+                }
             }
 
             return Page();
         }
 
 
-        public JsonResult OnPost(List<StudentAssessment> assessments)
+        public JsonResult OnPost(int? AssessId)
         {
-            //List<StudentAssessment> sa = new List<StudentAssessment>();
-            //foreach(StudentAssessment studentAssessment in studentAssessments)
-            //{
-            //sa.Add(studentAssessment);
-            //}
-            int sPostValue1;
-            double sPostValue2;
-            string sPostValue3 = "";
             {
+
+                _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
+                _context.SaveChanges();
                 MemoryStream stream = new MemoryStream();
                 Request.Body.CopyTo(stream);
                 stream.Position = 0;
@@ -104,60 +111,11 @@ namespace Smart.Pages.Instructors.Grading
                             }
                             );
                         }
-                        //if (obj != null)
-                        //{
-                        //    sPostValue1 = obj.StudentId;
-                        //    //sPostValue2 = obj.PointsAwarded;
-                        //    //sPostValue3 = obj.Comments;
-                        //}
                     }
                 }
             }
             return new JsonResult("test");
-                return new JsonResult("test: test");
-            //do something with the person class
         }
 
-        public class StudentAssessmentTemp
-        {
-
-            //public int AssessmentId { get; set; }
-            //public virtual Assessment Assessment { get; set; }
-
-            public int StudentId { get; set; }
-            //public virtual Student Student { get; set; }
-            public double PointsAwarded { get; set; }
-            public string Comments { get; set; }
-        }
-
-        //public ActionResult OnPostSend()
-        //{
-        //    List<string> lstString = new List<string>
-        //    {
-        //        "test",
-        //        "test2",
-        //        "test3"
-        //    };
-        //    return new JsonResult(lstString);
-        //    //using (CustomersEntities entities = new CustomersEntities())
-        //    //{
-        //    //    //Truncate Table to delete all old records.
-        //    //    entities.Database.ExecuteSqlCommand("TRUNCATE TABLE [Customers]");
-
-        //    //    //Check for NULL.
-        //    //    if (customers == null)
-        //    //    {
-        //    //        customers = new List<Customer>();
-        //    //    }
-
-        //    //    //Loop and insert records.
-        //    //    foreach (Customer customer in customers)
-        //    //    {
-        //    //        entities.Customers.Add(customer);
-        //    //    }
-        //    //    int insertedRecords = entities.SaveChanges();
-        //    //    return Json(insertedRecords);
-        //    //}
-        //}
     }
 }
