@@ -65,8 +65,12 @@ namespace Smart.Pages.ClassSchedule
             return Page();
         }
 
-        public async Task<IActionResult> OnPostScheduleClass(int classId)
+        public async Task<IActionResult> OnPostScheduleClass(int? classId)
         {
+            if (classId == null)
+            {
+                return await OnGetAsync(null);
+            }
             foreach (var s in ScheduleAvailabilities)
             {
                 if (s.Selected)
@@ -75,7 +79,7 @@ namespace Smart.Pages.ClassSchedule
                     {
                         var newClassSchedule = new Models.ClassSchedule()
                         {
-                            ClassId = classId,
+                            ClassId = (int)classId,
                             ScheduleAvailabilityId = s.ScheduleAvailabilityId
                         };
                         _db.ClassSchedule.Add(newClassSchedule);
