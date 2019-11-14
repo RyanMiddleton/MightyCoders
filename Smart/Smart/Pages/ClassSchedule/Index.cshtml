@@ -9,7 +9,7 @@
     var currentDay = 8;
 }
 <div class="container">
-    
+
     <div class="row py-3">
         <h2>Class Schedule</h2>
     </div>
@@ -21,7 +21,6 @@
             <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
         </div>
     </form>
-
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
         @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
@@ -42,16 +41,16 @@
                 currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
                 @if (currentDay < 8)
                 {
-                        @:</ul>
+                    @:</ul>
                     @:</div>
-                    @:<div class="pb-3"></div>
-                }
+            @:<div class="pb-3"></div>
+        }
                 @:<div class="card">
                     @:<div class="card-header">
                         @:<h5>@DayOfWeek</h5>
                     @:</div>
                     @:<ul class="list-group list-group-flush">
-            }
+                    }
             <li class="list-group-item">
                 <div class="d-inline">
                     @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
@@ -60,34 +59,49 @@
                     <input class="form-check-input" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
                     <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
                 </div>
-            @if (Model.Classes != null)
-            {
-                @foreach (var c in Model.Classes)
+                @if (Model.Classes != null)
                 {
-                    @foreach (var cs in c.ClassSchedules)
+                    @foreach (var c in Model.Classes)
                     {
-                        @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                        @foreach (var cs in c.ClassSchedules)
                         {
-                            @:<li class="list-group-item">
-                                @:<div class="offset-1">@c.Course.Name
-                                      <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
-                                  @:</div>
-                            @:</li>
+                            @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                            {
+                                @:<li class="list-group-item">
+                                    @:<div class="offset-1">
+                                        @c.Course.Name
+                                        <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                    @:</div>
+                                @:</li>
+                        }
                         }
                     }
                 }
+                </li>
             }
-            </li>
-        }
-        <input class="btn btn-primary text-white fixed-bottom ml-auto m-1 w-50" type="submit" value="Save" />
-    </form>
+        <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
+        </form>
 </div>
 
-@section Scripts{ 
+@section Scripts{
     <script>
         $(document).ready(function () {
             $('#TermId').change(function () {
                 $('#TermForm').submit();
+            });
+            $(window).scroll(function () {
+                var docHeight = $(document).height();
+                var toTop = $(window).scrollTop();
+                var windowHeight = window.innerHeight
+                    || document.documentElement.clientHeight
+                    || document.body.clientHeight;
+                var position = toTop + windowHeight;
+                if ((docHeight - position) < 50) {
+                    $('#saveBtn').removeClass('fixed-bottom');
+                }
+                else {
+                    $('#saveBtn').addClass('fixed-bottom');
+                }
             });
         });
     </script>

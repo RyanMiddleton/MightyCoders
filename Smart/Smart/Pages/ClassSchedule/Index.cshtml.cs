@@ -1,15 +1,12 @@
-using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Smart.Data;
+using Smart.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Smart.Data;
-using Smart.Utility;
-using Smart.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Smart.Pages.ClassSchedule
 {
@@ -21,14 +18,18 @@ namespace Smart.Pages.ClassSchedule
         {
             _db = db;
         }
+
         [BindProperty]
         public List<ScheduleAvailability> ScheduleAvailabilities { get; set; }
+
         [BindProperty]
         public List<SelectListItem> ClassSelectList { get; set; }
+
         public List<Class> Classes { get; set; }
+
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
-        
+
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
             ScheduleAvailabilities = await _db.ScheduleAvailability
@@ -42,7 +43,7 @@ namespace Smart.Pages.ClassSchedule
                                  Text = t.Description
                              })
                              .ToListAsync();
-                Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
+            Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
             if (termId != null)
             {
                 var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
@@ -54,11 +55,11 @@ namespace Smart.Pages.ClassSchedule
                                    .ToListAsync();
                 ClassSelectList = Classes.ConvertAll(c =>
                                          {
-                                              return new SelectListItem()
-                                              {
-                                                  Value = c.ClassId.ToString(),
-                                                  Text = c.Course.Name
-                                              };
+                                             return new SelectListItem()
+                                             {
+                                                 Value = c.ClassId.ToString(),
+                                                 Text = c.Course.Name
+                                             };
                                          });
             }
             return Page();
