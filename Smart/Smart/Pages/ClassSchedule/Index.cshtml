@@ -43,14 +43,14 @@
                 {
                     @:</ul>
                     @:</div>
-            @:<div class="pb-3"></div>
-        }
+                    @:<div class="pb-3"></div>
+                }
                 @:<div class="card">
-                    @:<div class="card-header">
-                        @:<h5>@DayOfWeek</h5>
-                    @:</div>
-                    @:<ul class="list-group list-group-flush">
-                    }
+                @:<div class="card-header">
+                    @:<h5>@DayOfWeek</h5>
+                @:</div>
+                @:<ul class="list-group list-group-flush">
+            }
             <li class="list-group-item">
                 <div class="d-inline">
                     @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
@@ -73,13 +73,17 @@
                                         <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
                                     @:</div>
                                 @:</li>
-                        }
+                            }
                         }
                     }
                 }
-                </li>
-            }
-        <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
+            </li>
+        }
+        </ul>
+        </div>
+        <div class="row justify-content-center">
+            <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
+        </div>
         </form>
 </div>
 
@@ -96,11 +100,13 @@
                     || document.documentElement.clientHeight
                     || document.body.clientHeight;
                 var position = toTop + windowHeight;
-                if ((docHeight - position) < 50) {
+                if ((docHeight - position) < 100) {
                     $('#saveBtn').removeClass('fixed-bottom');
                 }
-                else {
-                    $('#saveBtn').addClass('fixed-bottom');
+                else if ((docHeight - position) > 150) {
+                    if (!$('#saveBtn').hasClass('fixed-bottom')) {
+                        $('#saveBtn').addClass('fixed-bottom');
+                    }
                 }
             });
         });
