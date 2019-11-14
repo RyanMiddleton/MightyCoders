@@ -20,6 +20,7 @@ namespace Smart.Models
         [ForeignKey("ClassId")]
         public virtual Class Class { get; set; }
         public DateTime Date { get; set; }
+        [Display(Name = "Time In")]
         public DateTime TimeIn { get; set; }
         [Required]
         [Display(Name = "Attendance Status")]

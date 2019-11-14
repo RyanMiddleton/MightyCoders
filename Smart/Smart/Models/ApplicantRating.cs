@@ -27,6 +27,7 @@ namespace Smart.Models
         [Display(Name = "Term")]
         public int TermId { get; set; }
         public virtual Term Term { get; set; }
+        [Display(Name = "Score Assigned")]
         public int ScoreAssigned { get; set; }
         public DateTime DateTime { get; set; }
         public string Comment { get; set; }

@@ -11,10 +11,13 @@ namespace Smart.Models
     {
         [Key]
         public int ScheduleAvailabilityId { get; set; }
+        [Display(Name = "Day of the Week")]
         public int DayOfWeek { get; set; }
         [DataType(DataType.Time)]
+        [Display(Name = "Start Time")]
         public DateTime StartTime { get; set; }
         [DataType(DataType.Time)]
+        [Display(Name = "End Time")]
         public DateTime EndTime { get; set; }
         [NotMapped]
         public bool Selected { get; set; }
