@@ -33,77 +33,71 @@
         }
 
 
-            @if (Model.AssessmentId != 0)
-            {
-                <h3>Student Assessments</h3>
-                <table class="table" id="tblStudents">
-                    <thead>
+        @if (Model.AssessmentId != 0)
+        {
+            <h3>Student Assessments</h3>
+            <table class="table" id="tblStudents">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Points</th>
+                        <th>Comments</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GradingData.StudentAssessments)
+                    {
                         <tr>
-                            <th>Student ID</th>
-                            <th>Points</th>
-                            <th>Comments</th>
-                            <th></th>
+                            <td>
+                                @item.StudentId
+                            </td>
+                            <td>
+                                @item.PointsAwarded
+                            </td>
+                            <td>
+                                @item.Comments
+                            </td>
+                            <td>
+                                <input type="button" value="Remove" onclick="Remove(this)" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.GradingData.StudentAssessments)
-                        {
-                            <tr>
-                                <td>
-                                    @item.StudentId
-                                </td>
-                                <td>
-                                    @item.PointsAwarded
-                                </td>
-                                <td>
-                                    @item.Comments
-                                </td>
-                                <td>
-                                    <input type="button" value="Remove" onclick="Remove(this)" />
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><input type="text" id="txtId" /></td>
-                            <td><input type="text" id="txtPoints" /></td>
-                            <td><input type="text" id="txtComments" /></td>
-                            <td><input type="button" class="btnAdd" value="Add" /></td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <input type="button" id="btnSave" value="Save All" />
-            }
-            else
-            {
-                @*<div class="row">
-                    <p>No Assessments For Selected Class</p>
-                </div>*@
-            }
-            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-            <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" id="txtId" /></td>
+                        <td><input type="text" id="txtPoints" /></td>
+                        <td><input type="text" id="txtComments" /></td>
+                        <td><input type="button" class="btnAdd" value="Add" /></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <input type="button" id="btnSave" value="Save All" />
+        }
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
-            @section Scripts{
-                <script>
-                    $(document).ready(function () {
-                        $('#ClassId').change(function () {
-                            $('#ClassForm').submit();
-                        });
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    $('#ClassId').change(function () {
+                        $('#ClassForm').submit();
                     });
+                });
 
-                    $(document).ready(function () {
-                        $('#AssessmentId').change(function () {
-                            $('#AssessmentForm').submit();
-                        });
+                $(document).ready(function () {
+                    $('#AssessmentId').change(function () {
+                        $('#AssessmentForm').submit();
                     });
-                </script>
-                <script type="text/javascript">
+                });
+            </script>
+            <script type="text/javascript">
                     function Remove(button) {
                         //Determine the reference of the Row using the Button.
                         var row = $(button).closest("TR");
                         var id = $("TD", row).eq(0).html();
-                        if (confirm("Do you want to delete student assessment?")) {
+                        if (confirm("Are you sure you want to delete student assessment?")) {
                             //Get the reference of the Table.
                             var table = $("#tblStudents")[0];
 
@@ -156,14 +150,13 @@
                         $("#tblStudents TBODY TR").each(function () {
                             var row = $(this);
                             var StudentAssessment = {};
-                            //StudentAssessment.AssessmentId = 0;
-                            //StudentAssessment.Student = null;
+
                             StudentAssessment.StudentId = row.find("TD").eq(0).html();
                             StudentAssessment.PointsAwarded = row.find("TD").eq(1).html();
                             StudentAssessment.Comments = row.find("TD").eq(2).html();
                             assessments.push(StudentAssessment);
                         });
-                        //var person = {"FirstName":"Andrew","LastName":"Lock","Age":"31"};
+                        
                         //Send the JSON array to Controller using AJAX.
                         $.ajax({
                             type: "POST",
@@ -175,7 +168,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (r) {
-                                alert(r + " record(s) inserted.");
+                                alert(r);
                             },
                             error: function (xhRequest, ErrorText, thrownError) {
                                     console.log('xhRequest: ' + xhRequest + "\n");
@@ -185,53 +178,53 @@
                         });
                     });
                 });
-                </script>
-            }
+            </script>
+        }
 
-            @*<p>
-                <a asp-page="Create">Add New Grade</a>
-            </p>*@
+        @*<p>
+            <a asp-page="Create">Add New Grade</a>
+        </p>*@
 
-            @*<table class="table">
-                <thead>
+        @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Class ID
+                    </th>
+                    <th>
+                        Assessment Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Points Possible
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GradingData.Assessments)
+        {
                     <tr>
-                        <th>
-                            Class ID
-                        </th>
-                        <th>
-                            Assessment Title
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                        <th>
-                            Points Possible
-                        </th>
-                        <th></th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Class.ClassId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PointsPossible)
+                        </td>
+                        <td>
+                            <a asp-page="./Index" asp-route-assessmentId="@item.AssessmentId">View Assessments</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.GradingData.Assessments)
-            {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Class.ClassId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PointsPossible)
-                            </td>
-                            <td>
-                                <a asp-page="./Index" asp-route-assessmentId="@item.AssessmentId">View Assessments</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>*@
-        </body>
+                }
+            </tbody>
+        </table>*@
+    </body>
 </html>

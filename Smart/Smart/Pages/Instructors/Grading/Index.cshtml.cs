@@ -18,7 +18,6 @@ namespace Smart.Pages.Instructors.Grading
     public class IndexModel : PageModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;
-        public Assessment assessment { get; set; }
         public IndexModel(Smart.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -33,6 +32,7 @@ namespace Smart.Pages.Instructors.Grading
         public List<SelectListItem> Assessments { get; set; }
         [BindProperty]
         public int AssessmentId { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? classId, int? selectedAssessId)
         {
             GradingData = new GradingIndexData();
@@ -41,7 +41,7 @@ namespace Smart.Pages.Instructors.Grading
             GradingData.Assessments = await _context.Assessment.ToListAsync();
             GradingData.Students = await _context.Student.ToListAsync();
 
-            Classes = await _context.Class.Select(c =>
+            Classes = await _context.Class.Where(c => c.Assessments.Count > 0).Select(c =>
                                             new SelectListItem
                                             {
                                                 Value = c.ClassId.ToString(),
@@ -59,10 +59,10 @@ namespace Smart.Pages.Instructors.Grading
                                     Value = a.AssessmentId.ToString(),
                                     Text = a.Title.ToString()
                                 }).ToListAsync();
+                    GradingData.Assessments = GradingData.Assessments.Where(a => a.ClassId == clsId).ToList();
                 }
                 catch
                 {
-                    clsId = 0;
                 }
             }
 
@@ -72,12 +72,11 @@ namespace Smart.Pages.Instructors.Grading
                 try
                 {
                     Assessment assessment = GradingData.Assessments.Where(a => a.AssessmentId == AssessmentId).Single();
-                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();
-                    AssessmentId = assessment.AssessmentId;
+                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();                 
                 }
                 catch
                 {
-                    AssessmentId = 0;
+                    GradingData.StudentAssessments = new List<StudentAssessment>();
                 }
             }
 
@@ -87,8 +86,6 @@ namespace Smart.Pages.Instructors.Grading
 
         public JsonResult OnPost(int? AssessId)
         {
-            {
-
                 _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
                 _context.SaveChanges();
                 MemoryStream stream = new MemoryStream();
@@ -107,14 +104,27 @@ namespace Smart.Pages.Instructors.Grading
                             {
                                 StudentId = obj.StudentId,
                                 PointsAwarded = obj.PointsAwarded,
-                                Comments = obj.Comments
+                                Comments = obj.Comments,
+                                AssessmentId = AssessId.Value
                             }
-                            );
+                            ); ;
+                        }
+
+                        foreach(StudentAssessment student in lststudass)
+                        {
+                            _context.StudentAssessment.Add(student);
+                        }
+                        try
+                        {
+                            _context.SaveChanges();
+                        }
+                        catch
+                        {
+                            return new JsonResult("Error: Incorrect Student ID");
                         }
                     }
                 }
-            }
-            return new JsonResult("test");
+            return new JsonResult("Saved Changes Successfully");
         }
 
     }
