@@ -40,7 +40,7 @@ namespace Smart.Pages.ClassSchedule
                              .Select(t => new SelectListItem
                              {
                                  Value = t.TermId.ToString(),
-                                 Text = t.StartDate.Month + " To " + t.EndDate.Month + " " + t.EndDate.Year
+                                 Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
                              })
                              .ToListAsync();
             Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
