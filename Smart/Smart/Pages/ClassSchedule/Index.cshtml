@@ -68,7 +68,7 @@
                         {
                             @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                             {
-                                @:<li class="list-group-item">
+                                @:<li class="list-group-item scheduledClass @c.ClassId">
                                     @:<div class="offset-1">
                                         @c.Course.Name
                                         <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
@@ -115,6 +115,16 @@
             $('.checkBox').each(function () {
                 $(this).prop('checked', false);
             });
+            $('#ClassId').change(function () {
+                $(".scheduledClass").each(function () {
+                    if ($(this).hasClass($('#ClassId').val())) {
+                        $(this).css("background-color", "#2878bf");
+                    }
+                    else {
+                        $(this).css("background-color", "");
+                    }
+                })
+            })
         });
     </script>
 }
