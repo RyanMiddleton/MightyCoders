@@ -52,6 +52,7 @@ namespace Smart.Pages.ClassSchedule
                                    .Include(c => c.Course)
                                    .Include(c => c.ClassSchedules)
                                    .Where(t => t.TermId == termId)
+                                   .Where(c => c.Course.IsTaughtHere == true)
                                    .ToListAsync();
                 ClassSelectList = Classes.ConvertAll(c =>
                                          {
@@ -61,6 +62,7 @@ namespace Smart.Pages.ClassSchedule
                                                  Text = c.Course.Name
                                              };
                                          });
+                ClassSelectList.Insert(0, new SelectListItem { Text = "-- Select Class --", Value = null });
             }
             return Page();
         }
@@ -91,9 +93,17 @@ namespace Smart.Pages.ClassSchedule
             return await OnGetAsync(termIdToRedirect);
         }
 
-        public async Task<IActionResult> OnGetRemove(int classId, int scheduleId)
+        public async Task<IActionResult> OnGetRemove(int? classId, int? scheduleId)
         {
+            if (classId == null || scheduleId == null)
+            {
+                return await OnGetAsync(null);
+            }
             var classScheduleToDelete = _db.ClassSchedule.FirstOrDefault(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == scheduleId);
+            if (classScheduleToDelete == null)
+            {
+                return await OnGetAsync(null);
+            }
             _db.ClassSchedule.Remove(classScheduleToDelete);
             await _db.SaveChangesAsync();
             int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
