@@ -22,6 +22,5 @@ namespace Smart.Models
         [NotMapped]
         public bool Selected { get; set; }
         public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }
-        public virtual ICollection<PublicSchoolClassSchedule> PublicSchoolClassSchedules { get; set; }
     }
 }

@@ -235,10 +235,10 @@ namespace Smart.Data
             // Seeding Term Start
             var terms = new Term[]
             {
-                new Term { Description = "Spring2020", StartDate = DateTime.Parse("2020-02-01"), EndDate = DateTime.Parse("2020-06-30"), TimeOfYear = 1},
-                new Term { Description = "Fall2020", StartDate = DateTime.Parse("2020-08-01"), EndDate = DateTime.Parse("2020-11-30"), TimeOfYear = 2},
-                new Term { Description = "Spring2021", StartDate = DateTime.Parse("2021-02-01"), EndDate = DateTime.Parse("2021-06-30"), TimeOfYear = 1},
-                new Term { Description = "Fall2021", StartDate = DateTime.Parse("2021-08-01"), EndDate = DateTime.Parse("2021-11-30"), TimeOfYear = 2}
+                new Term { StartDate = DateTime.Parse("2020-02-01"), EndDate = DateTime.Parse("2020-06-30"), TimeOfYear = 1},
+                new Term { StartDate = DateTime.Parse("2020-08-01"), EndDate = DateTime.Parse("2020-11-30"), TimeOfYear = 2},
+                new Term { StartDate = DateTime.Parse("2021-02-01"), EndDate = DateTime.Parse("2021-06-30"), TimeOfYear = 1},
+                new Term { StartDate = DateTime.Parse("2021-08-01"), EndDate = DateTime.Parse("2021-11-30"), TimeOfYear = 2}
             };
 
             foreach (Term s in terms)
@@ -251,9 +251,11 @@ namespace Smart.Data
             // Seeding RatingCriteria Start
             var ratingCriterias = new RatingCriteria[]
             {
-                new RatingCriteria { Description = "Income", MaxScore = 50},
-                new RatingCriteria { Description = "Education", MaxScore = 50},
-                new RatingCriteria { Description = "Motivation", MaxScore = 50}
+                new RatingCriteria { Title = "Finances", Description = "Zero would be very wealthy and the highest value would be extremeley poor.", MaxScore = 50},
+                new RatingCriteria { Title = "Academics", Description = "What are their grades, attendance, and academic level in public school?", MaxScore = 50},
+                new RatingCriteria { Title = "Family Support and Interest", Description = "How motivated is the student to succeed and complete tasks and does their family support them in their efforts?", MaxScore = 50},
+                new RatingCriteria { Title = "Age", Description = "How old is the person compared to other applicants?", MaxScore = 50},
+                new RatingCriteria { Title = "Distance", Description = "How far will the student need to travel to school?", MaxScore = 50},
             };
 
             foreach (RatingCriteria s in ratingCriterias)
@@ -282,12 +284,15 @@ namespace Smart.Data
             // Seeding Course Start
             var courses = new Course[]
             {
-                new Course { Name = "ENG1"},
-                new Course { Name = "ENG2"},
-                new Course { Name = "ENG3"},
-                new Course { Name = "IT1"},
-                new Course { Name = "IT2"},
-                new Course { Name = "IT3"}
+                new Course { Name = "ENG1", IsCoreRequirement = true, IsTaughtHere = true },
+                new Course { Name = "ENG2", IsCoreRequirement = true, IsTaughtHere = true },
+                new Course { Name = "ENG3", IsCoreRequirement = false, IsTaughtHere = true },
+                new Course { Name = "IT1", IsCoreRequirement = true, IsTaughtHere = true },
+                new Course { Name = "IT2", IsCoreRequirement = false, IsTaughtHere = true },
+                new Course { Name = "IT3", IsCoreRequirement = false, IsTaughtHere = true },
+                new Course { Name = "Gym", IsCoreRequirement = false, IsTaughtHere = false },
+                new Course { Name = "Math", IsCoreRequirement = false, IsTaughtHere = false },
+                new Course { Name = "Cooking", IsCoreRequirement = false, IsTaughtHere = false }
             };
 
             foreach (Course s in courses)
@@ -322,7 +327,21 @@ namespace Smart.Data
                 new Class { CourseId = courses[1].CourseId, TermId = terms[3].TermId, Capacity = 20, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
                 new Class { CourseId = courses[2].CourseId, TermId = terms[3].TermId, Capacity = 15, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "Feeny").Id },
                 new Class { CourseId = courses[4].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
-                new Class { CourseId = courses[5].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id }
+                new Class { CourseId = courses[5].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
+
+                // public school classes
+                new Class { CourseId = courses[6].CourseId, TermId = terms[0].TermId },
+                new Class { CourseId = courses[6].CourseId, TermId = terms[1].TermId },
+                new Class { CourseId = courses[6].CourseId, TermId = terms[2].TermId },
+                new Class { CourseId = courses[6].CourseId, TermId = terms[3].TermId },
+                new Class { CourseId = courses[7].CourseId, TermId = terms[0].TermId },
+                new Class { CourseId = courses[7].CourseId, TermId = terms[1].TermId },
+                new Class { CourseId = courses[7].CourseId, TermId = terms[2].TermId },
+                new Class { CourseId = courses[7].CourseId, TermId = terms[3].TermId },
+                new Class { CourseId = courses[8].CourseId, TermId = terms[0].TermId },
+                new Class { CourseId = courses[8].CourseId, TermId = terms[1].TermId },
+                new Class { CourseId = courses[8].CourseId, TermId = terms[2].TermId },
+                new Class { CourseId = courses[8].CourseId, TermId = terms[3].TermId }
             };
 
             foreach (Class s in classes)
@@ -367,10 +386,10 @@ namespace Smart.Data
             // Seeding StudentAssessment Start
             var studentAssessments = new StudentAssessment[]
             {
-                new StudentAssessment { StudentId = students[0].StudentId, AssessmentId = assessments[0].AssessmentId, PointsAwarded = 100},
-                new StudentAssessment { StudentId = students[1].StudentId, AssessmentId = assessments[1].AssessmentId, PointsAwarded = 100},
-                new StudentAssessment { StudentId = students[2].StudentId, AssessmentId = assessments[2].AssessmentId, PointsAwarded = 100},
-                new StudentAssessment { StudentId = students[3].StudentId, AssessmentId = assessments[3].AssessmentId, PointsAwarded = 100}
+                new StudentAssessment { StudentId = students[0].StudentId, AssessmentId = assessments[0].AssessmentId, PointsAwarded = 100, SubmissionDateTime = DateTime.Now },
+                new StudentAssessment { StudentId = students[1].StudentId, AssessmentId = assessments[1].AssessmentId, PointsAwarded = 100, SubmissionDateTime = DateTime.Now },
+                new StudentAssessment { StudentId = students[2].StudentId, AssessmentId = assessments[2].AssessmentId, PointsAwarded = 100, SubmissionDateTime = DateTime.Now },
+                new StudentAssessment { StudentId = students[3].StudentId, AssessmentId = assessments[3].AssessmentId, PointsAwarded = 100, SubmissionDateTime = DateTime.Now }
             };
 
             foreach (StudentAssessment s in studentAssessments)
@@ -478,6 +497,20 @@ namespace Smart.Data
                 new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[9].ScheduleAvailabilityId },
                 new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[10].ScheduleAvailabilityId },
                 new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[11].ScheduleAvailabilityId },
+
+                // Public class shceduels
+                new ClassSchedule { ClassId = classes[20].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[16].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[21].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[17].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[22].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[8].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[23].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[4].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[24].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[1].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[25].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[11].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[26].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[13].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[27].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[20].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[28].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[18].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[29].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[22].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[30].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[10].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[31].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[3].ScheduleAvailabilityId },
             };
 
             foreach (ClassSchedule s in classSchedules)
@@ -486,37 +519,6 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding ClassSchedule End
-
-            // Seeding studentPublicSchoolClasses Start
-            var studentPublicSchoolClasses = new StudentPublicSchoolClass[]
-            {
-                new StudentPublicSchoolClass { StudentId = students[0].StudentId, CourseName = "Gym" },
-                new StudentPublicSchoolClass { StudentId = students[1].StudentId, CourseName = "Math" },
-                new StudentPublicSchoolClass { StudentId = students[2].StudentId, CourseName = "Cooking" }
-            };
-
-            foreach (StudentPublicSchoolClass s in studentPublicSchoolClasses)
-            {
-                context.StudentPublicSchoolClass.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding studentPublicSchoolClasses End
-
-            // Seeding publicSchoolClassSchedules Start
-            var publicSchoolClassSchedules = new PublicSchoolClassSchedule[]
-            {
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[0].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[12].ScheduleAvailabilityId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[13].ScheduleAvailabilityId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[1].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[14].ScheduleAvailabilityId },
-                new PublicSchoolClassSchedule { StudentPublicSchoolClassId = studentPublicSchoolClasses[2].StudentPublicSchoolClassId, ScheduleAvailabilityId = scheduleAvailabilities[15].ScheduleAvailabilityId },
-            };
-
-            foreach (PublicSchoolClassSchedule s in publicSchoolClassSchedules)
-            {
-                context.PublicSchoolClassSchedule.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding publicSchoolClassSchedules End
         }
     }
 }
