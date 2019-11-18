@@ -11,5 +11,6 @@ namespace Smart.Models
         [Key]
         public int NoteTypeId { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

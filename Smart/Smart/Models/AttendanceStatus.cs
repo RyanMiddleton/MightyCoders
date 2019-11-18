@@ -11,6 +11,6 @@ namespace Smart.Models
         [Key]
         public int AttendanceStatusId { get; set; }
         public string Description { get; set; }
-
+        public virtual ICollection<Attendance> Attendances { get; set; }
     }
 }
