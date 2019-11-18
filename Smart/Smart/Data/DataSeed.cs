@@ -269,11 +269,11 @@ namespace Smart.Data
             // Seeding RatingCriteria Start
             var ratingCriterias = new RatingCriteria[]
             {
-                new RatingCriteria { Title = "Finances", Description = "Zero would be very wealthy and the highest value would be extremeley poor.", MaxScore = 50},
-                new RatingCriteria { Title = "Academics", Description = "What are their grades, attendance, and academic level in public school?", MaxScore = 50},
-                new RatingCriteria { Title = "Family Support and Interest", Description = "How motivated is the student to succeed and complete tasks and does their family support them in their efforts?", MaxScore = 50},
-                new RatingCriteria { Title = "Age", Description = "How old is the person compared to other applicants?", MaxScore = 50},
-                new RatingCriteria { Title = "Distance", Description = "How far will the student need to travel to school?", MaxScore = 50},
+                new RatingCriteria { Title = "Finances", Description = "Zero would be very wealthy and the highest value would be extremeley poor.", MaxScore = 30},
+                new RatingCriteria { Title = "Academics", Description = "What are their grades, attendance, and academic level in public school?", MaxScore = 30},
+                new RatingCriteria { Title = "Family Support and Interest", Description = "How motivated is the student to succeed and complete tasks and does their family support them in their efforts?", MaxScore = 15},
+                new RatingCriteria { Title = "Age", Description = "How old is the person compared to other applicants?", MaxScore = 10},
+                new RatingCriteria { Title = "Distance", Description = "How far will the student need to travel to school?", MaxScore = 15},
             };
 
             foreach (RatingCriteria s in ratingCriterias)
