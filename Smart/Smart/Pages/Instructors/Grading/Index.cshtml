@@ -15,6 +15,7 @@
         <h1>Grade Book</h1>
         <form method="get" id="ClassForm">
             <div class="row">
+                <label>Class:</label>
                 <select id="ClassId" class="form-control" name="classId" asp-items="Model.Classes">
                     <option value="">Select Class</option>
                 </select>
@@ -25,6 +26,7 @@
         {
             <form method="get" id="AssessmentForm">
                 <div class="row">
+                    <label>Assessment:</label>
                     <select id="AssessmentId" class="form-control" name="selectedAssessId" asp-items="Model.Assessments">
                         <option value="">Select Assessment</option>
                     </select>
@@ -168,7 +170,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (r) {
-                                alert(r);
+                                //alert(r);
                             },
                             error: function (xhRequest, ErrorText, thrownError) {
                                     console.log('xhRequest: ' + xhRequest + "\n");
