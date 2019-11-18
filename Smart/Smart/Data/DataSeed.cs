@@ -347,7 +347,7 @@ namespace Smart.Data
                 new Class { CourseId = courses[4].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
                 new Class { CourseId = courses[5].CourseId, TermId = terms[3].TermId, Capacity = 25, InstructorUserId = context.ApplicationUser.Single(i => i.LastName == "White").Id },
 
-                // public school classes
+                // public school classes index 21 - 32
                 new Class { CourseId = courses[6].CourseId, TermId = terms[0].TermId },
                 new Class { CourseId = courses[6].CourseId, TermId = terms[1].TermId },
                 new Class { CourseId = courses[6].CourseId, TermId = terms[2].TermId },
@@ -372,10 +372,24 @@ namespace Smart.Data
             // Seeding StudentClass Start
             var studentClasses = new StudentClass[]
             {
-                new StudentClass { ClassId = classes[0].ClassId, StudentId = students[0].StudentId },
-                new StudentClass { ClassId = classes[1].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[2].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[3].ClassId, StudentId = students[3].StudentId }
+                // public classes
+                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[4].StudentId },
+                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[5].StudentId },
+                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[6].StudentId },
+                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[6].StudentId },
+                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[5].StudentId },
+                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[4].StudentId },
+                new StudentClass { ClassId = classes[27].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[28].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[29].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[30].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[31].ClassId, StudentId = students[2].StudentId }
             };
 
             foreach (StudentClass s in studentClasses)

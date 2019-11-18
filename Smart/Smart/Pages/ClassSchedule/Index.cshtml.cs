@@ -53,6 +53,7 @@ namespace Smart.Pages.ClassSchedule
                                    .Include(c => c.ClassSchedules)
                                    .Where(t => t.TermId == termId)
                                    .Where(c => c.Course.IsTaughtHere == true)
+                                   .OrderBy(c => c.Course.Name)
                                    .ToListAsync();
                 ClassSelectList = Classes.ConvertAll(c =>
                                          {
