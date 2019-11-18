@@ -143,11 +143,29 @@ namespace Smart.Data
             var students = new Student[]
            {
                 new Student { FirstName = "Abelina", LastName = "Abreu", DOB = DateTime.Parse("1999-01-01"), Address = "Aye Place 01", Village = "Aye Village",
-                    GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "James", GuardianType = "Father", Phone = "160-532-3452",
+                    GpsLatitude = 0.0, GpsLongitude = 0.01, PublicSchoolLevel = 4, GuardianName = "Elim", GuardianType = "Father", Phone = "160-532-3452",
                     Photo = null, StudentStatusId = studentStatuses[0].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
-                new Student { FirstName = "Abiba", LastName = "Macie", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village",
-                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Hela", GuardianType = "Father", Phone = "423-542-4231",
+
+                // Active Students
+                new Student { FirstName = "Abiba", LastName = "Arroz", DOB = DateTime.Parse("2000-01-02"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Abasi", GuardianType = "Father", Phone = "423-542-4231",
+                    Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
+                new Student { FirstName = "Dalila", LastName = "Bata", DOB = DateTime.Parse("2000-11-02"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Chene", GuardianType = "Father", Phone = "423-542-4231",
                     Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 2, ITLevel = 2 },
+                new Student { FirstName = "Hasina", LastName = "Doane", DOB = DateTime.Parse("2000-03-02"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Elewa", GuardianType = "Father", Phone = "423-542-4231",
+                    Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 2, ITLevel = 2 },
+                new Student { FirstName = "Bahati", LastName = "Fumo", DOB = DateTime.Parse("2000-04-02"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Abasi", GuardianType = "Father", Phone = "423-542-4231",
+                    Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
+                new Student { FirstName = "Fanaka", LastName = "Bata", DOB = DateTime.Parse("2000-05-12"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Abdu", GuardianType = "Father", Phone = "423-542-4231",
+                    Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 2, ITLevel = 2 },
+                new Student { FirstName = "Adia", LastName = "Hele", DOB = DateTime.Parse("2000-06-02"), Address = "Aye Place 02", Village = "Aye Village",
+                    GpsLatitude = 0.2, GpsLongitude = 0.02, PublicSchoolLevel = 4, GuardianName = "Elea", GuardianType = "Father", Phone = "423-542-4231",
+                    Photo = null, StudentStatusId = studentStatuses[1].StudentStatusId, EnglishLevel = 1, ITLevel = 1 },
+
                 new Student { FirstName = "Chamila", LastName = "Faife", DOB = DateTime.Parse("2001-01-03"), Address = "Aye Place 03", Village = "Aynotha Village",
                     GpsLatitude = 0.1, GpsLongitude = 0.03, PublicSchoolLevel = 4, GuardianName = "Shela", GuardianType = "Mother", Phone = "543-532-5663",
                     Photo = null, StudentStatusId = studentStatuses[2].StudentStatusId, EnglishLevel = 3, ITLevel = 3 },
