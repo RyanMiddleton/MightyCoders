@@ -23,7 +23,8 @@ namespace Smart.Pages.ScheduleStudents
         public List<Student> Students { get; set; }
         public List<SelectListItem> StudentsSelectList { get; set; }
         public List<Class> Classes { get; set; }
-        public List<Class> PublicClasses { get; set; }
+        public List<Models.ClassSchedule> ClassSchedules { get; set; }
+        public List<Student> StudentPublicClasses { get; set; }
         public List<SelectListItem> Terms { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? termId, int? studentId)
@@ -52,22 +53,27 @@ namespace Smart.Pages.ScheduleStudents
 
             if (termId != null)
             {
-                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
+                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
                 selectedTerm.Selected = true;
             }
             if (studentId != null)
             {
-                var selectedStudent = StudentsSelectList.Where(s => s.Value == studentId.ToString()).First();
+                var selectedStudent = StudentsSelectList.Where(s => s.Value == studentId.ToString()).FirstOrDefault();
                 selectedStudent.Selected = true;
             }
             if (termId != null && studentId != null)
             {
-                //PublicClasses = await _db.Student
-                //                         .First(s => s.StudentId == studentId)
-                //                         .Include(s => s.StudentClass)
-                //                         .Include(s => s.Class)
-                //                         .toListAsync();
-                
+                Student student = Students.Where(s => s.StudentId == studentId).FirstOrDefault();
+                ClassSchedules = await _db.ClassSchedule
+                                   .Include(cs => cs.ScheduleAvailability)
+                                   .Include(cs => cs.Class)
+                                       .ThenInclude(c => c.Course)
+                                   .Where(cs => cs.Class.TermId == termId && cs.Class.Course.IsTaughtHere == true 
+                                        && (cs.Class.Course.Name == "ENG" + (student.EnglishLevel + 1).ToString() || cs.Class.Course.Name == "IT" + (student.EnglishLevel + 1).ToString()))
+                                   .Include(c => c.Class.ApplicationUser)
+                                   .OrderBy(c => c.ScheduleAvailability.StartTime)
+                                   .OrderBy(c => c.ScheduleAvailability.DayOfWeek)
+                                   .ToListAsync();
             }
             return Page();
         }

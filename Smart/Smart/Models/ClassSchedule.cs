@@ -16,5 +16,7 @@ namespace Smart.Models
         [Display(Name = "Schedule")]
         public int ScheduleAvailabilityId { get; set; }
         public ScheduleAvailability ScheduleAvailability { get; set; }
+        [NotMapped]
+        public bool Selected { get; set; }
     }
 }
