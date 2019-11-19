@@ -26,22 +26,24 @@
     {
 
         <form method="post" id="ClassForm">
-            <table>
-                <tr>
-                    @if (Model.ClassSchedules.Any(cs => cs.ScheduleAvailability.DayOfWeek == 0))
-                    {
-                        <th>Sunday</th>
-                    }
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    @if (Model.ClassSchedules.Any(cs => cs.ScheduleAvailability.DayOfWeek == 6))
-                    {
-                        <th>Saturday</th>
-                    }
-                </tr>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        @if (Model.ClassSchedules.Any(cs => cs.ScheduleAvailability.DayOfWeek == 0))
+                        {
+                            <th>Sunday</th>
+                        }
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        @if (Model.ClassSchedules.Any(cs => cs.ScheduleAvailability.DayOfWeek == 6))
+                        {
+                            <th>Saturday</th>
+                        }
+                    </tr>
+                </thead>
                 <tr>
                     @{ 
                         var currentDay = 8;
@@ -55,12 +57,15 @@
                                 @:</td>
                             }
                             @:<td>
-
+                            currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
                         }
-                        <div>
-                            Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName
-                            Course: @Model.ClassSchedules[i].Class.Course.Name
-                            Select: <input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ClassSchedules[i].Selected" />
+                        <div class="py-2">
+                            Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
+                            Course: @Model.ClassSchedules[i].Class.Course.Name <br />
+                            Start: @Model.ClassSchedules[i].ScheduleAvailability.StartTime.ToShortTimeString()<br/>
+                            End: @Model.ClassSchedules[i].ScheduleAvailability.EndTime.ToShortTimeString()<br/>
+                            Select: <div class="float-right"><input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ClassSchedules[i].Selected" /></div>
+                            <br />
                         </div>
                     }
                 </tr>
