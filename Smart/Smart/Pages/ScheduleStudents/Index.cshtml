@@ -55,6 +55,11 @@
                             if (currentDay < 8)
                             {
                                 @:</td>
+                                while (currentDay < Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek)
+                                {
+                                    currentDay++;
+                                    <td></td>
+                                }
                             }
                             @:<td>
                             currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
