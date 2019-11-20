@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Class.Course.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Term.StartDate.Year)
+                @(item.Class.Term.StartDate.ToString("MMMM") + " to " + item.Class.Term.EndDate.ToString("MMMM")  + " " + item.Class.Term.EndDate.Year) 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
