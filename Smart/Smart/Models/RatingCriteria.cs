@@ -10,7 +10,9 @@ namespace Smart.Models
     {
         [Key]
         public int RatingCriteriaId { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
+        [Display(Name = "Max Score")]
         public int MaxScore { get; set; }
     }
 }

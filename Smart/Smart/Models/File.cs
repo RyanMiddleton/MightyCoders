@@ -17,7 +17,9 @@ namespace Smart.Models
         public virtual Student Student { get; set; }
         public string Path { get; set; }
         [Required]
+        [Display(Name = "File Type")]
         public int FileTypeId { get; set; }
         public FileType FileType { get; set; }
+        public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
 }
