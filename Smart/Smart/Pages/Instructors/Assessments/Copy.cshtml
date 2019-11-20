@@ -1,11 +1,11 @@
 ﻿@page
-@model Smart.Pages.Instructors.Assessments.CreateModel
+@model Smart.Pages.Instructors.Assessments.CopyModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Copy";
 }
 
-<h1>Create</h1>
+<h1>Copy</h1>
 
 <h4>Assessment</h4>
 <hr />
@@ -13,9 +13,11 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Assessment.AssessmentId" />
             <div class="form-group">
                 <label asp-for="Assessment.ClassId" class="control-label"></label>
                 <select asp-for="Assessment.ClassId" class="form-control" asp-items="ViewBag.ClassId"></select>
+                <span asp-validation-for="Assessment.ClassId" class="text-danger"></span>
             </div>
             @*<div class="form-group">
                 <label asp-for="Assessment.Class.Term.TermId" class="control-label"></label>
@@ -45,7 +47,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {

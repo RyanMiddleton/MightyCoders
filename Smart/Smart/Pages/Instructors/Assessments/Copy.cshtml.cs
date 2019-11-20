@@ -11,11 +11,11 @@ using Smart.Models;
 
 namespace Smart.Pages.Instructors.Assessments
 {
-    public class EditModel : PageModel
+    public class CopyModel : PageModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;
 
-        public EditModel(Smart.Data.ApplicationDbContext context)
+        public CopyModel(Smart.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -37,21 +37,22 @@ namespace Smart.Pages.Instructors.Assessments
             {
                 return NotFound();
             }
-            ViewData["ClassId"] = await _context.Class
-                                .Include(c => c.Term)
-                   .Select(c => new SelectListItem
-                   {
-                       Value = c.ClassId.ToString(),
-                       Text = c.Course.Name + " " + c.Term.StartDate.ToString("MMMM") + " to " + c.Term.EndDate.ToString("MMMM") + " " + c.Term.EndDate.Year
-                   })
-                   .ToListAsync();
+           ViewData["ClassId"] = await _context.Class
+                .Include(c => c.Term)
+                             .Select(c => new SelectListItem
+                             {
+                                 Value = c.ClassId.ToString(),
+                                 Text = c.Course.Name + " " + c.Term.StartDate.ToString("MMMM") + " to " + c.Term.EndDate.ToString("MMMM") + " " + c.Term.EndDate.Year
+                             })
+                             .ToListAsync();
             //ViewData["Term"] = await _context.Term
-            //     .Select(t => new SelectListItem
-            //     {
-            //         Value = t.TermId.ToString(),
-            //         Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
-            //     })
-            //     .ToListAsync();
+                
+            //                 .Select(t => new SelectListItem
+            //                 {
+            //                     Value = t.TermId.ToString(),
+            //                     Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+            //                 })
+            //                 .ToListAsync();
             return Page();
         }
 
@@ -62,23 +63,10 @@ namespace Smart.Pages.Instructors.Assessments
                 return Page();
             }
 
-            _context.Attach(Assessment).State = EntityState.Modified;
+            Assessment.AssessmentId = 0;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AssessmentExists(Assessment.AssessmentId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.Assessment.Add(Assessment);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
