@@ -2528,6 +2528,39 @@ fieldset:disabled a.btn {
   border-color: #17a2b8;
 }
 
+.btn-applicant {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 100px;
+    height: 300px;
+    
+}
+
+.btn-attendance {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 100px;
+    height: 100px;
+}
+
+.btn-reports {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 100px;
+    height: 100px;
+}
+
+.btn-students {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 100px;
+    height: 100px;
+}
+
 .btn-info:hover {
   color: #fff;
   background-color: #138496;
