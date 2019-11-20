@@ -30,6 +30,8 @@ namespace Smart.Pages.Instructors.Assessments
             }
 
             Assessment = await _context.Assessment
+                .Include(a => a.Class.Course)
+                .Include(a => a.Class.Term)
                 .Include(a => a.Class).FirstOrDefaultAsync(m => m.AssessmentId == id);
 
             if (Assessment == null)

@@ -39,13 +39,15 @@ namespace Smart.Pages.Instructors.Grading
             GradingData.Classes = await _context.Class.ToListAsync();
             GradingData.StudentAssessments = await _context.StudentAssessment.ToListAsync();
             GradingData.Assessments = await _context.Assessment.ToListAsync();
-            GradingData.Students = await _context.Student.ToListAsync();
+            GradingData.Students = await _context.StudentClass.ToListAsync();
 
-            Classes = await _context.Class.Where(c => c.Assessments.Count > 0).Select(c =>
+            Classes = await _context.Class.Where(c => c.Assessments.Count > 0)
+                                .Include(c => c.Term)
+                                .Select(c =>
                                             new SelectListItem
                                             {
                                                 Value = c.ClassId.ToString(),
-                                                Text = c.Course.Name.ToString()
+                                                Text = c.Course.Name + " " + c.Term.StartDate.ToString("MMMM") + " to " + c.Term.EndDate.ToString("MMMM") + " " + c.Term.EndDate.Year
                                             }).ToListAsync();
 
             if (classId != null)
@@ -71,7 +73,10 @@ namespace Smart.Pages.Instructors.Grading
                 AssessmentId = selectedAssessId.Value;
                 try
                 {
+                    
                     Assessment assessment = GradingData.Assessments.Where(a => a.AssessmentId == AssessmentId).Single();
+                    GradingData.Students = _context.StudentClass.Include(s => s.Student)
+                        .Where(s => s.ClassId == assessment.ClassId).ToList();
                     GradingData.StudentAssessments = assessment.StudentAssessments.ToList();                 
                 }
                 catch
@@ -120,7 +125,7 @@ namespace Smart.Pages.Instructors.Grading
                         }
                         catch
                         {
-                            return new JsonResult("Error: Incorrect Student ID");
+                            return new JsonResult("An Error Has Occured");
                         }
                     }
                 }

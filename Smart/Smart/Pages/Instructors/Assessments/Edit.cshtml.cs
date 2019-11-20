@@ -37,7 +37,21 @@ namespace Smart.Pages.Instructors.Assessments
             {
                 return NotFound();
             }
-           ViewData["ClassId"] = new SelectList(_context.Class, "ClassId", "ClassId");
+            ViewData["ClassId"] = await _context.Class
+                                .Include(c => c.Term)
+                   .Select(c => new SelectListItem
+                   {
+                       Value = c.ClassId.ToString(),
+                       Text = c.Course.Name + " " + c.Term.StartDate.ToString("MMMM") + " to " + c.Term.EndDate.ToString("MMMM") + " " + c.Term.EndDate.Year
+                   })
+                   .ToListAsync();
+            //ViewData["Term"] = await _context.Term
+            //     .Select(t => new SelectListItem
+            //     {
+            //         Value = t.TermId.ToString(),
+            //         Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+            //     })
+            //     .ToListAsync();
             return Page();
         }
 
