@@ -44,40 +44,41 @@
                     </tr>
                 </thead>
                 <tr>
-                    @{ 
-                        var currentDay = 8;
-                    }
-
-                    @* This adjusts the current column over. In case there isn't a class scheduled monday *@
-                    @for(int i = 1; i < Model.ClassSchedules[0].ScheduleAvailability.DayOfWeek; i++)
+                    @if (Model.ClassSchedules.Count > 0)
                     {
-                        <td></td>
-                    }
+                            var currentDay = 8;
 
-                    @for (int i = 0; i < Model.ClassSchedules.Count; i++)
-                    {
-                        if (Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek != currentDay)
+                        @* This adjusts the current column over. In case there isn't a class scheduled monday *@
+                        @for (int i = 1; i < Model.ClassSchedules[0].ScheduleAvailability.DayOfWeek; i++)
                         {
-                            if (currentDay < 8)
-                            {
-                                @:</td>
-                                while (currentDay < Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek - 1)
-                                {
-                                    currentDay++;
-                                    <td></td>
-                                }
-                            }
-                            @:<td>
-                            currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
+                            <td></td>
                         }
-                        <div class="py-2">
-                            Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
-                            Course: @Model.ClassSchedules[i].Class.Course.Name <br />
-                            Start: @Model.ClassSchedules[i].ScheduleAvailability.StartTime.ToShortTimeString()<br/>
-                            End: @Model.ClassSchedules[i].ScheduleAvailability.EndTime.ToShortTimeString()<br/>
-                            Select: <div class="float-right"><input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ClassSchedules[i].Selected" /></div>
-                            <br />
-                        </div>
+
+                        @for (int i = 0; i < Model.ClassSchedules.Count; i++)
+                        {
+                            if (Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek != currentDay)
+                            {
+                                if (currentDay < 8)
+                                {
+                                    @:</td>
+                                    while (currentDay < Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek - 1)
+                                    {
+                                        currentDay++;
+                                        <td></td>
+                                    }
+                                }
+                                @:<td>
+                                currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
+                            }
+                            <div class="py-2">
+                                Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
+                                Course: @Model.ClassSchedules[i].Class.Course.Name <br />
+                                Start: @Model.ClassSchedules[i].ScheduleAvailability.StartTime.ToShortTimeString()<br/>
+                                End: @Model.ClassSchedules[i].ScheduleAvailability.EndTime.ToShortTimeString()<br/>
+                                Select: <div class="float-right"><input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ClassSchedules[i].Selected" /></div>
+                                <br />
+                            </div>
+                        }
                     }
                 </tr>
             </table>

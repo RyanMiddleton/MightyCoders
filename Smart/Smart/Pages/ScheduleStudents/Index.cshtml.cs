@@ -77,5 +77,32 @@ namespace Smart.Pages.ScheduleStudents
             }
             return Page();
         }
+
+        public async Task<IActionResult> OnPostScheduleClass(int? classId, int? scheduleId)
+        {
+            if (classId == null)
+            {
+                return await OnGetAsync(null, null);
+            }
+            foreach (var s in ClassSchedules)
+            {
+                if (s.Selected)
+                {
+                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId))
+                    {
+                        var newClassSchedule = new Models.ClassSchedule()
+                        {
+                            ClassId = (int)classId,
+                            ScheduleAvailabilityId = s.ScheduleAvailabilityId
+                        };
+                        _db.ClassSchedule.Add(newClassSchedule);
+                    }
+                }
+            }
+            await _db.SaveChangesAsync();
+            int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
+            return await OnGetAsync(termIdToRedirect, null);
+        }
+
     }
 }
