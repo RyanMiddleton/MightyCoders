@@ -24,7 +24,6 @@
     </form>
     @if (Model.ClassSchedules != null)
     {
-
         <form method="post" id="ClassForm">
             <table class="table">
                 <thead class="thead-dark">
@@ -48,6 +47,13 @@
                     @{ 
                         var currentDay = 8;
                     }
+
+                    @* This adjusts the current column over. In case there isn't a class scheduled monday *@
+                    @for(int i = 1; i < Model.ClassSchedules[0].ScheduleAvailability.DayOfWeek; i++)
+                    {
+                        <td></td>
+                    }
+
                     @for (int i = 0; i < Model.ClassSchedules.Count; i++)
                     {
                         if (Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek != currentDay)
@@ -55,7 +61,7 @@
                             if (currentDay < 8)
                             {
                                 @:</td>
-                                while (currentDay < Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek)
+                                while (currentDay < Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek - 1)
                                 {
                                     currentDay++;
                                     <td></td>
