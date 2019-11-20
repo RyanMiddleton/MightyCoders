@@ -2532,8 +2532,8 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 1000px;
-    height: 500px;
+    width: 100px;
+    height: 300px;
     
 }
 
@@ -2541,24 +2541,24 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 1000px;
-    height: 500px;
+    width: 100px;
+    height: 100px;
 }
 
 .btn-reports {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 1000px;
-    height: 500px;
+    width: 100px;
+    height: 100px;
 }
 
 .btn-students {
     color: #fff;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 1000px;
-    height: 500px;
+    width: 100px;
+    height: 100px;
 }
 
 .btn-info:hover {

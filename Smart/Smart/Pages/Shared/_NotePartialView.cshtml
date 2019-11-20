@@ -1,0 +1,41 @@
+﻿@using Smart.Models
+@model IList<Note>
+
+@if (Model.Count() > 0)
+{
+    <div class="col-12 post @Model.FirstOrDefault().NoteType.Description.Replace(" ",string.Empty) menu-restuarant">
+        <div class="row">
+            <h3 class="text-success">@Model.FirstOrDefault().NoteType.Description</h3>
+        </div>
+        <table class="table">
+            
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Student.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Student.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoteType.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+}
