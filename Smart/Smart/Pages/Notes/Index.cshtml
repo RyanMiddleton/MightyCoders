@@ -10,6 +10,21 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<div class="backgroundWhite container">
+    <ul id="menu-filters" class="menu-filter-list list-inline text-center">
+        @foreach (var item in Model.Note)
+        {
+            <li class="btn btn-secondary ml-1 mr-1" data-filter=".@item.NoteType.Description.Replace(" ",string.Empty)">@item.NoteType.Description</li>
+        }
+    </ul>
+    @foreach (var item in Model.Note)
+    {
+        <div class="row" id="menu-wrapper">
+            <partial name="_NotePartialView"
+                     model="@Model.Note.Where(m=>m.NoteType.Description.Equals(item.NoteType.Description))" />
+        </div>
+    }
+</div>
 <table class="table">
     <thead>
         <tr>
