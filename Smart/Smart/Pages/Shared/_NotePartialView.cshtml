@@ -1,0 +1,58 @@
+﻿@using Smart.Models
+@model IEnumerable<Note>
+
+@if (Model.Count() > 0)
+{
+    <div class="col-12 post @Model.FirstOrDefault().NoteType.Description.Replace(" ",string.Empty) menu-restuarant">
+        <div class="row">
+            <h3 class="text-success">@Model.FirstOrDefault().NoteType.Description</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Student.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Student.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).NoteType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Text)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Student.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Student.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoteType.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+}
