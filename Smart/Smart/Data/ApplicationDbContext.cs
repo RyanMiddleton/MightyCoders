@@ -32,8 +32,6 @@ namespace Smart.Data
         public DbSet<StudentAssessment> StudentAssessment { get; set; }
         public DbSet<ClassSchedule> ClassSchedule { get; set; }
         public DbSet<ScheduleAvailability> ScheduleAvailability { get; set; }
-        public DbSet<PublicSchoolClassSchedule> PublicSchoolClassSchedule { get; set; }
-        public DbSet<StudentPublicSchoolClass> StudentPublicSchoolClass { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

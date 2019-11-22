@@ -5,16 +5,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Manage Assessments</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-info"><i class="fas fa-plus"></i> Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Assessment[0].Class)
+            </th>
+            <th>
+                Term
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Assessment[0].Title)
@@ -32,7 +35,10 @@
 @foreach (var item in Model.Assessment) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.ClassId)
+                @Html.DisplayFor(modelItem => item.Class.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Term.StartDate.Year)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -44,9 +50,10 @@
                 @Html.DisplayFor(modelItem => item.PointsPossible)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.AssessmentId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.AssessmentId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.AssessmentId">Delete</a>
+                <a asp-page="./Edit" class="btn btn-primary text-white" asp-route-id="@item.AssessmentId">Edit</a>
+                @*<a asp-page="./Details" class="btn btn-success text-white" asp-route-id="@item.AssessmentId">Details</a>*@
+                <a asp-page="./Copy" class="btn btn-dark text-white" asp-route-id="@item.AssessmentId">Copy</a>
+                <a asp-page="./Delete" class="btn btn-danger text-white" asp-route-id="@item.AssessmentId">Delete</a>
             </td>
         </tr>
 }

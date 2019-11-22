@@ -25,7 +25,7 @@ namespace Smart.Pages.Ratings
            object selectedTerm = null)
         {
             var statusQuery = from s in _context.Term
-                              orderby s.Description // Sort by name.
+                              orderby s.StartDate // Sort by start date.
                               select s;
 
             TermNameSL = new SelectList(statusQuery.AsNoTracking(),

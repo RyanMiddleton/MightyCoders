@@ -24,7 +24,9 @@ namespace Smart.Pages.Instructors.Assessments
         public async Task OnGetAsync()
         {
             Assessment = await _context.Assessment
-                .Include(a => a.Class).ToListAsync();
+                .Include(a => a.Class)
+                .Include(a => a.Class.Term)
+                .Include(a => a.Class.Course).ToListAsync();
         }
     }
 }

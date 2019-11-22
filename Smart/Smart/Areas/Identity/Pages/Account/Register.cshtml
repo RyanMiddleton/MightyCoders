@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using Smart.Utility
 @{
     ViewData["Title"] = "Register";
 }
@@ -37,6 +38,18 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            @if (User.IsInRole(SD.AdminUser))
+            {
+                <div class="form-group row">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-auto">
+                        <input type="radio" name="UserRole" value="@SD.InstructorUser" checked /> @SD.InstructorUser
+                        <input type="radio" name="UserRole" value="@SD.SocialWorkerUser" checked /> @SD.SocialWorkerUser
+                        <input type="radio" name="UserRole" value="@SD.RaterUser" checked /> @SD.RaterUser
+                    </div>
+                </div>
+            }
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>

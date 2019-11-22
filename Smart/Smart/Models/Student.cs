@@ -48,13 +48,14 @@ namespace Smart.Models
         public string Phone { get; set; }
         public byte[] Photo { get; set; }
         [Required]
-        public int StudentStatusId { get; set; }
         [Display(Name = "Student Status")]
+        public int StudentStatusId { get; set; }
         public StudentStatus StudentStatus { get; set; }
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<ApplicantRating> ApplicantRatings { get; set; }
         public virtual ICollection<File> Files { get; set; }
-
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
+        public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
 }

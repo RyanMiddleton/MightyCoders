@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
+using Smart.Utility;
 
 namespace Smart.Pages.Students
 {
+
+    [Authorize(Roles = "Instructor, Admin")]
     public class IndexModel : PageModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;

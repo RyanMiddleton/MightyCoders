@@ -1,8 +1,8 @@
-﻿@*@page
-@model Smart.Pages.Instructors.Classes.IndexModel
-
+﻿@page
+@model Smart.Pages.Instructors.Grading.IndexModel
+@Html.AntiForgeryToken()
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Grading";
 }
 
 <h1>Index</h1>
@@ -32,7 +32,8 @@
                 @Html.DisplayFor(modelItem => item.Course.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Term.Description)
+                @*@Html.DisplayFor(modelItem => item.Term.StartDate)*@
+                @(item.Term.StartDate.ToString("MMMM") + " to " + item.Term.EndDate.ToString("MMMM") + " " + item.Term.EndDate.Year)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClassId)
@@ -43,4 +44,4 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>

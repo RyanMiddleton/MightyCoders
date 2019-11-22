@@ -1,10 +1,65 @@
 ﻿@page
 @model IndexModel
+@using Smart.Utility
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">S.M.A.R.T. Tools</h1>
+        @if (User.IsInRole(SD.AdminUser))
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-applicant btn-lg"><i class="fas fa-address-card"></i>Applicants</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-attendance form-control"><i class="fas fa-address-card"></i>Attendance</a>
+                </div>
+            </div>
+        }
+        else if (User.IsInRole(SD.InstructorUser))
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-attendance form-control"><i class="fas fa-address-card"></i>Attendance</a>
+                </div>
+            </div>
+        }
+        else if (User.IsInRole(SD.RaterUser))
+        {
+            <div class="col-lg-6">
+                <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+            </div>
+        }
+        else if (User.IsInRole(SD.SocialWorkerUser))
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-applicant btn-lg"><i class="fas fa-address-card"></i>Applicants</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+                </div>
+                <div class="col-lg-6">
+                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>Log in to the Application with a user account to get respective functionality.</p>
+        }
+    </div>
