@@ -21,7 +21,7 @@ namespace Smart.Pages.Ratings
             _context = context;
         }
 
-        public IList<ApplicantRating> ApplicantRating { get;set; }
+        public IList<ApplicantRating> ApplicantRating { get; set; }
 
         public async Task OnGetAsync()
         {
