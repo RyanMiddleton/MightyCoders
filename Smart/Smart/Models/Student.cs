@@ -55,7 +55,7 @@ namespace Smart.Models
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<ApplicantRating> ApplicantRatings { get; set; }
         public virtual ICollection<File> Files { get; set; }
-        public virtual ICollection<StudentClass> StudentClasses { get; set; }
+        public virtual ICollection<StudentClassSchedule> StudentClassSchedules { get; set; }
         public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
 }

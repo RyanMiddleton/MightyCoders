@@ -25,14 +25,14 @@ namespace Smart.Pages.Instructors.Grading
         public int ClassID { get; set; }
         public GradingIndexData GradingData { get; set; }
         public List<SelectListItem> Classes { get; set; }
-        public async Task OnGetAsync(int? Id)
-        {
-            //GradingData = new GradingIndexData();
-            //GradingData.Classes = await _context.Class.FirstOrDefault(c => c.ClassID = Id);
-            //GradingData.StudentAssessments = await _context.StudentAssessment.ToListAsync();
-            //GradingData.Assessments = await _context.Assessment.ToListAsync();
-            //GradingData.Students = await _context.Student.ToListAsync();
-        }
+        //public async Task OnGetAsync(int? Id)
+        //{
+        //    //GradingData = new GradingIndexData();
+        //    //GradingData.Classes = await _context.Class.FirstOrDefault(c => c.ClassID = Id);
+        //    //GradingData.StudentAssessments = await _context.StudentAssessment.ToListAsync();
+        //    //GradingData.Assessments = await _context.Assessment.ToListAsync();
+        //    //GradingData.Students = await _context.Student.ToListAsync();
+        //}
 
         //public async Task<IActionResult> OnGetAsync(int? studentAssessmentId)
         //{

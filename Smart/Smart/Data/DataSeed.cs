@@ -369,36 +369,6 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Class End
 
-            // Seeding StudentClass Start
-            var studentClasses = new StudentClass[]
-            {
-                // public classes
-                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[4].StudentId },
-                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[5].StudentId },
-                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[6].StudentId },
-                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[6].StudentId },
-                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[5].StudentId },
-                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[4].StudentId },
-                new StudentClass { ClassId = classes[27].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[28].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[29].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[30].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[31].ClassId, StudentId = students[2].StudentId }
-            };
-
-            foreach (StudentClass s in studentClasses)
-            {
-                context.StudentClass.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding StudentClass End
-
             // Seeding Assessment Start
             var assessments = new Assessment[]
             {
@@ -513,22 +483,35 @@ namespace Smart.Data
             context.SaveChanges();
             // Seeding Schedule End
 
+            // Seeding Section Start
+            var sections = new Section[]
+            {
+                new Section { Name = "A" },
+                new Section { Name = "B" }
+            };
+
+            foreach (Section s in sections)
+            {
+                context.Section.Add(s);
+            }
+            context.SaveChanges();
+
             // Seeding ClassSchedule Start
             var classSchedules = new ClassSchedule[]
             {
-                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[0].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[1].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[2].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[3].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[4].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[5].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[0].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[1].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[2].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[3].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[4].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[5].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
 
-                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[6].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[7].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[8].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[9].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[10].ScheduleAvailabilityId },
-                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[11].ScheduleAvailabilityId },
+                new ClassSchedule { ClassId = classes[0].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[6].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[1].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[7].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
+                new ClassSchedule { ClassId = classes[2].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[8].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[3].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[9].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
+                new ClassSchedule { ClassId = classes[4].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[10].ScheduleAvailabilityId, SectionId = sections[0].SectionId },
+                new ClassSchedule { ClassId = classes[5].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[11].ScheduleAvailabilityId, SectionId = sections[1].SectionId },
 
                 // Public class shceduels
                 new ClassSchedule { ClassId = classes[20].ClassId, ScheduleAvailabilityId = scheduleAvailabilities[16].ScheduleAvailabilityId },
@@ -551,6 +534,36 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding ClassSchedule End
+
+            // Seeding StudentClassSchedule Start
+            var StudentClassSchedulees = new StudentClassSchedule[]
+            {
+                // public classes
+                new StudentClassSchedule { ClassScheduleId = classSchedules[21].ClassScheduleId, StudentId = students[1].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[22].ClassScheduleId, StudentId = students[2].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[23].ClassScheduleId, StudentId = students[3].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[24].ClassScheduleId, StudentId = students[3].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[25].ClassScheduleId, StudentId = students[2].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[26].ClassScheduleId, StudentId = students[1].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[21].ClassScheduleId, StudentId = students[4].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[22].ClassScheduleId, StudentId = students[5].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[23].ClassScheduleId, StudentId = students[6].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[24].ClassScheduleId, StudentId = students[6].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[25].ClassScheduleId, StudentId = students[5].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[26].ClassScheduleId, StudentId = students[4].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[27].ClassScheduleId, StudentId = students[1].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[28].ClassScheduleId, StudentId = students[2].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[29].ClassScheduleId, StudentId = students[3].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[30].ClassScheduleId, StudentId = students[3].StudentId },
+                new StudentClassSchedule { ClassScheduleId = classSchedules[31].ClassScheduleId, StudentId = students[2].StudentId }
+            };
+
+            foreach (StudentClassSchedule s in StudentClassSchedulees)
+            {
+                context.StudentClassSchedule.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding StudentClassSchedule End
         }
     }
-}
+} 
