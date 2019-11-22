@@ -10,6 +10,9 @@ namespace Smart.Models
     {
         [Key]
         public int CourseId { get; set; }
+        public bool IsCoreRequirement { get; set; }
+        public bool IsTaughtHere { get; set; }
         public string Name { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
     }
 }

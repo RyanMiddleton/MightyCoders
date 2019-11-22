@@ -18,6 +18,7 @@ namespace Smart.Models
         public virtual Class Class { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        [Display(Name = "Points Possible")]
         public int PointsPossible { get; set; }
         public virtual ICollection<StudentAssessment> StudentAssessments { get; set; }
     }
