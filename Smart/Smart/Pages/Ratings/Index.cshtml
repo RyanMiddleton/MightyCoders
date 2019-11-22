@@ -32,29 +32,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ApplicantRating) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RatingCriteria.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScoreAssigned)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ApplicantRatingId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ApplicantRatingId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ApplicantRatingId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.ApplicantRating)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RatingCriteria.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScoreAssigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ApplicantRatingId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ApplicantRatingId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ApplicantRatingId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

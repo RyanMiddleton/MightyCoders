@@ -73,11 +73,11 @@ namespace Smart.Pages.Instructors.Grading
                 AssessmentId = selectedAssessId.Value;
                 try
                 {
-                    
+
                     Assessment assessment = GradingData.Assessments.Where(a => a.AssessmentId == AssessmentId).Single();
                     GradingData.Students = _context.StudentClass.Include(s => s.Student)
                         .Where(s => s.ClassId == assessment.ClassId).ToList();
-                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();                 
+                    GradingData.StudentAssessments = assessment.StudentAssessments.ToList();
                 }
                 catch
                 {
@@ -91,44 +91,44 @@ namespace Smart.Pages.Instructors.Grading
 
         public JsonResult OnPost(int? AssessId)
         {
-                _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
-                _context.SaveChanges();
-                MemoryStream stream = new MemoryStream();
-                Request.Body.CopyTo(stream);
-                stream.Position = 0;
-                using (StreamReader reader = new StreamReader(stream))
+            _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
+            _context.SaveChanges();
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
                 {
-                    string requestBody = reader.ReadToEnd();
-                    if (requestBody.Length > 0)
+                    dynamic dyn = JsonConvert.DeserializeObject(requestBody);
+                    var lststudass = new List<StudentAssessment>();
+                    foreach (var obj in dyn)
                     {
-                        dynamic dyn = JsonConvert.DeserializeObject(requestBody);
-                        var lststudass = new List<StudentAssessment>();
-                        foreach(var obj in dyn)
+                        lststudass.Add(new StudentAssessment()
                         {
-                            lststudass.Add(new StudentAssessment()
-                            {
-                                StudentId = obj.StudentId,
-                                PointsAwarded = obj.PointsAwarded,
-                                Comments = obj.Comments,
-                                AssessmentId = AssessId.Value
-                            }
-                            ); ;
+                            StudentId = obj.StudentId,
+                            PointsAwarded = obj.PointsAwarded,
+                            Comments = obj.Comments,
+                            AssessmentId = AssessId.Value
                         }
+                        ); ;
+                    }
 
-                        foreach(StudentAssessment student in lststudass)
-                        {
-                            _context.StudentAssessment.Add(student);
-                        }
-                        try
-                        {
-                            _context.SaveChanges();
-                        }
-                        catch
-                        {
-                            return new JsonResult("An Error Has Occured");
-                        }
+                    foreach (StudentAssessment student in lststudass)
+                    {
+                        _context.StudentAssessment.Add(student);
+                    }
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch
+                    {
+                        return new JsonResult("An Error Has Occured");
                     }
                 }
+            }
             return new JsonResult("Saved Changes Successfully");
         }
 
