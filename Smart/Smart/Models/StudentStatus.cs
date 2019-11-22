@@ -11,5 +11,6 @@ namespace Smart.Models
         [Key]
         public int StudentStatusId { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

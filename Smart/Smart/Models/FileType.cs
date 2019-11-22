@@ -11,5 +11,6 @@ namespace Smart.Models
         [Key]
         public int FileTypeId { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<File> Files { get; set; }
     }
 }

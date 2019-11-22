@@ -19,7 +19,7 @@ namespace Smart.Pages.Notes
             _context = context;
         }
 
-        public IList<Note> Note { get;set; }
+        public IEnumerable<Note> Note { get;set; }
 
         public async Task OnGetAsync()
         {

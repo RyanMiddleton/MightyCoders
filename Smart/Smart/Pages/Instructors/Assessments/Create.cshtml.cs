@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
 
@@ -19,9 +20,24 @@ namespace Smart.Pages.Instructors.Assessments
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-        ViewData["ClassId"] = new SelectList(_context.Class, "ClassId", "ClassId");
+            ViewData["ClassId"] = await _context.Class
+                                .Include(c => c.Term)
+                      .Select(c => new SelectListItem
+                      {
+                          Value = c.ClassId.ToString(),
+                          Text = c.Course.Name + " " + c.Term.StartDate.ToString("MMMM") + " to " + c.Term.EndDate.ToString("MMMM") + " " + c.Term.EndDate.Year
+                      })
+                      .ToListAsync();
+            //ViewData["Term"] = await _context.Term
+            //         .Select(t => new SelectListItem
+            //         {
+            //             Value = t.TermId.ToString(),
+            //             Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+            //         })
+            //         .ToListAsync();
+
             return Page();
         }
 
