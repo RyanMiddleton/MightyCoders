@@ -11,7 +11,7 @@ using Smart.Models;
 
 namespace Smart.Pages.Notes
 {
-    [Authorize(Roles = "Rater, Admin")]
+    [Authorize(Roles = "Rater, Instructor, SocialWorker, Admin")]
     public class CreateModel : PageModel
     {
         private readonly Smart.Data.ApplicationDbContext _context;
