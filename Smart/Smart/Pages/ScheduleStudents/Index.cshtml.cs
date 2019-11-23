@@ -114,7 +114,7 @@ namespace Smart.Pages.ScheduleStudents
                 }
                 else
                 {
-                    StudentClassSchedule studentClassSchedule = await _db.StudentClassSchedule.FindAsync(s.ClassScheduleId, StudentId);
+                    StudentClassSchedule studentClassSchedule = await _db.StudentClassSchedule.SingleOrDefaultAsync(scs => scs.ClassScheduleId == s.ClassScheduleId && scs.StudentId == StudentId);
                     if (studentClassSchedule != null)
                     {
                         _db.StudentClassSchedule.Remove(studentClassSchedule);
