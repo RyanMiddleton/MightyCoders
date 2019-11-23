@@ -26,6 +26,8 @@ namespace Smart.Pages.ClassSchedule
         public List<SelectListItem> ClassSelectList { get; set; }
 
         public List<Class> Classes { get; set; }
+        [BindProperty]
+        public List<SelectListItem> SectionSelectList { get; set; }
 
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
@@ -51,6 +53,7 @@ namespace Smart.Pages.ClassSchedule
                 Classes = await _db.Class
                                    .Include(c => c.Course)
                                    .Include(c => c.ClassSchedules)
+                                        .ThenInclude(cs => cs.Section)
                                    .Where(t => t.TermId == termId)
                                    .Where(c => c.Course.IsTaughtHere == true)
                                    .OrderBy(c => c.Course.Name)
@@ -64,28 +67,58 @@ namespace Smart.Pages.ClassSchedule
                                              };
                                          });
                 ClassSelectList.Insert(0, new SelectListItem { Text = "-- Select Class --", Value = null });
+                SectionSelectList = await _db.Section
+                                             .Select(s => new SelectListItem
+                                             {
+                                                 Value = s.SectionId.ToString(),
+                                                 Text = s.Name
+                                             })
+                                             .ToListAsync();
+                SectionSelectList.Insert(0, new SelectListItem { Text = "-- Select Section --", Value = null });
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostScheduleClass(int? classId)
+        public async Task<IActionResult> OnPostScheduleClass(int? classId, int? sectionId)
         {
             if (classId == null)
             {
                 return await OnGetAsync(null);
             }
-            foreach (var s in ScheduleAvailabilities)
+            if (sectionId == null)
             {
-                if (s.Selected)
+                foreach (var s in ScheduleAvailabilities)
                 {
-                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId))
+                    if (s.Selected)
                     {
-                        var newClassSchedule = new Models.ClassSchedule()
+                        if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId))
                         {
-                            ClassId = (int)classId,
-                            ScheduleAvailabilityId = s.ScheduleAvailabilityId
-                        };
-                        _db.ClassSchedule.Add(newClassSchedule);
+                            var newClassSchedule = new Models.ClassSchedule()
+                            {
+                                ClassId = (int)classId,
+                                ScheduleAvailabilityId = s.ScheduleAvailabilityId
+                            };
+                            _db.ClassSchedule.Add(newClassSchedule);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var s in ScheduleAvailabilities)
+                {
+                    if (s.Selected)
+                    {
+                        if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId && cs.SectionId == sectionId))
+                        {
+                            var newClassSchedule = new Models.ClassSchedule()
+                            {
+                                ClassId = (int)classId,
+                                ScheduleAvailabilityId = s.ScheduleAvailabilityId,
+                                SectionId = sectionId
+                            };
+                            _db.ClassSchedule.Add(newClassSchedule);
+                        }
                     }
                 }
             }
