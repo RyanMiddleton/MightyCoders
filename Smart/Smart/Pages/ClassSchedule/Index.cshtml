@@ -77,7 +77,7 @@
                         {
                             @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                             {
-                                @:<li class="list-group-item scheduledClass @c.ClassId">
+                                @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
                                     @:<div class="offset-1">
                                         @if (cs.Section != null)
                                         {
@@ -131,16 +131,24 @@
             $('.checkBox').each(function () {
                 $(this).prop('checked', false);
             });
+            function highlightSelected () {
+                if ($(this).hasClass("C" + $('#ClassId').val())) {
+                    $(this).css("background-color", "#85dcff");
+                    if ($(this).hasClass("S" + $('#SectionId').val())) {
+                        $(this).css("border", "5px solid #00A8F6")
+                    }
+                }
+                else {
+                    $(this).css("background-color", "");
+                    $(this).css("border", "")
+                }
+            }
             $('#ClassId').change(function () {
-                $(".scheduledClass").each(function () {
-                    if ($(this).hasClass($('#ClassId').val())) {
-                        $(this).css("background-color", "#85dcff");
-                    }
-                    else {
-                        $(this).css("background-color", "");
-                    }
-                })
-            })
+                $(".scheduledClass").each(highlightSelected);
+            });
+            $('#SectionId').change(function () {
+                $(".scheduledClass").each(highlightSelected);
+            });
         });
     </script>
 }
