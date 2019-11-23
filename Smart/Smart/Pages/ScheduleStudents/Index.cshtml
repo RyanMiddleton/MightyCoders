@@ -72,7 +72,7 @@
                                 @:<td>
                                 currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
                             }
-                            <div class="py-2">
+                            <div class="py-2 border p-1 ClassSchedule">
                                 <input hidden asp-for="@Model.ClassSchedules[i].ClassScheduleId" />
                                 Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
                                 Course: @Model.ClassSchedules[i].Class.Course.Name <br />
@@ -101,6 +101,22 @@
             });
             $('#StudentId').change(function () {
                 $('#TermStudentForm').submit();
+            });
+            $('.checkBox').each(function () {
+                if ($(this).prop("checked") == true) {
+                    $(this).closest(".ClassSchedule").css("background-color", "LightGreen");
+                }
+                else {
+                    $(this).closest(".ClassSchedule").css("background-color", "");
+                }
+            });
+            $('.checkBox').click(function () {
+                if ($(this).prop("checked") == true) {
+                    $(this).closest(".ClassSchedule").css("background-color", "LightGreen");
+                }
+                else {
+                    $(this).closest(".ClassSchedule").css("background-color", "");
+                }
             });
         });
     </script>
