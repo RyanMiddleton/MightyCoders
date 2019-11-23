@@ -21,8 +21,13 @@ namespace Smart.Pages.ScheduleStudents
         }
 
         public List<Student> Students { get; set; }
+        [BindProperty]
+        public int? StudentId { get; set; }
+        [BindProperty]
+        public int? TermId { get; set; }
         public List<SelectListItem> StudentsSelectList { get; set; }
         public List<Class> Classes { get; set; }
+        [BindProperty]
         public List<Models.ClassSchedule> ClassSchedules { get; set; }
         public List<Student> StudentPublicClasses { get; set; }
         public List<SelectListItem> Terms { get; set; }
@@ -55,17 +60,19 @@ namespace Smart.Pages.ScheduleStudents
             {
                 var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
                 selectedTerm.Selected = true;
+                TermId = termId;
             }
             if (studentId != null)
             {
                 var selectedStudent = StudentsSelectList.Where(s => s.Value == studentId.ToString()).FirstOrDefault();
                 selectedStudent.Selected = true;
-            }
+                StudentId = studentId;           }
             if (termId != null && studentId != null)
             {
                 Student student = Students.Where(s => s.StudentId == studentId).FirstOrDefault();
                 ClassSchedules = await _db.ClassSchedule
                                    .Include(cs => cs.ScheduleAvailability)
+                                   .Include(cs => cs.Section)
                                    .Include(cs => cs.Class)
                                        .ThenInclude(c => c.Course)
                                    .Where(cs => cs.Class.TermId == termId && cs.Class.Course.IsTaughtHere == true 
@@ -74,13 +81,20 @@ namespace Smart.Pages.ScheduleStudents
                                    .OrderBy(c => c.ScheduleAvailability.StartTime)
                                    .OrderBy(c => c.ScheduleAvailability.DayOfWeek)
                                    .ToListAsync();
+                foreach (var cs in ClassSchedules)
+                {
+                    if(await _db.StudentClassSchedule.AnyAsync(scs => scs.ClassScheduleId == cs.ClassScheduleId && scs.StudentId == studentId))
+                    {
+                        cs.Selected = true;
+                    }
+                }
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostScheduleClass(int? classId, int? scheduleId)
+        public async Task<IActionResult> OnPostScheduleStudent()
         {
-            if (classId == null)
+            if (StudentId == null || ClassSchedules == null)
             {
                 return await OnGetAsync(null, null);
             }
@@ -88,20 +102,27 @@ namespace Smart.Pages.ScheduleStudents
             {
                 if (s.Selected)
                 {
-                    if (!_db.ClassSchedule.Any(cs => cs.ClassId == classId && cs.ScheduleAvailabilityId == s.ScheduleAvailabilityId))
+                    if (!_db.StudentClassSchedule.Any(scs => scs.ClassScheduleId == s.ClassScheduleId && scs.StudentId == StudentId))
                     {
-                        var newClassSchedule = new Models.ClassSchedule()
+                        var newStudentClassSchedule = new StudentClassSchedule()
                         {
-                            ClassId = (int)classId,
-                            ScheduleAvailabilityId = s.ScheduleAvailabilityId
+                            StudentId = (int)StudentId,
+                            ClassScheduleId = s.ClassScheduleId
                         };
-                        _db.ClassSchedule.Add(newClassSchedule);
+                        _db.StudentClassSchedule.Add(newStudentClassSchedule);
+                    }
+                }
+                else
+                {
+                    StudentClassSchedule studentClassSchedule = await _db.StudentClassSchedule.FindAsync(s.ClassScheduleId, StudentId);
+                    if (studentClassSchedule != null)
+                    {
+                        _db.StudentClassSchedule.Remove(studentClassSchedule);
                     }
                 }
             }
             await _db.SaveChangesAsync();
-            int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
-            return await OnGetAsync(termIdToRedirect, null);
+            return await OnGetAsync(TermId, StudentId);
         }
 
     }
