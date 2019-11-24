@@ -75,9 +75,9 @@
                 <span asp-validation-for="Student.Photo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Student.StudentStatusId" class="control-label"></label>
-                <select asp-for="Student.StudentStatusId" class="form-control" asp-items="ViewBag.StudentStatusId"></select>
-                <span asp-validation-for="Student.StudentStatusId" class="text-danger"></span>
+                <label asp-for="Student.StudentStatus" class="control-label"></label>
+                <select asp-for="Student.StudentStatus.Description" class="form-control" asp-items="ViewBag.StudentStatusId"></select>
+                <span asp-validation-for="Student.StudentStatus.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
