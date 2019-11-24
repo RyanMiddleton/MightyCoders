@@ -24,13 +24,22 @@
     </form>
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
-        @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
+        @if (Model.ClassSelectList != null && Model.ClassSelectList.Count > 0)
         {
             <div class="row">
                 <h6>Select Class:</h6>
             </div>
             <div class="row pb-3">
                 <select name="classId" id="ClassId" asp-items="Model.ClassSelectList" class="form-control"></select>
+            </div>
+        }
+        @if (Model.SectionSelectList != null && Model.SectionSelectList.Count > 0)
+        {
+            <div class="row">
+                <h6>Select Section:</h6>
+            </div>
+            <div class="row pb-3">
+                <select name="sectionId" id="SectionId" asp-items="Model.SectionSelectList" class="form-control"></select>
             </div>
         }
 
@@ -68,9 +77,16 @@
                         {
                             @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                             {
-                                @:<li class="list-group-item scheduledClass @c.ClassId">
+                                @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
                                     @:<div class="offset-1">
-                                        @c.Course.Name
+                                        @if (cs.Section != null)
+                                        {
+                                            @(c.Course.Name + " - " + cs.Section.Name)
+                                        }
+                                        else
+                                        {
+                                            @c.Course.Name
+                                        }
                                         <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
                                     @:</div>
                                 @:</li>
@@ -115,16 +131,24 @@
             $('.checkBox').each(function () {
                 $(this).prop('checked', false);
             });
+            function highlightSelected () {
+                if ($(this).hasClass("C" + $('#ClassId').val())) {
+                    $(this).css("background-color", "#85dcff");
+                    if ($(this).hasClass("S" + $('#SectionId').val())) {
+                        $(this).css("border", "5px solid #00A8F6")
+                    }
+                }
+                else {
+                    $(this).css("background-color", "");
+                    $(this).css("border", "")
+                }
+            }
             $('#ClassId').change(function () {
-                $(".scheduledClass").each(function () {
-                    if ($(this).hasClass($('#ClassId').val())) {
-                        $(this).css("background-color", "#85dcff");
-                    }
-                    else {
-                        $(this).css("background-color", "");
-                    }
-                })
-            })
+                $(".scheduledClass").each(highlightSelected);
+            });
+            $('#SectionId').change(function () {
+                $(".scheduledClass").each(highlightSelected);
+            });
         });
     </script>
 }

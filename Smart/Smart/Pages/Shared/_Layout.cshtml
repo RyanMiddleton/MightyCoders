@@ -23,7 +23,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">No Poor Amongst Us</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">No Poor Among Us</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -51,9 +51,15 @@
 
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-page="/ClassSchedule/Index">Class Schedule</a>
-                            </li>
+                            <li class="nav-item dropdown text-white">
+                            	<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropDownMenuLink"
+                               		role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Schedule</a>
+                            	<div class="dropdown-menu" aria-labelledby="navbar-DropDownMenuLink">
+                                	<a class="dropdown-item" asp-area="" asp-page="/ClassSchedule/Index">Class Schedule</a>
+                                	<a class="dropdown-item" asp-area="" asp-page="/ScheduleStudents/Index">Schedule Students</a>
+                                	<a class="dropdown-item" asp-area="" asp-page="/ScheduleAvailabilities/Index">Schedule Availabilities</a>
+                            	</div>
+                        	</li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-page="/About">About</a>
                             </li>
@@ -80,7 +86,6 @@
                                 <a class="nav-link text-white" asp-area="" asp-page="/About">About</a>
                             </li>
                         </ul>
-
                     }
                     else if (User.IsInRole(SD.SocialWorkerUser))
                     {
@@ -99,7 +104,6 @@
                                 <a class="nav-link text-white" asp-area="" asp-page="/About">About</a>
                             </li>
                         </ul>
-
                     }
                     else if (User.IsInRole(SD.RaterUser))
                     {
@@ -117,9 +121,7 @@
                                 <a class="nav-link text-white" asp-area="" asp-page="/About">About</a>
                             </li>
                         </ul>
-
                     }
-
                 </div>
             </div>
         </nav>
@@ -132,7 +134,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - No Poor Amongst Us - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2019 - No Poor Among Us - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

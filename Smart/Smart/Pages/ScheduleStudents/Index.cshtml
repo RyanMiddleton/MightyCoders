@@ -24,7 +24,9 @@
     </form>
     @if (Model.ClassSchedules != null)
     {
-        <form method="post" id="ClassForm">
+        <form method="post" id="ScheduleStudentForm" asp-page-handler="ScheduleStudent">
+            <input hidden asp-for="StudentId" />
+            <input hidden asp-for="TermId" />
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -70,9 +72,11 @@
                                 @:<td>
                                 currentDay = Model.ClassSchedules[i].ScheduleAvailability.DayOfWeek;
                             }
-                            <div class="py-2">
+                            <div class="py-2 border p-1 ClassSchedule">
+                                <input hidden asp-for="@Model.ClassSchedules[i].ClassScheduleId" />
                                 Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
                                 Course: @Model.ClassSchedules[i].Class.Course.Name <br />
+                                Section: @Model.ClassSchedules[i].Section.Name <br />
                                 Start: @Model.ClassSchedules[i].ScheduleAvailability.StartTime.ToShortTimeString()<br/>
                                 End: @Model.ClassSchedules[i].ScheduleAvailability.EndTime.ToShortTimeString()<br/>
                                 Select: <div class="float-right"><input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ClassSchedules[i].Selected" /></div>
@@ -82,6 +86,17 @@
                     }
                 </tr>
             </table>
+            <div class="row">
+                <div class="col-4">
+                    <button name="submit" class="btn btn-dark w-75" type="submit" id="prev" value="prev">@("<< Previous Student")</button>
+                </div>
+                <div class="col-4 text-center">
+                    <button name="submit" class="btn btn-dark w-75" type="submit" id="save" value="save">Save</button>
+                </div>
+                <div class="col-4">
+                    <button name="submit" class="btn btn-dark w-75 float-right" type="submit" id="next" value="next">@("Next Student >>")</button>
+                </div>
+            </div>
         </form>
     }
 </div>
@@ -94,6 +109,22 @@
             });
             $('#StudentId').change(function () {
                 $('#TermStudentForm').submit();
+            });
+            $('.checkBox').each(function () {
+                if ($(this).prop("checked") == true) {
+                    $(this).closest(".ClassSchedule").css("background-color", "LightGreen");
+                }
+                else {
+                    $(this).closest(".ClassSchedule").css("background-color", "");
+                }
+            });
+            $('.checkBox').click(function () {
+                if ($(this).prop("checked") == true) {
+                    $(this).closest(".ClassSchedule").css("background-color", "LightGreen");
+                }
+                else {
+                    $(this).closest(".ClassSchedule").css("background-color", "");
+                }
             });
         });
     </script>

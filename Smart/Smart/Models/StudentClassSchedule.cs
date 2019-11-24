@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Smart.Models
 {
-    public class StudentClass
+    public class StudentClassSchedule
     {
         [Display(Name = "Student")]
         public int StudentId { get; set; }
         public Student Student { get; set; }
         [Display(Name = "Class")]
-        public int ClassId { get; set; }
-        public Class Class { get; set; }
+        public int ClassScheduleId { get; set; }
+        public ClassSchedule ClassSchedule { get; set; }
     }
 }
