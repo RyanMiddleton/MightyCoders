@@ -1,0 +1,34 @@
+﻿@page
+@model Smart.Pages.ScheduleAvailabilities.IndexModel
+@using Smart.Utility
+@using Smart.Models
+@{
+    ViewData["Title"] = "Schedule Availability";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row py-3">
+        <h2>Schedule Availablility</h2>
+    </div>
+    @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
+    {
+        var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
+        var dayAvailability = new List<ScheduleAvailability>();
+        
+        @foreach(var sa in Model.ScheduleAvailabilities)
+        {
+            if (currentDay != sa.DayOfWeek)
+            {
+                <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
+                currentDay = sa.DayOfWeek;
+                dayAvailability.Clear();
+            }
+            dayAvailability.Add(sa);
+        }
+        <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
+    }
+
+</div>
+
