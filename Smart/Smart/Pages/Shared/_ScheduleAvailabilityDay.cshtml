@@ -15,6 +15,7 @@
         {
         <li class="list-group-item">
             @Html.DisplayFor(s => sa.StartTime) - @Html.DisplayFor(s => sa.EndTime)
+            <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-scheduleId="@sa.ScheduleAvailabilityId" type="button">Remove</a>
         </li>
         }
     </ul>

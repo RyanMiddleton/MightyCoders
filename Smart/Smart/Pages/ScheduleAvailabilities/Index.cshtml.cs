@@ -29,7 +29,22 @@ namespace Smart.Pages.ScheduleAvailabilities
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
             return Page();
-
         }
+
+        public async Task<IActionResult> OnGetRemoveAsync(int? scheduleId)
+        {
+            if (scheduleId == null)
+            {
+                return await OnGetAsync();
+            }
+            var scheduleToDelete = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.ScheduleAvailabilityId == scheduleId);
+            if (scheduleToDelete != null)
+            {
+                _db.ScheduleAvailability.Remove(scheduleToDelete);
+                await _db.SaveChangesAsync();
+            }
+            return await OnGetAsync();
+        }
+        
     }
 }
