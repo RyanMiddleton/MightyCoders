@@ -12,11 +12,38 @@
     <div class="row py-3">
         <h2>Schedule Availablility</h2>
     </div>
+    <form method="post">
+        <div class="row py-3">
+            <h5>Add New Availability:</h5>
+        </div>
+        <div class="row py-3">
+            <div class="pr-1">
+                <label asp-for="ScheduleAvailability.DayOfWeek"></label>
+            </div>
+            <div class="pr-2">
+                <select asp-for="ScheduleAvailability.DayOfWeek" asp-items="Html.GetEnumSelectList<SD.EDayOfWeek>()"></select>
+            </div>
+            <div class="pr-1">
+                <label asp-for="ScheduleAvailability.StartTime"></label>
+            </div>
+            <div class="pr-2">
+                <input asp-for="ScheduleAvailability.StartTime" />
+            </div>
+            <div class="pr-1">
+                <label asp-for="ScheduleAvailability.EndTime"></label>
+            </div>
+            <div class="pr-2">
+                <input asp-for="ScheduleAvailability.EndTime" />
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </div>
+        </div>
+    </form>
     @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
     {
         var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
         var dayAvailability = new List<ScheduleAvailability>();
-        
         @foreach(var sa in Model.ScheduleAvailabilities)
         {
             if (currentDay != sa.DayOfWeek)
