@@ -40,7 +40,9 @@ namespace Smart.Pages.ScheduleAvailabilities
         {
             if (ModelState.IsValid)
             {
-                var scheduleToAdd = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.DayOfWeek == ScheduleAvailability.DayOfWeek && sa.StartTime == ScheduleAvailability.StartTime && sa.EndTime == ScheduleAvailability.EndTime);
+                var scheduleToAdd = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.DayOfWeek == ScheduleAvailability.DayOfWeek 
+                                                                                        && sa.StartTime == ScheduleAvailability.StartTime 
+                                                                                        && sa.EndTime == ScheduleAvailability.EndTime);
                 if (scheduleToAdd == null)
                 {
                     _db.ScheduleAvailability.Add(ScheduleAvailability);

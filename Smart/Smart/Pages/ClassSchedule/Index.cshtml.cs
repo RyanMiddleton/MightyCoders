@@ -37,6 +37,7 @@ namespace Smart.Pages.ClassSchedule
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .OrderBy(t => t.StartTime)
                                               .OrderBy(s => s.DayOfWeek)
+                                              .Include(sa => sa.ClassSchedules)
                                               .ToListAsync();
             Terms = await _db.Term
                              .Select(t => new SelectListItem

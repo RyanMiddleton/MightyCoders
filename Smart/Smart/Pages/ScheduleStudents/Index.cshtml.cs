@@ -25,6 +25,7 @@ namespace Smart.Pages.ScheduleStudents
         public int? StudentId { get; set; }
         [BindProperty]
         public int? TermId { get; set; }
+        [BindProperty]
         public List<SelectListItem> StudentsSelectList { get; set; }
         public List<Class> Classes { get; set; }
         [BindProperty]
@@ -32,7 +33,7 @@ namespace Smart.Pages.ScheduleStudents
         public List<Student> StudentPublicClasses { get; set; }
         public List<SelectListItem> Terms { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? termId, int? studentId)
+        public async Task<IActionResult> OnGetAsync(int? termId, int? studentId, string shift = null)
         {
             Terms = await _db.Term
                              .Select(t => new SelectListItem
@@ -65,11 +66,43 @@ namespace Smart.Pages.ScheduleStudents
             if (studentId != null)
             {
                 var selectedStudent = StudentsSelectList.Where(s => s.Value == studentId.ToString()).FirstOrDefault();
-                selectedStudent.Selected = true;
-                StudentId = studentId;           }
+                if (shift == null)
+                {
+                    selectedStudent.Selected = true;
+                    StudentId = studentId;           
+                }
+                else if (shift == "prev")
+                {
+                    var index = StudentsSelectList.IndexOf(selectedStudent);
+                    if (index > 1)
+                    {
+                        StudentsSelectList[index - 1].Selected = true;
+                        StudentId = Int32.Parse(StudentsSelectList[index - 1].Value);
+                    }
+                    else
+                    {
+                        selectedStudent.Selected = true;
+                        StudentId = studentId;           
+                    }
+                }
+                else if (shift == "next")
+                {
+                    var index = StudentsSelectList.IndexOf(selectedStudent);
+                    if (index < StudentsSelectList.Count - 1)
+                    {
+                        StudentsSelectList[index + 1].Selected = true;
+                        StudentId = Int32.Parse(StudentsSelectList[index + 1].Value);
+                    }
+                    else
+                    {
+                        selectedStudent.Selected = true;
+                        StudentId = studentId;           
+                    }
+                }
+            }
             if (termId != null && studentId != null)
             {
-                Student student = Students.Where(s => s.StudentId == studentId).FirstOrDefault();
+                Student student = Students.Where(s => s.StudentId == StudentId).FirstOrDefault();
                 ClassSchedules = await _db.ClassSchedule
                                    .Include(cs => cs.ScheduleAvailability)
                                    .Include(cs => cs.Section)
@@ -83,20 +116,21 @@ namespace Smart.Pages.ScheduleStudents
                                    .ToListAsync();
                 foreach (var cs in ClassSchedules)
                 {
-                    if(await _db.StudentClassSchedule.AnyAsync(scs => scs.ClassScheduleId == cs.ClassScheduleId && scs.StudentId == studentId))
+                    if(await _db.StudentClassSchedule.AnyAsync(scs => scs.ClassScheduleId == cs.ClassScheduleId && scs.StudentId == StudentId))
                     {
                         cs.Selected = true;
                     }
                 }
             }
+            ModelState.Clear();
             return Page();
         }
 
-        public async Task<IActionResult> OnPostScheduleStudent()
+        public async Task<IActionResult> OnPostScheduleStudent(string submit)
         {
             if (StudentId == null || ClassSchedules == null)
             {
-                return await OnGetAsync(null, null);
+                return await OnGetAsync(null, null, null);
             }
             foreach (var s in ClassSchedules)
             {
@@ -114,7 +148,8 @@ namespace Smart.Pages.ScheduleStudents
                 }
                 else
                 {
-                    StudentClassSchedule studentClassSchedule = await _db.StudentClassSchedule.SingleOrDefaultAsync(scs => scs.ClassScheduleId == s.ClassScheduleId && scs.StudentId == StudentId);
+                    StudentClassSchedule studentClassSchedule = await _db.StudentClassSchedule.SingleOrDefaultAsync(scs => scs.ClassScheduleId == s.ClassScheduleId 
+                                                                                                                    && scs.StudentId == StudentId);
                     if (studentClassSchedule != null)
                     {
                         _db.StudentClassSchedule.Remove(studentClassSchedule);
@@ -122,7 +157,15 @@ namespace Smart.Pages.ScheduleStudents
                 }
             }
             await _db.SaveChangesAsync();
-            return await OnGetAsync(TermId, StudentId);
+            if (submit == "prev")
+            {
+                return await OnGetAsync(TermId, StudentId, "prev");
+            }
+            if (submit == "next")
+            {
+                return await OnGetAsync(TermId, StudentId, "next");
+            }
+            return await OnGetAsync(TermId, StudentId, null);
         }
 
     }
