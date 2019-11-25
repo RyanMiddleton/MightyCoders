@@ -11,52 +11,69 @@
         {
             <div class="row">
                 <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-applicant btn-lg"><i class="fas fa-address-card"></i>Applicants</a>
+                    <a asp-area="" asp-page="/Applicants/Index" class="btn-applicant form-control"><i class="fas fa-address-card"></i>Applicants</a>
                 </div>
                 <div class="col-lg-6">
                     <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
                 </div>
                 <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+                    <a asp-area="" asp-page="/Ratings/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
                 </div>
                 <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-attendance form-control"><i class="fas fa-address-card"></i>Attendance</a>
+                    <a asp-area="" asp-page="/Instructors/Assessments/Index" class="btn-assessments form-control"><i class="fas fa-address-card"></i>Attendance</a>
                 </div>
             </div>
         }
         else if (User.IsInRole(SD.InstructorUser))
         {
-            <div class="row">
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
-                </div>
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
-                </div>
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-attendance form-control"><i class="fas fa-address-card"></i>Attendance</a>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Applicants/Index" class="btn-applicant form-control"><i class="fas fa-address-card"></i>Applicants</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Ratings/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Instructors/Assessments/Index" class="btn-assessments form-control"><i class="fas fa-address-card"></i>Attendance</a>
+        </div>
+    </div>
         }
         else if (User.IsInRole(SD.RaterUser))
         {
-            <div class="col-lg-6">
-                <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
-            </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Applicants/Index" class="btn-applicant form-control"><i class="fas fa-address-card"></i>Applicants</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Ratings/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Instructors/Assessments/Index" class="btn-assessments form-control"><i class="fas fa-address-card"></i>Attendance</a>
+        </div>
+    </div>
         }
         else if (User.IsInRole(SD.SocialWorkerUser))
         {
-            <div class="row">
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-applicant btn-lg"><i class="fas fa-address-card"></i>Applicants</a>
-                </div>
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
-                </div>
-                <div class="col-lg-6">
-                    <a asp-area="" asp-page="/Students/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Applicants/Index" class="btn-applicant form-control"><i class="fas fa-address-card"></i>Applicants</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Students/Index" class="btn-students form-control"><i class="fas fa-address-card"></i>Students</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Ratings/Index" class="btn-reports form-control"><i class="fas fa-address-card"></i>Reports</a>
+        </div>
+        <div class="col-lg-6">
+            <a asp-area="" asp-page="/Instructors/Assessments/Index" class="btn-assessments form-control"><i class="fas fa-address-card"></i>Attendance</a>
+        </div>
+    </div>
         }
         else
         {
