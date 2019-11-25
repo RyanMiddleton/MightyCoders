@@ -22,7 +22,7 @@ namespace Smart.Data
         public DbSet<StudentStatus> StudentStatus { get; set; }
         public DbSet<Note> Note { get; set; }
         public DbSet<NoteType> NoteType { get; set; }
-        public DbSet<StudentClass> StudentClass { get; set; }
+        public DbSet<StudentClassSchedule> StudentClassSchedule { get; set; }
         public DbSet<Term> Term { get; set; }
         public DbSet<Class> Class { get; set; }
         public DbSet<Course> Course { get; set; }
@@ -33,15 +33,19 @@ namespace Smart.Data
         public DbSet<ClassSchedule> ClassSchedule { get; set; }
         public DbSet<ScheduleAvailability> ScheduleAvailability { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Section> Section { get; set; }
+        public DbSet<StudentClass> StudentClass { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<StudentClassSchedule>()
+                .HasKey(c => new { c.StudentId, c.ClassScheduleId });
             modelBuilder.Entity<StudentClass>()
                 .HasKey(c => new { c.StudentId, c.ClassId });
             modelBuilder.Entity<StudentAssessment>()
                 .HasKey(c => new { c.AssessmentId, c.StudentId });
-            modelBuilder.Entity<ClassSchedule>()
-                .HasKey(c => new { c.ClassId, c.ScheduleAvailabilityId });
+            //modelBuilder.Entity<ClassSchedule>()
+            //    .HasKey(c => new { c.ClassId, c.ScheduleAvailabilityId });
             base.OnModelCreating(modelBuilder);
         }
     }

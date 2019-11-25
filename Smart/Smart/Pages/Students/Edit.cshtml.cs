@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -44,32 +45,30 @@ namespace Smart.Pages.Students
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Student student)
         {
-            if (!ModelState.IsValid)
+            //var emptyStudent = new Student();
+            if (ModelState.IsValid)
             {
-                return Page();
-            }
-
-            _context.Attach(Student).State = EntityState.Modified;
-
-            try
-            {
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    byte[] pic = null;
+                    using (var fs = files[0].OpenReadStream())
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            fs.CopyTo(ms);
+                            pic = ms.ToArray();
+                        }
+                    }
+                    student.Photo = pic;
+                }
+                _context.Student.Update(student);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudentExists(Student.StudentId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool StudentExists(int id)

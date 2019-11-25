@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.Data;
 
 namespace Smart.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191122222049_LinkedStudentToClassScheduleInseadOfClassAddedSection")]
+    partial class LinkedStudentToClassScheduleInseadOfClassAddedSection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -526,19 +528,6 @@ namespace Smart.Data.Migrations
                     b.ToTable("StudentAssessment");
                 });
 
-            modelBuilder.Entity("Smart.Models.StudentClass", b =>
-                {
-                    b.Property<int>("StudentId");
-
-                    b.Property<int>("ClassId");
-
-                    b.HasKey("StudentId", "ClassId");
-
-                    b.HasIndex("ClassId");
-
-                    b.ToTable("StudentClass");
-                });
-
             modelBuilder.Entity("Smart.Models.StudentClassSchedule", b =>
                 {
                     b.Property<int>("StudentId");
@@ -774,19 +763,6 @@ namespace Smart.Data.Migrations
 
                     b.HasOne("Smart.Models.Student", "Student")
                         .WithMany("StudentAssessments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Smart.Models.StudentClass", b =>
-                {
-                    b.HasOne("Smart.Models.Class", "Class")
-                        .WithMany("StudentClasses")
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Smart.Models.Student", "Student")
-                        .WithMany("StudentClasses")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

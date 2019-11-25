@@ -1,4 +1,4 @@
-﻿@page
+﻿@*@page
 
 @model Smart.Pages.ClassSchedule.IndexModel
 @using Smart.Utility
@@ -24,13 +24,22 @@
     </form>
 
     <form method="post" asp-page-handler="ScheduleClass" id="addClassForm">
-        @if (Model.ClassSelectList != null && Model.ClassSelectList.Count != 0)
+        @if (Model.ClassSelectList != null && Model.ClassSelectList.Count > 0)
         {
             <div class="row">
                 <h6>Select Class:</h6>
             </div>
             <div class="row pb-3">
                 <select name="classId" id="ClassId" asp-items="Model.ClassSelectList" class="form-control"></select>
+            </div>
+        }
+        @if (Model.SectionSelectList != null && Model.SectionSelectList.Count > 0)
+        {
+            <div class="row">
+                <h6>Select Section:</h6>
+            </div>
+            <div class="row pb-3">
+                <select name="sectionId" id="SectionId" asp-items="Model.SectionSelectList" class="form-control"></select>
             </div>
         }
 
@@ -44,14 +53,14 @@
                 {
                     @:</ul>
                     @:</div>
-            @:<div class="pb-3"></div>
+                    @:<div class="pb-3"></div>
                 }
                 @:<div class="card">
-                    @:<div class="card-header">
-                        @:<h5>@DayOfWeek</h5>
-                    @:</div>
-                    @:<ul class="list-group list-group-flush">
-}
+                @:<div class="card-header">
+                    @:<h5>@DayOfWeek</h5>
+                @:</div>
+                @:<ul class="list-group list-group-flush">
+            }
             <li class="list-group-item">
                 <div class="d-inline">
                     @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
@@ -68,65 +77,78 @@
                         {
                             @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
                             {
-                                @:<li class="list-group-item scheduledClass @c.ClassId">
-                                @:<div class="offset-1">
-                                    @c.Course.Name
-                                    <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
+                                    @:<div class="offset-1">
+                                        @if (cs.Section != null)
+                                        {
+                                            @(c.Course.Name + " - " + cs.Section.Name)
+                                        }
+                                        else
+                                        {
+                                            @c.Course.Name
+                                        }
+                                        <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
                                     @:</div>
                                 @:</li>
-                        }
+                            }
                         }
                     }
-
                 }
             </li>
-          }
-
-@{
-@:</ul>
+        }
+    @{ 
+        @:</ul>
         @:</div>
         <div class="row justify-content-center">
             <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
         </div>
-        }
-        </form>
-        </div>
+    }
+    </form>
+</div>
 
-        @section Scripts{
-            <script>
-                $(document).ready(function () {
-                    $('#TermId').change(function () {
-                        $('#TermForm').submit();
-                    });
-                    $(window).scroll(function () {
-                        var docHeight = $(document).height();
-                        var toTop = $(window).scrollTop();
-                        var windowHeight = window.innerHeight
-                            || document.documentElement.clientHeight
-                            || document.body.clientHeight;
-                        var position = toTop + windowHeight;
-                        if ((docHeight - position) < 100) {
-                            $('#saveBtn').removeClass('fixed-bottom');
-                        }
-                        else if ((docHeight - position) > 150) {
-                            if (!$('#saveBtn').hasClass('fixed-bottom')) {
-                                $('#saveBtn').addClass('fixed-bottom');
-                            }
-                        }
-                    });
-                    $('.checkBox').each(function () {
-                        $(this).prop('checked', false);
-                    });
-                    $('#ClassId').change(function () {
-                        $(".scheduledClass").each(function () {
-                            if ($(this).hasClass($('#ClassId').val())) {
-                                $(this).css("background-color", "#85dcff");
-                            }
-                            else {
-                                $(this).css("background-color", "");
-                            }
-                        })
-                    })
-                });
-            </script>
-        }
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#TermId').change(function () {
+                $('#TermForm').submit();
+            });
+            $(window).scroll(function () {
+                var docHeight = $(document).height();
+                var toTop = $(window).scrollTop();
+                var windowHeight = window.innerHeight
+                    || document.documentElement.clientHeight
+                    || document.body.clientHeight;
+                var position = toTop + windowHeight;
+                if ((docHeight - position) < 100) {
+                    $('#saveBtn').removeClass('fixed-bottom');
+                }
+                else if ((docHeight - position) > 150) {
+                    if (!$('#saveBtn').hasClass('fixed-bottom')) {
+                        $('#saveBtn').addClass('fixed-bottom');
+                    }
+                }
+            });
+            $('.checkBox').each(function () {
+                $(this).prop('checked', false);
+            });
+            function highlightSelected () {
+                if ($(this).hasClass("C" + $('#ClassId').val())) {
+                    $(this).css("background-color", "#85dcff");
+                    if ($(this).hasClass("S" + $('#SectionId').val())) {
+                        $(this).css("border", "5px solid #00A8F6")
+                    }
+                }
+                else {
+                    $(this).css("background-color", "");
+                    $(this).css("border", "")
+                }
+            }
+            $('#ClassId').change(function () {
+                $(".scheduledClass").each(highlightSelected);
+            });
+            $('#SectionId').change(function () {
+                $(".scheduledClass").each(highlightSelected);
+            });
+        });
+    </script>
+}*@

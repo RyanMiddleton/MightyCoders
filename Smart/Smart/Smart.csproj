@@ -16,6 +16,8 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20191118042703_LinkedStudentClassTableAddedCollectionLinks.cs" />
     <Compile Remove="Data\Migrations\20191118042703_LinkedStudentClassTableAddedCollectionLinks.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191122221815_LinkedStudentToClassScheduleInseadOfClassAddedSection.cs" />
+    <Compile Remove="Data\Migrations\20191122221815_LinkedStudentToClassScheduleInseadOfClassAddedSection.Designer.cs" />
   </ItemGroup>
 
 
