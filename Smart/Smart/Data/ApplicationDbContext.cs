@@ -34,11 +34,14 @@ namespace Smart.Data
         public DbSet<ScheduleAvailability> ScheduleAvailability { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Section> Section { get; set; }
+        public DbSet<StudentClass> StudentClass { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StudentClassSchedule>()
                 .HasKey(c => new { c.StudentId, c.ClassScheduleId });
+            modelBuilder.Entity<StudentClass>()
+                .HasKey(c => new { c.StudentId, c.ClassId });
             modelBuilder.Entity<StudentAssessment>()
                 .HasKey(c => new { c.AssessmentId, c.StudentId });
             //modelBuilder.Entity<ClassSchedule>()

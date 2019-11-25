@@ -564,6 +564,36 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding StudentClassSchedule End
+
+            // Seeding StudentClass Start
+            var studentClasses = new StudentClass[]
+            {
+                // public classes
+                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[4].StudentId },
+                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[5].StudentId },
+                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[6].StudentId },
+                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[6].StudentId },
+                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[5].StudentId },
+                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[4].StudentId },
+                new StudentClass { ClassId = classes[27].ClassId, StudentId = students[1].StudentId },
+                new StudentClass { ClassId = classes[28].ClassId, StudentId = students[2].StudentId },
+                new StudentClass { ClassId = classes[29].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[30].ClassId, StudentId = students[3].StudentId },
+                new StudentClass { ClassId = classes[31].ClassId, StudentId = students[2].StudentId }
+            };
+
+            foreach (StudentClass s in studentClasses)
+            {
+                context.StudentClass.Add(s);
+            }
+            context.SaveChanges();
+            // Seeding StudentClass End
         }
     }
 } 
