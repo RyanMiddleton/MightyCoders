@@ -1,0 +1,57 @@
+﻿@page
+@model Smart.Pages.Rating.RatingModel
+@{
+    ViewData["Title"] = "Rating";
+}
+
+<div>
+    <h4>Student Rating</h4>
+
+    <div class="row">
+        <div class="col-2 font-weight-bold">
+            @Html.DisplayNameFor(model => model.Student.FullName)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.Student.FullName)
+        </div>
+    </div>
+    <br />
+    <form method="post">
+        <div class="col-12">
+            @foreach (var item in Model.RatingCirterium)
+            {
+                <div class="font-weight-bold" style="margin-bottom: 5px">
+                    @item.Title out of (@item.MaxScore):
+                    <input type="text" name="inputValues" class="control-label" />
+                </div>
+                <br />
+            }
+
+            @*Comments Box*@
+            <div class="col-6">
+                <div class="form-group font-weight-bold" style="margin-top: 10px">
+                    <label asp-for="ApplicantRating.Comment" class="control-label"></label>
+                    @Html.TextAreaFor(model => model.ApplicantRating.Comment, 6, 20, htmlAttributes: new { style = "width: 100%; max-width: 100%;" })
+                </div>
+            </div>
+
+            @*Term Select List
+                <div class="font-weight-bold">
+                    Term:
+                    <select class="control-label col-12" asp-for="TermId" asp-items="@(new SelectList(terms, "Value", "Text"))"></select>
+                </div>*@
+
+            <br />
+
+            <div class="row">
+                <div class="col-3">
+                    <input type="submit" class="btn btn-info form-control" value="Update" />
+                </div>
+                <div class="col-3">
+                    <a asp-page="Index" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

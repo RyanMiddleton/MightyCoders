@@ -17,6 +17,7 @@ namespace Smart.Models
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Student Name")]
         public string FullName
         {
             get
