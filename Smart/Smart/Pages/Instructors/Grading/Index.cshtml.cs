@@ -39,7 +39,7 @@ namespace Smart.Pages.Instructors.Grading
             GradingData.Classes = await _context.Class.ToListAsync();
             GradingData.StudentAssessments = await _context.StudentAssessment.ToListAsync();
             GradingData.Assessments = await _context.Assessment.ToListAsync();
-            GradingData.Students = await _context.StudentClass.ToListAsync();
+            GradingData.Students = await _context.Student.ToListAsync();
 
             Classes = await _context.Class.Where(c => c.Assessments.Count > 0)
                                 .Include(c => c.Term)
@@ -75,7 +75,7 @@ namespace Smart.Pages.Instructors.Grading
                 {
 
                     Assessment assessment = GradingData.Assessments.Where(a => a.AssessmentId == AssessmentId).Single();
-                    GradingData.Students = _context.StudentClass.Include(s => s.Student)
+                    GradingData.Students = _context.Student.Include(s => s.Student)
                         .Where(s => s.ClassId == assessment.ClassId).ToList();
                     GradingData.StudentAssessments = assessment.StudentAssessments.ToList();
                 }

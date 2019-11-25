@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     
-    <div class="col-md-4">
+    <div class="col-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -35,65 +35,66 @@
                 <span asp-validation-for="Student.Address" class="text-danger"></span>
             </div>
 
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Student.Village" class="control-label"></label>
+                    <input asp-for="Student.Village" class="form-control" />
+                    <span asp-validation-for="Student.Village" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.GpsLongitude" class="control-label"></label>
+                    <input asp-for="Student.GpsLongitude" class="form-control" />
+                    <span asp-validation-for="Student.GpsLongitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.GpsLatitude" class="control-label"></label>
+                    <input asp-for="Student.GpsLatitude" class="form-control" />
+                    <span asp-validation-for="Student.GpsLatitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.PublicSchoolLevel" class="control-label"></label>
+                    <input asp-for="Student.PublicSchoolLevel" class="form-control" />
+                    <span asp-validation-for="Student.PublicSchoolLevel" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Student.GuardianName" class="control-label"></label>
+                    <input asp-for="Student.GuardianName" class="form-control" />
+                    <span asp-validation-for="Student.GuardianName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.GuardianType" class="control-label"></label>
+                    <input asp-for="Student.GuardianType" class="form-control" />
+                    <span asp-validation-for="Student.GuardianType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.Phone" class="control-label"></label>
+                    <input asp-for="Student.Phone" class="form-control" />
+                    <span asp-validation-for="Student.Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.Photo" class="control-label"></label>
+                    <input asp-for="Student.Photo" class="form-control" />
+                    <span asp-validation-for="Student.Photo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Student.StudentStatus" class="control-label"></label>
+                    <select asp-for="Student.StudentStatusId" class="form-control"
+                            asp-items="@Model.StatusNameSL">
+                    </select>
+                    <span asp-validation-for="Student.StudentStatusId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                    <a asp-page="Index" class="btn btn-info">Back To List</a>
+                </div>
+            </div>
+        </form>
     </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Student.Village" class="control-label"></label>
-                <input asp-for="Student.Village" class="form-control" />
-                <span asp-validation-for="Student.Village" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.GpsLongitude" class="control-label"></label>
-                <input asp-for="Student.GpsLongitude" class="form-control" />
-                <span asp-validation-for="Student.GpsLongitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.GpsLatitude" class="control-label"></label>
-                <input asp-for="Student.GpsLatitude" class="form-control" />
-                <span asp-validation-for="Student.GpsLatitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.PublicSchoolLevel" class="control-label"></label>
-                <input asp-for="Student.PublicSchoolLevel" class="form-control" />
-                <span asp-validation-for="Student.PublicSchoolLevel" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Student.GuardianName" class="control-label"></label>
-                <input asp-for="Student.GuardianName" class="form-control" />
-                <span asp-validation-for="Student.GuardianName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.GuardianType" class="control-label"></label>
-                <input asp-for="Student.GuardianType" class="form-control" />
-                <span asp-validation-for="Student.GuardianType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.Phone" class="control-label"></label>
-                <input asp-for="Student.Phone" class="form-control" />
-                <span asp-validation-for="Student.Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.Photo" class="control-label"></label>
-                <input asp-for="Student.Photo" class="form-control" />
-                <span asp-validation-for="Student.Photo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.StudentStatus" class="control-label"></label>
-                <select asp-for="Student.StudentStatusId" class="form-control"
-                        asp-items="@Model.StatusNameSL">
-                </select>
-                <span asp-validation-for="Student.StudentStatusId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <input type="submit" value="Create" class="btn btn-success" />
-                <a asp-page="Index" class="btn btn-info">Back To List</a>
-            </div>
-        </div>
-    </form>
 </div>
 
 @section Scripts {

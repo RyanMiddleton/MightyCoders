@@ -7,6 +7,6 @@ namespace Smart.Models.StudentViewModel
 {
     public class StudentIndexModel
     {
-        public ICollection<Note> Notes 
+        public ICollection<Note> Notes; 
     }
 }

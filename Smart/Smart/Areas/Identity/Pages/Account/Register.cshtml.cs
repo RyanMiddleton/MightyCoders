@@ -75,7 +75,10 @@ namespace Smart.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            string role = Request.Form["UserRole"].ToString();
+            string role1 = Request.Form["UserRole1"].ToString();
+            string role2 = Request.Form["UserRole2"].ToString();
+            string role3 = Request.Form["UserRole3"].ToString();
+            string role4 = Request.Form["UserRole4"].ToString();
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
@@ -88,30 +91,29 @@ namespace Smart.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (role == SD.InstructorUser)
+                    if (role1 == SD.AdminUser)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.AdminUser);
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(returnUrl);
+
+                    }
+
+                    if (role2 == SD.InstructorUser)
                     {
                         await _userManager.AddToRoleAsync(user, SD.InstructorUser);
                     }
-                    else
+
+                    if (role3 == SD.SocialWorkerUser)
                     {
-                        if (role == SD.SocialWorkerUser)
-                        {
-                            await _userManager.AddToRoleAsync(user, SD.SocialWorkerUser);
-                        }
-                        else
-                        {
-                            if (role == SD.RaterUser)
-                            {
-                                await _userManager.AddToRoleAsync(user, SD.RaterUser);
-                            }
-                            else
-                            {
-                                await _userManager.AddToRoleAsync(user, SD.AdminUser);
-                                await _signInManager.SignInAsync(user, isPersistent: false);
-                                return LocalRedirect(returnUrl);
-                            }
-                        }
+                        await _userManager.AddToRoleAsync(user, SD.SocialWorkerUser);
                     }
+
+                    if (role4 == SD.RaterUser)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.RaterUser);
+                    }
+                
 
                     return RedirectToPage("/Users/Index");
                     /*await _userManager.AddToRoleAsync(user, SD.AdminUser);

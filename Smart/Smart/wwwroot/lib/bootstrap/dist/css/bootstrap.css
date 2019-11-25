@@ -2530,35 +2530,71 @@ fieldset:disabled a.btn {
 
 .btn-applicant {
     color: #fff;
+    padding-top: 80px;
+    margin-left: 220px;
+    margin-bottom: 50px;
+    font-size: 24px;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 100px;
-    height: 300px;
-    
+    width: 250px;
+    height: 200px;
 }
 
-.btn-attendance {
+.btn-assessments {
     color: #fff;
+    padding-top: 80px;
+    margin-left: 20px;
+    font-size: 24px;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 200px;
 }
 
 .btn-reports {
     color: #fff;
+    padding-top: 80px;
+    margin-left: 220px;
+    font-size: 24px;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 200px;
 }
 
 .btn-students {
     color: #fff;
+    padding-top: 80px;
+    margin-left: 20px;
+    font-size: 24px;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 200px;
+}
+
+.btn-applicant:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-attendance:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-reports:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-students:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
 }
 
 .btn-info:hover {
