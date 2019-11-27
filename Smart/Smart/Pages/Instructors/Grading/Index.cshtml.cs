@@ -91,8 +91,6 @@ namespace Smart.Pages.Instructors.Grading
 
         public JsonResult OnPost(int? AssessId)
         {
-                _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
-                _context.SaveChanges();
                 MemoryStream stream = new MemoryStream();
                 Request.Body.CopyTo(stream);
                 stream.Position = 0;
@@ -114,6 +112,19 @@ namespace Smart.Pages.Instructors.Grading
                             }
                             ); ;
                         }
+
+                    var assess = _context.Assessment.Where(a => a.AssessmentId == AssessId).Single();
+
+                    foreach (StudentAssessment student in lststudass)
+                    {
+                        if (student.PointsAwarded > assess.PointsPossible)
+                        {
+                            return new JsonResult("More points than points possible for the assessment has been given.");
+                        }
+                    }
+
+                    _context.StudentAssessment.RemoveRange(_context.StudentAssessment.Where(s => s.AssessmentId == AssessId));
+                    _context.SaveChanges();
 
                         foreach(StudentAssessment student in lststudass)
                         {

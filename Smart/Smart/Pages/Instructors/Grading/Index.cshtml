@@ -91,7 +91,7 @@
                 </tr>
             </tfoot>*@
         </table>
-        <input type="button" id="btnSave" value="Save All" />
+        <input type="button" class="btn btn-success text-white" id="btnSave" value="Save All" />
     </div>
         }
 
@@ -217,6 +217,19 @@
                             StudentAssessment.StudentId = row.find("TD").eq(0).find('input').val();
                             StudentAssessment.PointsAwarded = row.find("TD").eq(1).find('input').val();
                             StudentAssessment.Comments = row.find("TD").eq(2).find('input').val();
+
+                            if (Number.isInteger(StudentAssessment.PointsAwarded) == false)
+                            {
+                                alert("Points must be a number.");
+                                throw ("Points must be a number.");
+                            }
+
+                            if (StudentAssessment.StudentId == "" || StudentAssessment.PointsAwarded == "" || StudentAssessment.Comments == "")
+                            {
+                                alert("Student is missing an input.");
+                                throw ("Student is missing an input.");
+                            }
+
                             assessments.push(StudentAssessment);
                         });
 
