@@ -13,31 +13,33 @@
     </head>
     <body>
         <h1>Grade Book</h1>
-        <form method="get" id="ClassForm">
-            <div class="row">
-                <label>Class:</label>
-                <select id="ClassId" class="form-control" name="classId" asp-items="Model.Classes">
-                    <option value="">Select Class</option>
-                </select>
-            </div>
-        </form>
-
-        @if (Model.clsId != 0)
+        @if (Model.AssessmentSelected == false)
         {
-            <form method="get" id="AssessmentForm">
+            <form method="get" id="ClassForm">
                 <div class="row">
-                    <label>Assessment:</label>
-                    <select id="AssessmentId" class="form-control" name="selectedAssessId" asp-items="Model.Assessments">
-                        <option value="">Select Assessment</option>
+                    <label>Class:</label>
+                    <select id="ClassId" class="form-control" name="classId" asp-items="Model.Classes">
+                        <option value="">Select Class</option>
                     </select>
                 </div>
             </form>
         }
-        <br />
-        @if (Model.AssessmentId != 0)
-        {
-    <div class="row">
-        <h3>Student Assessments</h3>
+
+            @if (Model.clsId != 0)
+            {
+                <form method="get" id="AssessmentForm">
+                    <div class="row">
+                        <label>Assessment:</label>
+                        <select id="AssessmentId" class="form-control" name="selectedAssessId" asp-items="Model.Assessments">
+                            <option value="">Select Assessment</option>
+                        </select>
+                    </div>
+                </form>
+            }
+            <br />
+            @if (Model.AssessmentId != 0)
+            {
+        <h3>Student Assessments For @Model.AssessmentName</h3>
         <table class="table" id="tblStudents">
             <thead>
                 <tr>
@@ -92,70 +94,70 @@
             </tfoot>*@
         </table>
         <input type="button" class="btn btn-success text-white" id="btnSave" value="Save All" />
-    </div>
-        }
+        <a class="btn btn-primary text-white" id="btnBack" href="./Grading/Index">Select New Class</a>
+            }
 
-        @*@if (Model.AssessmentId != 0)
-        {
-            <h3>Student Assessments</h3>
-            <table class="table" id="tblStudents">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Points</th>
-                        <th>Comments</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.GradingData.StudentAssessments)
-                    {
+            @*@if (Model.AssessmentId != 0)
+            {
+                <h3>Student Assessments</h3>
+                <table class="table" id="tblStudents">
+                    <thead>
                         <tr>
-                            <td>
-                                @item.StudentId
-                            </td>
-                            <td>
-                                @item.PointsAwarded
-                            </td>
-                            <td>
-                                @item.Comments
-                            </td>
-                            <td>
-                                <input type="button" value="Remove" onclick="Remove(this)" />
-                            </td>
+                            <th>Student ID</th>
+                            <th>Points</th>
+                            <th>Comments</th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td><input type="text" id="txtId" /></td>
-                        <td><input type="text" id="txtPoints" /></td>
-                        <td><input type="text" id="txtComments" /></td>
-                        <td><input type="button" class="btnAdd" value="Add" /></td>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.GradingData.StudentAssessments)
+                        {
+                            <tr>
+                                <td>
+                                    @item.StudentId
+                                </td>
+                                <td>
+                                    @item.PointsAwarded
+                                </td>
+                                <td>
+                                    @item.Comments
+                                </td>
+                                <td>
+                                    <input type="button" value="Remove" onclick="Remove(this)" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><input type="text" id="txtId" /></td>
+                            <td><input type="text" id="txtPoints" /></td>
+                            <td><input type="text" id="txtComments" /></td>
+                            <td><input type="button" class="btnAdd" value="Add" /></td>
+                        </tr>
+                    </tfoot>
+                </table>
 
-        }*@
+            }*@
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
-        @section Scripts{
-            <script>
-                $(document).ready(function () {
-                    $('#ClassId').change(function () {
-                        $('#ClassForm').submit();
+            @section Scripts{
+                <script>
+                    $(document).ready(function () {
+                        $('#ClassId').change(function () {
+                            $('#ClassForm').submit();
+                        });
                     });
-                });
 
-                $(document).ready(function () {
-                    $('#AssessmentId').change(function () {
-                        $('#AssessmentForm').submit();
+                    $(document).ready(function () {
+                        $('#AssessmentId').change(function () {
+                            $('#AssessmentForm').submit();
+                        });
                     });
-                });
-            </script>
-            <script type="text/javascript">
+                </script>
+                <script type="text/javascript">
                     function Remove(button) {
                         //Determine the reference of the Row using the Button.
                         var row = $(button).closest("TR");
@@ -218,12 +220,6 @@
                             StudentAssessment.PointsAwarded = row.find("TD").eq(1).find('input').val();
                             StudentAssessment.Comments = row.find("TD").eq(2).find('input').val();
 
-                            if (Number.isInteger(StudentAssessment.PointsAwarded) == false)
-                            {
-                                alert("Points must be a number.");
-                                throw ("Points must be a number.");
-                            }
-
                             if (StudentAssessment.StudentId == "" || StudentAssessment.PointsAwarded == "" || StudentAssessment.Comments == "")
                             {
                                 alert("Student is missing an input.");
@@ -254,53 +250,53 @@
                         });
                     });
                 });
-            </script>
-        }
+                </script>
+            }
 
-        @*<p>
-            <a asp-page="Create">Add New Grade</a>
-        </p>*@
+            @*<p>
+                <a asp-page="Create">Add New Grade</a>
+            </p>*@
 
-        @*<table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Class ID
-                    </th>
-                    <th>
-                        Assessment Title
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Points Possible
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.GradingData.Assessments)
-        {
+            @*<table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Class.ClassId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PointsPossible)
-                        </td>
-                        <td>
-                            <a asp-page="./Index" asp-route-assessmentId="@item.AssessmentId">View Assessments</a>
-                        </td>
+                        <th>
+                            Class ID
+                        </th>
+                        <th>
+                            Assessment Title
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Points Possible
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>*@
-    </body>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GradingData.Assessments)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Class.ClassId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PointsPossible)
+                            </td>
+                            <td>
+                                <a asp-page="./Index" asp-route-assessmentId="@item.AssessmentId">View Assessments</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+        </body>
 </html>
