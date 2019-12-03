@@ -66,6 +66,5 @@ namespace Smart.Pages.ScheduleAvailabilities
             }
             return await OnGetAsync();
         }
-        
     }
 }
