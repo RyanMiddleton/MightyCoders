@@ -18,6 +18,7 @@ namespace Smart.Models
         public int TimeOfYear { get; set; } 
         public virtual ICollection<Class> Classes { get; set; }
         public virtual ICollection<ApplicantRating> ApplicantRatings { get; set; }
+        public virtual ICollection<ScheduleAvailability> ScheduleAvailabilities { get; set; }
 
       
     }

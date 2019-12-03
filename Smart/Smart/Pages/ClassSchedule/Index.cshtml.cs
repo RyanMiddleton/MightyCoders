@@ -36,11 +36,6 @@ namespace Smart.Pages.ClassSchedule
 
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
-            ScheduleAvailabilities = await _db.ScheduleAvailability
-                                              .OrderBy(t => t.StartTime)
-                                              .OrderBy(s => s.DayOfWeek)
-                                              .Include(sa => sa.ClassSchedules)
-                                              .ToListAsync();
             Terms = await _db.Term
                              .Select(t => new SelectListItem
                              {
@@ -53,6 +48,12 @@ namespace Smart.Pages.ClassSchedule
             {
                 var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
                 selectedTerm.Selected = true;
+                ScheduleAvailabilities = await _db.ScheduleAvailability
+                                                  .Where(sa => sa.TermId == termId)
+                                                  .OrderBy(t => t.StartTime)
+                                                  .OrderBy(s => s.DayOfWeek)
+                                                  .Include(sa => sa.ClassSchedules)
+                                                  .ToListAsync();
                 Classes = await _db.Class
                                    .Include(c => c.Course)
                                    .Include(c => c.ClassSchedules)

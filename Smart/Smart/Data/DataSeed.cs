@@ -217,14 +217,14 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding File End
-            
+
             // Seeding NoteType Start
             var noteTypes = new NoteType[]
             {
-                new NoteType { Description = "Application Process" },
-                new NoteType { Description = "Instructor Note" },
-                new NoteType { Description = "SocialWorker Note" },
-                new NoteType { Description = "Rating Note" }
+                new NoteType { Description = "ApplicationProcess" },
+                new NoteType { Description = "InstructorNote" },
+                new NoteType { Description = "SocialWorkerNote" },
+                new NoteType { Description = "Rating" }
             };
 
             foreach (NoteType s in noteTypes)
@@ -435,45 +435,168 @@ namespace Smart.Data
             // Seeding Schedule Start
             var scheduleAvailabilities = new ScheduleAvailability[]
             {
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                // term[0]
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[0].TermId },
 
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[0].TermId },
 
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[0].TermId },
 
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[0].TermId },
 
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00") },
-                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00") }
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[0].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[0].TermId },
+
+                // term[1]
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[1].TermId },
+                //new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[1].TermId },
+                //new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[1].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[1].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[1].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[1].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[1].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[1].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[1].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[1].TermId },
+
+                // term[2]
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[2].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[2].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[2].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[2].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[2].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[2].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[2].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[2].TermId },
+                //new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[2].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[2].TermId },
+                new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[2].TermId },
+
+                // term[3]
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 1, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[3].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 2, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[3].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 3, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[3].TermId },
+
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[3].TermId },
+                new ScheduleAvailability { DayOfWeek = 4, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[3].TermId },
+
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("08:00:00"), EndTime = DateTime.Parse("09:00:00"), TermId = terms[3].TermId }, new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("09:00:00"), EndTime = DateTime.Parse("10:00:00"), TermId = terms[3].TermId },
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("10:00:00"), EndTime = DateTime.Parse("11:00:00"), TermId = terms[3].TermId },
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("11:00:00"), EndTime = DateTime.Parse("12:00:00"), TermId = terms[3].TermId },
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("12:00:00"), EndTime = DateTime.Parse("13:00:00"), TermId = terms[3].TermId },
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("13:00:00"), EndTime = DateTime.Parse("14:00:00"), TermId = terms[3].TermId },
+                //new ScheduleAvailability { DayOfWeek = 5, StartTime = DateTime.Parse("14:00:00"), EndTime = DateTime.Parse("15:00:00"), TermId = terms[3].TermId }
             };
 
             foreach (ScheduleAvailability s in scheduleAvailabilities)
@@ -564,36 +687,6 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding StudentClassSchedule End
-
-            // Seeding StudentClass Start
-            var studentClasses = new StudentClass[]
-            {
-                // public classes
-                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[21].ClassId, StudentId = students[4].StudentId },
-                new StudentClass { ClassId = classes[22].ClassId, StudentId = students[5].StudentId },
-                new StudentClass { ClassId = classes[23].ClassId, StudentId = students[6].StudentId },
-                new StudentClass { ClassId = classes[24].ClassId, StudentId = students[6].StudentId },
-                new StudentClass { ClassId = classes[25].ClassId, StudentId = students[5].StudentId },
-                new StudentClass { ClassId = classes[26].ClassId, StudentId = students[4].StudentId },
-                new StudentClass { ClassId = classes[27].ClassId, StudentId = students[1].StudentId },
-                new StudentClass { ClassId = classes[28].ClassId, StudentId = students[2].StudentId },
-                new StudentClass { ClassId = classes[29].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[30].ClassId, StudentId = students[3].StudentId },
-                new StudentClass { ClassId = classes[31].ClassId, StudentId = students[2].StudentId }
-            };
-
-            foreach (StudentClass s in studentClasses)
-            {
-                context.StudentClass.Add(s);
-            }
-            context.SaveChanges();
-            // Seeding StudentClass End
         }
     }
 } 
