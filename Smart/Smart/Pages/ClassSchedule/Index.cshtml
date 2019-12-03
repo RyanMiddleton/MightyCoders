@@ -43,66 +43,69 @@
             </div>
         }
 
-        @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)
-        {
-            @if (currentDay != Model.ScheduleAvailabilities[i].DayOfWeek)
+        @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
+        { 
+            @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)
             {
-                SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)Model.ScheduleAvailabilities[i].DayOfWeek;
-                currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
-                @if (currentDay < 8)
+                @if (currentDay != Model.ScheduleAvailabilities[i].DayOfWeek)
                 {
-                    @:</ul>
-                    @:</div>
-                    @:<div class="pb-3"></div>
-                }
-                @:<div class="card">
-                @:<div class="card-header">
-                    @:<h5>@DayOfWeek</h5>
-                @:</div>
-                @:<ul class="list-group list-group-flush">
-            }
-            <li class="list-group-item">
-                <div class="d-inline">
-                    @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
-                </div>
-                <div class="float-right d-inline">
-                    <input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
-                    <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
-                </div>
-                @if (Model.Classes != null)
-                {
-                    @foreach (var c in Model.Classes)
+                    SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)Model.ScheduleAvailabilities[i].DayOfWeek;
+                    currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
+                    @if (currentDay < 8)
                     {
-                        @foreach (var cs in c.ClassSchedules)
+                        @:</ul>
+                        @:</div>
+                        @:<div class="pb-3"></div>
+                    }
+                    @:<div class="card">
+                    @:<div class="card-header">
+                        @:<h5>@DayOfWeek</h5>
+                    @:</div>
+                    @:<ul class="list-group list-group-flush">
+                }
+                <li class="list-group-item">
+                    <div class="d-inline">
+                        @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
+                    </div>
+                    <div class="float-right d-inline">
+                        <input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
+                        <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
+                    </div>
+                    @if (Model.Classes != null)
+                    {
+                        @foreach (var c in Model.Classes)
                         {
-                            @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                            @foreach (var cs in c.ClassSchedules)
                             {
-                                @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
-                                    @:<div class="offset-1">
-                                        @if (cs.Section != null)
-                                        {
-                                            @(c.Course.Name + " - " + cs.Section.Name)
-                                        }
-                                        else
-                                        {
-                                            @c.Course.Name
-                                        }
-                                        <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
-                                    @:</div>
-                                @:</li>
+                                @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                                {
+                                    @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
+                                        @:<div class="offset-1">
+                                            @if (cs.Section != null)
+                                            {
+                                                @(c.Course.Name + " - " + cs.Section.Name)
+                                            }
+                                            else
+                                            {
+                                                @c.Course.Name
+                                            }
+                                            <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                        @:</div>
+                                    @:</li>
+                                }
                             }
                         }
                     }
+                </li>
                 }
-            </li>
         }
-    @{ 
-        @:</ul>
-        @:</div>
-        <div class="row justify-content-center">
-            <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
-        </div>
-    }
+        @{ 
+            @:</ul>
+            @:</div>
+            <div class="row justify-content-center">
+                <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
+            </div>
+        }
     </form>
 </div>
 
