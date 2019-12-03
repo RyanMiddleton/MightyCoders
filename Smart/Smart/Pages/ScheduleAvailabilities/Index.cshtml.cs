@@ -32,25 +32,30 @@ namespace Smart.Pages.ScheduleAvailabilities
 
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
-            Terms = await _db.Term
-                             .Select(t => new SelectListItem
-                             {
-                                 Value = t.TermId.ToString(),
-                                 Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
-                             })
-                             .ToListAsync();
-            Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
-            if (termId != null)
+            var terms = await _db.Term
+                                 .OrderBy(t => t.StartDate)
+                                 .ToListAsync();
+            if (termId == null)
             {
-                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
-                selectedTerm.Selected = true;
-                TermId = (int)termId;
-                ScheduleAvailabilities = await _db.ScheduleAvailability
-                                                  .Where(sa => sa.TermId == termId)
-                                                  .OrderBy(t => t.StartTime)
-                                                  .OrderBy(s => s.DayOfWeek)
-                                                  .ToListAsync();
+                // default to the next term
+                termId = terms.Where(t => t.StartDate > DateTime.Now).First().TermId;
             }
+            Terms = terms.ConvertAll(t =>
+                             {
+                                 return new SelectListItem()
+                                 {
+                                     Value = t.TermId.ToString(),
+                                     Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+                                 };
+                             });
+            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
+            selectedTerm.Selected = true;
+            TermId = (int)termId;
+            ScheduleAvailabilities = await _db.ScheduleAvailability
+                                              .Where(sa => sa.TermId == termId)
+                                              .OrderBy(t => t.StartTime)
+                                              .OrderBy(s => s.DayOfWeek)
+                                              .ToListAsync();
             return Page();
         }
 

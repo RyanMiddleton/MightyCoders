@@ -7,63 +7,66 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+    <div class="container">
 
-    <div class="row py-3">
-        <h2>Schedule Availablility</h2>
-    </div>
-    <form method="get" id="TermForm">
-        <div class="row pb-3">
-            <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+        <div class="row py-3">
+            <h2>Schedule Availablility</h2>
         </div>
-    </form>
-    @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
-    {
-        <form method="post">
-            <div class="row py-3">
-                <h5>Add New Availability:</h5>
-            </div>
-            <div class="row py-3">
-                <div class="pr-1">
-                    <label asp-for="ScheduleAvailability.DayOfWeek"></label>
-                </div>
-                <div class="pr-2">
-                    <select asp-for="ScheduleAvailability.DayOfWeek" asp-items="Html.GetEnumSelectList<SD.EDayOfWeek>()"></select>
-                </div>
-                <div class="pr-1">
-                    <label asp-for="ScheduleAvailability.StartTime"></label>
-                </div>
-                <div class="pr-2">
-                    <input asp-for="ScheduleAvailability.StartTime" />
-                </div>
-                <div class="pr-1">
-                    <label asp-for="ScheduleAvailability.EndTime"></label>
-                </div>
-                <div class="pr-2">
-                    <input asp-for="ScheduleAvailability.EndTime" />
-                </div>
-                <input hidden asp-for="ScheduleAvailability.TermId" value="TermId" />
-                <div>
-                    <input class="btn btn-primary" type="submit" value="Save" />
-                </div>
+        <div class="row">
+            <h6>Select Term:</h6>
+        </div>
+        <form method="get" id="TermForm">
+            <div class="row pb-3">
+                <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
             </div>
         </form>
-        var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
-        var dayAvailability = new List<ScheduleAvailability>();
-        @foreach (var sa in Model.ScheduleAvailabilities)
+        @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
         {
-            if (currentDay != sa.DayOfWeek)
+            <form method="post">
+                <div class="row py-3">
+                    <h5>Add New Availability:</h5>
+                </div>
+                <div class="row py-3">
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.DayOfWeek"></label>
+                    </div>
+                    <div class="pr-2">
+                        <select asp-for="ScheduleAvailability.DayOfWeek" asp-items="Html.GetEnumSelectList<SD.EDayOfWeek>()"></select>
+                    </div>
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.StartTime"></label>
+                    </div>
+                    <div class="pr-2">
+                        <input asp-for="ScheduleAvailability.StartTime" />
+                    </div>
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.EndTime"></label>
+                    </div>
+                    <div class="pr-2">
+                        <input asp-for="ScheduleAvailability.EndTime" />
+                    </div>
+                    <input hidden asp-for="ScheduleAvailability.TermId" value="TermId" />
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Save" />
+                    </div>
+                </div>
+            </form>
+            var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
+            var dayAvailability = new List<ScheduleAvailability>();
+            @foreach (var sa in Model.ScheduleAvailabilities)
             {
-                <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
-                currentDay = sa.DayOfWeek;
-                dayAvailability.Clear();
+                if (currentDay != sa.DayOfWeek)
+                {
+                    <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
+                    currentDay = sa.DayOfWeek;
+                    dayAvailability.Clear();
+                }
+                dayAvailability.Add(sa);
             }
-            dayAvailability.Add(sa);
+            <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
         }
-        <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
-    }
 
-</div>
+    </div>
 @section Scripts{
     <script>
         $(document).ready(function () {
