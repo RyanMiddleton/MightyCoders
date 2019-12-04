@@ -41,4 +41,16 @@
     <a asp-page="Index">Back to List</a>
 </div>
 
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            toolbarButtons: [['undo', 'redo'], ['paragraphFormat'], ['bold', 'italic'],
+            ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
+            ['formatOL', 'formatUL'], ['indent', 'outdent']],
+            menubar: "file edit format"
+        })
+    </script>
 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
