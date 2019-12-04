@@ -25,6 +25,10 @@ namespace Smart.Models
         public int NoteTypeId { get; set; }
         [Display(Name = "Note Type")]
         public NoteType NoteType { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Date Created")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime CreationDate { get; set; }
         public Boolean Disabled { get; set; }
 
         public string Text { get; set; }

@@ -20,41 +20,46 @@
         {
             <div class="row" id="menu-wrapper">
                 <partial name="_NotePartialView"
-                         model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
+                         model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description) && item.Disabled.Equals(false))" />
             </div>
         }
 
-        @if (User.IsInRole(SD.InstructorUser))
+        else
         {
-            if (item.NoteType.Description.Equals("Instructor Note"))
+            @if (User.IsInRole(SD.InstructorUser))
             {
-                <div class="row" id="menu-wrapper">
-                    <partial name="_NotePartialView"
-                             model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
-                </div>
+                if (item.NoteType.Description.Equals("Instructor Note"))
+                {
+                    <div class="row" id="menu-wrapper">
+                        <partial name="_NotePartialView"
+                                 model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description) && item.Disabled.Equals(false))" />
+                    </div>
+                }
+            }
+
+            @if (User.IsInRole(SD.SocialWorkerUser))
+            {
+                if (item.NoteType.Description.Equals("SocialWorker Note"))
+                {
+                    <div class="row" id="menu-wrapper">
+                        <partial name="_NotePartialView"
+                                 model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description) && item.Disabled.Equals(false))" />
+                    </div>
+                }
+            }
+
+            @if (User.IsInRole(SD.RaterUser))
+            {
+                if (item.NoteType.Description.Equals("Rating Note"))
+                {
+                    <div class="row" id="menu-wrapper">
+                        <partial name="_NotePartialView"
+                                 model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description) && item.Disabled.Equals(false))" />
+                    </div>
+                }
             }
         }
 
-        @if (User.IsInRole(SD.SocialWorkerUser))
-        {
-            if (item.NoteType.Description.Equals("SocialWorker Note"))
-            {
-                <div class="row" id="menu-wrapper">
-                    <partial name="_NotePartialView"
-                             model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
-                </div>
-            }
-        }
 
-        @if (User.IsInRole(SD.RaterUser))
-        {
-            if (item.NoteType.Description.Equals("Rating Note"))
-            {
-                <div class="row" id="menu-wrapper">
-                    <partial name="_NotePartialView"
-                             model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
-                </div>
-            }
-        }
     }
 </div>

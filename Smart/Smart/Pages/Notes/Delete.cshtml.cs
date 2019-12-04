@@ -54,8 +54,7 @@ namespace Smart.Pages.Notes
 
             if (Note != null)
             {
-                _context.Note.Remove(Note);
-                await _context.SaveChangesAsync();
+                Note.Disabled = true;
             }
 
             return RedirectToPage("./Index");

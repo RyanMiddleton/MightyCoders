@@ -39,6 +39,11 @@ namespace Smart.Pages.Notes
                 return Page();
             }
 
+            if (Note != null)
+            {
+                Note.CreationDate = DateTime.Now;
+            }
+
             _context.Note.Add(Note);
             await _context.SaveChangesAsync();
 

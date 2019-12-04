@@ -1,4 +1,5 @@
 ﻿@using Smart.Models
+@using System.Security.Claims
 @model IEnumerable<Note>
 
 @if (Model.Count() > 0)
@@ -29,25 +30,57 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Student.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Student.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NoteType.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Text)
-                        </td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
-                            <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>
-                        </td>
-                    </tr>
+                    @if (item.Disabled.Equals(false))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Student.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Student.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoteType.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreationDate)
+                            </td>
+                            <td>
+
+                                @{var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);}
+                                @if (item.UserId.Equals(userId))
+                                {
+                                    <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a>
+                                    <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a>
+                                    <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>}
+                                else
+                                {
+                                    <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    else if (item.Disabled.Equals(true))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Student.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Student.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NoteType.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreationDate)
+                            </td>
+                            <td>
+                                    <a asp-page="./Edit" asp-route-id="@item.NoteId">Restore</a>
+                                    <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
