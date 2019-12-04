@@ -15,15 +15,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Note.StudentId" class="control-label"></label>
-                <select asp-for="Note.StudentId" class ="form-control" asp-items="ViewBag.StudentId"></select>
+                <select asp-for="Note.StudentId" class="form-control" asp-items="ViewBag.StudentId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Note.UserId" class="control-label"></label>
-                <select asp-for="Note.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+                <select asp-for="Note.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Note.NoteTypeId" class="control-label"></label>
-                <select asp-for="Note.NoteTypeId" class ="form-control" asp-items="ViewBag.NoteTypeId"></select>
+                <select asp-for="Note.NoteTypeId" class="form-control" asp-items="ViewBag.NoteTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Note.Text" class="control-label"></label>
@@ -41,6 +41,17 @@
     <a asp-page="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+<script>
+    tinymce.init({
+        selector: "textarea",
+        toolbarButtons: [['undo', 'redo'], ['paragraphFormat'], ['bold', 'italic'],
+['alignLeft', 'alignCenter', 'alignRight', 'alignJustify'],
+            ['formatOL', 'formatUL'], ['indent', 'outdent']],
+        menubar: "file edit format"
+    })
+</script>
+
+    
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
