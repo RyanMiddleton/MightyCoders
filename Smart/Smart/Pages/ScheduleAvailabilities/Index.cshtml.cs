@@ -92,5 +92,21 @@ namespace Smart.Pages.ScheduleAvailabilities
             }
             return await OnGetAsync(null);
         }
+
+        public async Task<IActionResult> OnPostCopyTermSchedule(int termToCopyId)
+        {
+            ScheduleAvailabilities = await _db.ScheduleAvailability
+                                              .Where(sa => sa.TermId == termToCopyId)
+                                              .OrderBy(t => t.StartTime)
+                                              .OrderBy(s => s.DayOfWeek)
+                                              .ToListAsync();
+            foreach (var sa in ScheduleAvailabilities)
+            {
+                sa.TermId = TermId;
+                _db.Add(sa);
+            }
+            await _db.SaveChangesAsync();
+            return await OnGetAsync(TermId);
+        }
     }
 }
