@@ -37,15 +37,15 @@
                         <label asp-for="ScheduleAvailability.StartTime"></label>
                     </div>
                     <div class="pr-2">
-                        <input asp-for="ScheduleAvailability.StartTime" />
+                        <input id="StartTime" asp-for="ScheduleAvailability.StartTime" />
                     </div>
                     <div class="pr-1">
                         <label asp-for="ScheduleAvailability.EndTime"></label>
                     </div>
                     <div class="pr-2">
-                        <input asp-for="ScheduleAvailability.EndTime" />
+                        <input id="EndTime" asp-for="ScheduleAvailability.EndTime" />
                     </div>
-                    <input hidden asp-for="ScheduleAvailability.TermId" value="TermId" />
+                    <input hidden asp-for="ScheduleAvailability.TermId" />
                     <div>
                         <input class="btn btn-primary" type="submit" value="Save" />
                     </div>
@@ -72,6 +72,9 @@
         $(document).ready(function () {
             $('#TermId').change(function () {
                 $('#TermForm').submit();
+            });
+            $('#StartTime').change(function () {
+                $('#EndTime').attr('value', $('StartTime').val());
             });
         });
     </script>

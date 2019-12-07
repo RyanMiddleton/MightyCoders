@@ -28,6 +28,7 @@ namespace Smart.Pages.ScheduleAvailabilities
         public List<SelectListItem> DaysOfWeek { get; set; }
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
+        [BindProperty]
         public int TermId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? termId)
@@ -50,7 +51,7 @@ namespace Smart.Pages.ScheduleAvailabilities
                              });
             var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
             selectedTerm.Selected = true;
-            TermId = (int)termId;
+            ScheduleAvailability.TermId = (int)termId;
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .Where(sa => sa.TermId == termId)
                                               .OrderBy(t => t.StartTime)
@@ -66,7 +67,7 @@ namespace Smart.Pages.ScheduleAvailabilities
                 var scheduleToAdd = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.DayOfWeek == ScheduleAvailability.DayOfWeek 
                                                                                         && sa.StartTime == ScheduleAvailability.StartTime 
                                                                                         && sa.EndTime == ScheduleAvailability.EndTime
-                                                                                        && sa.TermId == termId);
+                                                                                        && sa.TermId == ScheduleAvailability.TermId);
                 if (scheduleToAdd == null)
                 {
                     _db.ScheduleAvailability.Add(ScheduleAvailability);
