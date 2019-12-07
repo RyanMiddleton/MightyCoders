@@ -49,9 +49,12 @@ namespace Smart.Pages.ScheduleAvailabilities
                                      Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
                                  };
                              });
-            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
-            selectedTerm.Selected = true;
-            ScheduleAvailability.TermId = (int)termId;
+            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
+            if (selectedTerm != null)
+            {
+                selectedTerm.Selected = true;
+            }
+            TermId = (int)termId;
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .Where(sa => sa.TermId == termId)
                                               .OrderBy(t => t.StartTime)

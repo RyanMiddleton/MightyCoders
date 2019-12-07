@@ -43,7 +43,7 @@
                     <div class="pr-2">
                         <input id="EndTime" asp-for="ScheduleAvailability.EndTime" />
                     </div>
-                    <input hidden asp-for="ScheduleAvailability.TermId" />
+                    <input hidden asp-for="ScheduleAvailability.TermId" value="@Model.TermId"/>
                     <div>
                         <input class="btn btn-primary" type="submit" value="Save" />
                     </div>
@@ -92,7 +92,27 @@
                 $('#TermForm').submit();
             });
             $('#StartTime').change(function () {
-                $('#EndTime').attr('value', $('StartTime').val());
+                console.log(this.valueAsDate);
+                var start = new Date(this.valueAsDate);
+                console.log(start.getUTCHours());
+                //console.log((start.getHours() + 1) + ":" + start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
+                var minPad = "";
+                var hourPad = "";
+                var hoursIncremented;
+                if (start.getMinutes() < 10) {
+                    minPad = "0";
+                }
+                if (start.getUTCHours() < 9) {
+                    hourPad = "0";
+                }
+                if (start.getUTCHours() > 22) {
+                    hoursIncremented = "00";
+                }
+                else {
+                    hoursIncremented = start.getUTCHours() + 1;
+                }
+                
+                $('#EndTime').val(hourPad + hoursIncremented + ":" + minPad + start.getMinutes());
             });
             $('#TermCopyForm option[value=' + @Model.TermId + ']').remove();
         });
