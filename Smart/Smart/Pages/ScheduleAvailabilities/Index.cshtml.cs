@@ -57,7 +57,7 @@ namespace Smart.Pages.ScheduleAvailabilities
             TermId = (int)termId;
             ScheduleAvailabilities = await _db.ScheduleAvailability
                                               .Where(sa => sa.TermId == termId)
-                                              .OrderBy(t => t.StartTime)
+                                              .OrderBy(t => t.StartTime.Hour)
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
             return Page();
@@ -77,7 +77,7 @@ namespace Smart.Pages.ScheduleAvailabilities
                     await _db.SaveChangesAsync();
                 }
             }
-            return await OnGetAsync(termId);
+            return await OnGetAsync(ScheduleAvailability.TermId);
         }
 
         public async Task<IActionResult> OnGetRemoveAsync(int? scheduleId)
