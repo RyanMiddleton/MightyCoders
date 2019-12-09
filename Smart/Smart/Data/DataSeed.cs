@@ -217,14 +217,14 @@ namespace Smart.Data
             }
             context.SaveChanges();
             // Seeding File End
-
+            
             // Seeding NoteType Start
             var noteTypes = new NoteType[]
             {
-                new NoteType { Description = "ApplicationProcess" },
-                new NoteType { Description = "InstructorNote" },
-                new NoteType { Description = "SocialWorkerNote" },
-                new NoteType { Description = "Rating" }
+                new NoteType { Description = "Application Process" },
+                new NoteType { Description = "Instructor Note" },
+                new NoteType { Description = "SocialWorker Note" },
+                new NoteType { Description = "Rating Note" }
             };
 
             foreach (NoteType s in noteTypes)
