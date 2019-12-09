@@ -57,6 +57,8 @@ namespace Smart.Pages.Notes
                 Note.Disabled = true;
             }
 
+            _context.Attach(Note).State = EntityState.Modified;
+
             return RedirectToPage("./Index");
         }
     }

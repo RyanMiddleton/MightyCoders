@@ -41,9 +41,9 @@ namespace Smart.Pages.Notes
             {
                 return NotFound();
             }
-           ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "Id");
-           ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "NoteTypeId");
-           ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FirstName");
+           ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "UserName");
+           ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "Description");
+           ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FullName");
             return Page();
         }
 
