@@ -40,28 +40,11 @@ namespace Smart.Pages.Rating
             }
 
             //get student list & create instance of RatingCriteria
-            IQueryable<Student> studentIQ = _context.Student.Where(a => a.StudentStatus.Description == "Applicant").AsQueryable();//change to where status != active or graduated
+            IQueryable<Student> studentIQ = _context.Student
+                .OrderBy(a=> a.LastName)
+                .Where(a => a.StudentStatus.Description == "Applicant")
+                .AsQueryable();
             ApplicantRating = await _context.ApplicantRating.ToListAsync();
-
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    studentIQ = studentIQ.Where(a => a.FirstName.Contains(searchString) || a.LastName.Contains(searchString));
-            //}
-
-            //studentIQ = sortOrder switch //create sorting options
-            //{
-            //    "last_name_desc" => studentIQ.OrderByDescending(s => s.LastName),
-            //    "first_name_desc" => studentIQ.OrderByDescending(s => s.FirstName),
-            //    "FirstName" => studentIQ.OrderBy(s => s.FirstName),
-            //    "public_school_level_desc" => studentIQ.OrderByDescending(s => s.PublicSchoolLevel),
-            //    "PublicSchoolLevel" => studentIQ.OrderBy(s => s.PublicSchoolLevel),
-            //    "status_desc" => studentIQ.OrderByDescending(s => s.StudentStatus),
-            //    "Status" => studentIQ.OrderBy(s => s.StudentStatus),
-            //    "score_desc" => studentIQ.OrderBy(a => a.ApplicantRatings.Sum(s => s.ScoreAssigned)),
-            //    "Score" => studentIQ.OrderByDescending(a => a.ApplicantRatings.Sum(s => s.ScoreAssigned)),
-            //    _ => studentIQ.OrderBy(s => s.LastName),
-            //};
-
             Student = await studentIQ.AsNoTracking().ToListAsync();
 
             SetCurrentUserId();
@@ -71,11 +54,6 @@ namespace Smart.Pages.Rating
         public void SetCurrentUserId()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            /* int userId = 0;*/ //sets default in case there is an issue getting the id in string form
-                                 //if (!String.IsNullOrEmpty(userIdString))
-                                 //{
-                                 //    userId = int.Parse(userIdString);
-                                 //}
 
             CurrentUserId = userId;
         }

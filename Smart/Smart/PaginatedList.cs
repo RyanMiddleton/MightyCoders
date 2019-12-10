@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Smart
+namespace ContosoUniversity
 {
     public class PaginatedList<T> : List<T>
     {
