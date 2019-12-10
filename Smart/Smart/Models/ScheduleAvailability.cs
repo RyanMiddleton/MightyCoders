@@ -19,6 +19,11 @@ namespace Smart.Models
         [DataType(DataType.Time)]
         [Display(Name = "End Time")]
         public DateTime EndTime { get; set; }
+        [Required]
+        [Display(Name = "Term")]
+        public int TermId { get; set; }
+        [ForeignKey("TermId")]
+        public virtual Term Term { get; set; }
         [NotMapped]
         public bool Selected { get; set; }
         public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }

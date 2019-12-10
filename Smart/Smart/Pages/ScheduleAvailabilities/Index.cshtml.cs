@@ -26,46 +26,91 @@ namespace Smart.Pages.ScheduleAvailabilities
         [BindProperty]
         public ScheduleAvailability ScheduleAvailability { get; set; }
         public List<SelectListItem> DaysOfWeek { get; set; }
+        [BindProperty]
+        public List<SelectListItem> Terms { get; set; }
+        [BindProperty]
+        public int TermId { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? termId)
         {
+            var terms = await _db.Term
+                                 .OrderBy(t => t.StartDate)
+                                 .ToListAsync();
+            if (termId == null)
+            {
+                // default to the next term
+                termId = terms.Where(t => t.StartDate > DateTime.Now).First().TermId;
+            }
+            Terms = terms.ConvertAll(t =>
+                             {
+                                 return new SelectListItem()
+                                 {
+                                     Value = t.TermId.ToString(),
+                                     Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+                                 };
+                             });
+            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
+            if (selectedTerm != null)
+            {
+                selectedTerm.Selected = true;
+            }
+            TermId = (int)termId;
             ScheduleAvailabilities = await _db.ScheduleAvailability
-                                              .OrderBy(t => t.StartTime)
+                                              .Where(sa => sa.TermId == termId)
+                                              .OrderBy(t => t.StartTime.Hour)
                                               .OrderBy(s => s.DayOfWeek)
                                               .ToListAsync();
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int termId)
         {
             if (ModelState.IsValid)
             {
                 var scheduleToAdd = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.DayOfWeek == ScheduleAvailability.DayOfWeek 
                                                                                         && sa.StartTime == ScheduleAvailability.StartTime 
-                                                                                        && sa.EndTime == ScheduleAvailability.EndTime);
+                                                                                        && sa.EndTime == ScheduleAvailability.EndTime
+                                                                                        && sa.TermId == ScheduleAvailability.TermId);
                 if (scheduleToAdd == null)
                 {
                     _db.ScheduleAvailability.Add(ScheduleAvailability);
                     await _db.SaveChangesAsync();
                 }
             }
-            return await OnGetAsync();
+            return await OnGetAsync(ScheduleAvailability.TermId);
         }
 
         public async Task<IActionResult> OnGetRemoveAsync(int? scheduleId)
         {
             if (scheduleId == null)
             {
-                return await OnGetAsync();
+                return await OnGetAsync(null);
             }
             var scheduleToDelete = await _db.ScheduleAvailability.SingleOrDefaultAsync(sa => sa.ScheduleAvailabilityId == scheduleId);
             if (scheduleToDelete != null)
             {
+                var termId = scheduleToDelete.TermId;
                 _db.ScheduleAvailability.Remove(scheduleToDelete);
                 await _db.SaveChangesAsync();
+                return await OnGetAsync(termId);
             }
-            return await OnGetAsync();
+            return await OnGetAsync(null);
         }
-        
+
+        public async Task<IActionResult> OnPostCopyTermSchedule(int termToCopyId)
+        {
+            ScheduleAvailabilities = await _db.ScheduleAvailability
+                                              .Where(sa => sa.TermId == termToCopyId)
+                                              .OrderBy(t => t.StartTime)
+                                              .OrderBy(s => s.DayOfWeek)
+                                              .ToListAsync();
+            foreach (var sa in ScheduleAvailabilities)
+            {
+                sa.TermId = TermId;
+                _db.Add(sa);
+            }
+            await _db.SaveChangesAsync();
+            return await OnGetAsync(TermId);
+        }
     }
 }

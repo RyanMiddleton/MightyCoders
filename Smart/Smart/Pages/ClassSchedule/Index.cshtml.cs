@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,59 +34,82 @@ namespace Smart.Pages.ClassSchedule
 
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
+        [BindProperty]
+        public List<Section> Sections { get; set; }
+        [BindProperty]
+        public Section NewSection { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
+            var terms = await _db.Term
+                                 .OrderBy(t => t.StartDate)
+                                 .ToListAsync();
+            if (termId == null)
+            {
+                // default to the next term
+                termId = terms.Where(t => t.StartDate > DateTime.Now).First().TermId;
+            }
+            Terms = terms.ConvertAll(t =>
+            {
+                return new SelectListItem()
+                {
+                    Value = t.TermId.ToString(),
+                    Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+                };
+            });
+            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
+            selectedTerm.Selected = true;
             ScheduleAvailabilities = await _db.ScheduleAvailability
-                                              .OrderBy(t => t.StartTime)
-                                              .OrderBy(s => s.DayOfWeek)
+                                              .Where(sa => sa.TermId == termId)
+                                              .OrderBy(sa => sa.StartTime.Hour)
                                               .Include(sa => sa.ClassSchedules)
                                               .ToListAsync();
-            Terms = await _db.Term
-                             .Select(t => new SelectListItem
-                             {
-                                 Value = t.TermId.ToString(),
-                                 Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
-                             })
-                             .ToListAsync();
-            Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
-            if (termId != null)
-            {
-                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).First();
-                selectedTerm.Selected = true;
-                Classes = await _db.Class
-                                   .Include(c => c.Course)
-                                   .Include(c => c.ClassSchedules)
-                                        .ThenInclude(cs => cs.Section)
-                                   .Where(t => t.TermId == termId)
-                                   .Where(c => c.Course.IsTaughtHere == true)
-                                   .OrderBy(c => c.Course.Name)
-                                   .ToListAsync();
-                ClassSelectList = Classes.ConvertAll(c =>
+            ScheduleAvailabilities = ScheduleAvailabilities.OrderBy(sa => sa.DayOfWeek).ToList();
+            Classes = await _db.Class
+                               .Include(c => c.Course)
+                               .Include(c => c.ClassSchedules)
+                                    .ThenInclude(cs => cs.Section)
+                               .Where(t => t.TermId == termId)
+                               .Where(c => c.Course.IsTaughtHere == true)
+                               .OrderBy(c => c.Course.Name)
+                               .ToListAsync();
+            ClassSelectList = Classes.ConvertAll(c =>
+                                     {
+                                         return new SelectListItem()
                                          {
-                                             return new SelectListItem()
-                                             {
-                                                 Value = c.ClassId.ToString(),
-                                                 Text = c.Course.Name
-                                             };
-                                         });
-                ClassSelectList.Insert(0, new SelectListItem { Text = "-- Select Class --", Value = null });
-                SectionSelectList = await _db.Section
-                                             .Select(s => new SelectListItem
-                                             {
-                                                 Value = s.SectionId.ToString(),
-                                                 Text = s.Name
-                                             })
-                                             .ToListAsync();
-                SectionSelectList.Insert(0, new SelectListItem { Text = "-- Select Section --", Value = null });
-            }
+                                             Value = c.ClassId.ToString(),
+                                             Text = c.Course.Name
+                                         };
+                                     });
+            ClassSelectList.Insert(0, new SelectListItem { Text = "-- Select Class --", Value = null });
+            Sections = await _db.Section
+                                .OrderBy(s => s.Name)
+                                .ToListAsync();
+            SectionSelectList = Sections.ConvertAll(s =>
+                                        {
+                                            return new SelectListItem()
+                                            {
+                                                Value = s.SectionId.ToString(),
+                                                Text = s.Name
+                                            };
+                                        });
+            SectionSelectList.Insert(0, new SelectListItem { Text = "-- Select Section --", Value = null });
             return Page();
         }
 
         public async Task<IActionResult> OnPostScheduleClass(int? classId, int? sectionId)
         {
+            foreach (Section section in Sections)
+            {
+                _db.Section.Update(section);
+            }
+            if (NewSection.Name != null)
+            {
+                _db.Section.Add(NewSection);
+            }
             if (classId == null)
             {
+                await _db.SaveChangesAsync();
                 return await OnGetAsync(null);
             }
             if (sectionId == null)
@@ -145,6 +169,26 @@ namespace Smart.Pages.ClassSchedule
             await _db.SaveChangesAsync();
             int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
             return await OnGetAsync(termIdToRedirect);
+        }
+
+        public async Task<IActionResult> OnGetRemoveSection(int? sectionId)
+        {
+            if (sectionId == null)
+            {
+                return await OnGetAsync(null);
+            }
+            var sectionToDelete = _db.Section.Include(s => s.ClassSchedules).FirstOrDefault(s => s.SectionId == sectionId);
+            if (sectionToDelete == null)
+            {
+                return await OnGetAsync(null);
+            }
+            if (sectionToDelete.ClassSchedules.Count > 0)
+            {
+                return await OnGetAsync(null);
+            }
+            _db.Section.Remove(sectionToDelete);
+            await _db.SaveChangesAsync();
+            return await OnGetAsync(null);
         }
     }
 }

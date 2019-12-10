@@ -42,67 +42,89 @@
                 <select name="sectionId" id="SectionId" asp-items="Model.SectionSelectList" class="form-control"></select>
             </div>
         }
-
-        @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)
-        {
-            @if (currentDay != Model.ScheduleAvailabilities[i].DayOfWeek)
-            {
-                SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)Model.ScheduleAvailabilities[i].DayOfWeek;
-                currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
-                @if (currentDay < 8)
+        <div class="row">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#sectionCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Manage Sections
+            </button>
+        </div>
+        <div class="collapse pt-3" id="sectionCollapse">
+            <div class="card card-body">
+                @for (int i = 0; i < Model.Sections.Count(); i++)
                 {
-                    @:</ul>
-                    @:</div>
-                    @:<div class="pb-3"></div>
+                    <div class="row">
+                        <input class="form-control col-10" asp-for="@Model.Sections[i].Name" />
+                        <a class="btn btn-danger form-control col-2" asp-page="Index" asp-page-handler="RemoveSection" asp-route-sectionId="@Model.Sections[i].SectionId" type="button">Remove</a>
+                        <input hidden asp-for="@Model.Sections[i].SectionId" />
+                    </div>
                 }
-                @:<div class="card">
-                @:<div class="card-header">
-                    @:<h5>@DayOfWeek</h5>
-                @:</div>
-                @:<ul class="list-group list-group-flush">
-            }
-            <li class="list-group-item">
-                <div class="d-inline">
-                    @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
-                </div>
-                <div class="float-right d-inline">
-                    <input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
-                    <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
-                </div>
-                @if (Model.Classes != null)
+                <label class="col-form-label">Add New Section:</label>
+                <input class="form-control" id="newSection" type="text" asp-for="@Model.NewSection.Name" />
+            </div>
+        </div>
+
+        @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
+        {
+            @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)
+            {
+                @if (currentDay != Model.ScheduleAvailabilities[i].DayOfWeek)
                 {
-                    @foreach (var c in Model.Classes)
+                    SD.EDayOfWeek DayOfWeek = (SD.EDayOfWeek)Model.ScheduleAvailabilities[i].DayOfWeek;
+                    currentDay = Model.ScheduleAvailabilities[i].DayOfWeek;
+                    @if (currentDay < 8)
                     {
-                        @foreach (var cs in c.ClassSchedules)
+                        @:</ul>
+                        @:</div>
+                        @:<div class="pb-3"></div>
+                    }
+                    @:<div class="card">
+                    @:<div class="card-header">
+                        @:<h5>@DayOfWeek</h5>
+                    @:</div>
+                    @:<ul class="list-group list-group-flush">
+                }
+                <li class="list-group-item">
+                    <div class="d-inline">
+                        @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].StartTime) - @Html.DisplayFor(s => Model.ScheduleAvailabilities[i].EndTime)
+                    </div>
+                    <div class="float-right d-inline">
+                        <input class="form-check-input checkBox" type="checkbox" asp-for="@Model.ScheduleAvailabilities[i].Selected" />
+                        <input hidden asp-for="@Model.ScheduleAvailabilities[i].ScheduleAvailabilityId" />
+                    </div>
+                    @if (Model.Classes != null)
+                    {
+                        @foreach (var c in Model.Classes)
                         {
-                            @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                            @foreach (var cs in c.ClassSchedules)
                             {
-                                @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
-                                    @:<div class="offset-1">
-                                        @if (cs.Section != null)
-                                        {
-                                            @(c.Course.Name + " - " + cs.Section.Name)
-                                        }
-                                        else
-                                        {
-                                            @c.Course.Name
-                                        }
-                                        <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
-                                    @:</div>
-                                @:</li>
+                                @if (cs.ScheduleAvailabilityId == Model.ScheduleAvailabilities[i].ScheduleAvailabilityId)
+                                {
+                                    @:<li class="list-group-item scheduledClass @("C" + c.ClassId + " S" + @cs.SectionId)">
+                                        @:<div class="offset-1">
+                                            @if (cs.Section != null)
+                                            {
+                                                @(c.Course.Name + " - " + cs.Section.Name)
+                                            }
+                                            else
+                                            {
+                                                @c.Course.Name
+                                            }
+                                            <a class="btn btn-danger float-right" asp-page="Index" asp-page-handler="Remove" asp-route-classId="@c.ClassId" asp-route-scheduleId="@cs.ScheduleAvailabilityId" type="button">Remove</a>
+                                        @:</div>
+                                    @:</li>
+                                }
                             }
                         }
                     }
+                </li>
                 }
-            </li>
         }
-    @{ 
-        @:</ul>
-        @:</div>
-        <div class="row justify-content-center">
-            <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
-        </div>
-    }
+        @{ 
+            @:</ul>
+            @:</div>
+            <div class="row justify-content-center">
+                <input class="btn btn-primary text-white fixed-bottom mx-auto m-1 w-50" id="saveBtn" type="submit" value="Save" />
+            </div>
+        }
     </form>
 </div>
 
@@ -137,6 +159,9 @@
                     if ($(this).hasClass("S" + $('#SectionId').val())) {
                         $(this).css("border", "5px solid #00A8F6")
                     }
+                    else {
+                        $(this).css("border", "")
+                    }
                 }
                 else {
                     $(this).css("background-color", "");
@@ -149,6 +174,7 @@
             $('#SectionId').change(function () {
                 $(".scheduledClass").each(highlightSelected);
             });
+            $('#newSection').prop('value', "");
         });
     </script>
 }
