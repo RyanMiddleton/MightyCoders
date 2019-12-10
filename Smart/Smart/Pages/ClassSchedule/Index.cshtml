@@ -54,6 +54,7 @@
                     <div class="row">
                         <input class="form-control col-10" asp-for="@Model.Sections[i].Name" />
                         <a class="btn btn-danger form-control col-2" asp-page="Index" asp-page-handler="RemoveSection" asp-route-sectionId="@Model.Sections[i].SectionId" type="button">Remove</a>
+                        <input hidden asp-for="@Model.Sections[i].SectionId" />
                     </div>
                 }
                 <label class="col-form-label">Add New Section:</label>

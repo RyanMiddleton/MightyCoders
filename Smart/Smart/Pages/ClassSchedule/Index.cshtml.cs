@@ -101,11 +101,7 @@ namespace Smart.Pages.ClassSchedule
         {
             foreach (Section section in Sections)
             {
-                var savedSection = _db.Section.FirstOrDefault(s => s.SectionId == section.SectionId);
-                if (savedSection != null && savedSection.Name != section.Name)
-                {
-                    _db.Section.Update(section);
-                }
+                _db.Section.Update(section);
             }
             if (NewSection.Name != null)
             {
