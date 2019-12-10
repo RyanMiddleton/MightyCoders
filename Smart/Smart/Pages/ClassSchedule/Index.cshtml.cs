@@ -34,6 +34,10 @@ namespace Smart.Pages.ClassSchedule
 
         [BindProperty]
         public List<SelectListItem> Terms { get; set; }
+        [BindProperty]
+        public List<Section> Sections { get; set; }
+        [BindProperty]
+        public Section NewSection { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? termId)
         {
@@ -78,21 +82,38 @@ namespace Smart.Pages.ClassSchedule
                                          };
                                      });
             ClassSelectList.Insert(0, new SelectListItem { Text = "-- Select Class --", Value = null });
-            SectionSelectList = await _db.Section
-                                         .Select(s => new SelectListItem
-                                         {
-                                             Value = s.SectionId.ToString(),
-                                             Text = s.Name
-                                         })
-                                         .ToListAsync();
+            Sections = await _db.Section
+                                .OrderBy(s => s.Name)
+                                .ToListAsync();
+            SectionSelectList = Sections.ConvertAll(s =>
+                                        {
+                                            return new SelectListItem()
+                                            {
+                                                Value = s.SectionId.ToString(),
+                                                Text = s.Name
+                                            };
+                                        });
             SectionSelectList.Insert(0, new SelectListItem { Text = "-- Select Section --", Value = null });
             return Page();
         }
 
         public async Task<IActionResult> OnPostScheduleClass(int? classId, int? sectionId)
         {
+            foreach (Section section in Sections)
+            {
+                var savedSection = _db.Section.FirstOrDefault(s => s.SectionId == section.SectionId);
+                if (savedSection != null && savedSection.Name != section.Name)
+                {
+                    _db.Section.Update(section);
+                }
+            }
+            if (NewSection.Name != null)
+            {
+                _db.Section.Add(NewSection);
+            }
             if (classId == null)
             {
+                await _db.SaveChangesAsync();
                 return await OnGetAsync(null);
             }
             if (sectionId == null)
@@ -152,6 +173,26 @@ namespace Smart.Pages.ClassSchedule
             await _db.SaveChangesAsync();
             int termIdToRedirect = _db.Class.FirstOrDefault(c => c.ClassId == classId).TermId;
             return await OnGetAsync(termIdToRedirect);
+        }
+
+        public async Task<IActionResult> OnGetRemoveSection(int? sectionId)
+        {
+            if (sectionId == null)
+            {
+                return await OnGetAsync(null);
+            }
+            var sectionToDelete = _db.Section.Include(s => s.ClassSchedules).FirstOrDefault(s => s.SectionId == sectionId);
+            if (sectionToDelete == null)
+            {
+                return await OnGetAsync(null);
+            }
+            if (sectionToDelete.ClassSchedules.Count > 0)
+            {
+                return await OnGetAsync(null);
+            }
+            _db.Section.Remove(sectionToDelete);
+            await _db.SaveChangesAsync();
+            return await OnGetAsync(null);
         }
     }
 }

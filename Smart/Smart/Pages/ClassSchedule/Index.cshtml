@@ -42,9 +42,27 @@
                 <select name="sectionId" id="SectionId" asp-items="Model.SectionSelectList" class="form-control"></select>
             </div>
         }
+        <div class="row">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#sectionCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Manage Sections
+            </button>
+        </div>
+        <div class="collapse pt-3" id="sectionCollapse">
+            <div class="card card-body">
+                @for (int i = 0; i < Model.Sections.Count(); i++)
+                {
+                    <div class="row">
+                        <input class="form-control col-10" asp-for="@Model.Sections[i].Name" />
+                        <a class="btn btn-danger form-control col-2" asp-page="Index" asp-page-handler="RemoveSection" asp-route-sectionId="@Model.Sections[i].SectionId" type="button">Remove</a>
+                    </div>
+                }
+                <label class="col-form-label">Add New Section:</label>
+                <input class="form-control" id="newSection" type="text" asp-for="@Model.NewSection.Name" />
+            </div>
+        </div>
 
         @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
-        { 
+        {
             @for (int i = 0; i < Model.ScheduleAvailabilities.Count; i++)
             {
                 @if (currentDay != Model.ScheduleAvailabilities[i].DayOfWeek)
@@ -155,6 +173,7 @@
             $('#SectionId').change(function () {
                 $(".scheduledClass").each(highlightSelected);
             });
+            $('#newSection').prop('value', "");
         });
     </script>
 }
