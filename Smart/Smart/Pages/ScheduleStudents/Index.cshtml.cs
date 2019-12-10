@@ -35,14 +35,25 @@ namespace Smart.Pages.ScheduleStudents
 
         public async Task<IActionResult> OnGetAsync(int? termId, int? studentId, string shift = null)
         {
-            Terms = await _db.Term
-                             .Select(t => new SelectListItem
-                             {
-                                 Value = t.TermId.ToString(),
-                                 Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
-                             })
-                             .ToListAsync();
-            Terms.Insert(0, new SelectListItem { Text = "-- Select Term --", Value = null });
+            var terms = await _db.Term
+                                 .OrderBy(t => t.StartDate)
+                                 .ToListAsync();
+            if (termId == null)
+            {
+                // default to the next term
+                termId = terms.Where(t => t.StartDate > DateTime.Now).First().TermId;
+            }
+            Terms = terms.ConvertAll(t =>
+            {
+                return new SelectListItem()
+                {
+                    Value = t.TermId.ToString(),
+                    Text = t.StartDate.ToString("MMMM") + " to " + t.EndDate.ToString("MMMM") + " " + t.EndDate.Year
+                };
+            });
+            var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
+            selectedTerm.Selected = true;
+            TermId = termId;
             Students = await _db.Student
                                 .Where(s => s.StudentStatus.Description == "Student")
                                 .OrderBy(s => s.LastName)
@@ -57,12 +68,6 @@ namespace Smart.Pages.ScheduleStudents
                                 });
             StudentsSelectList.Insert(0, new SelectListItem { Text = "-- Select Student --", Value = null });
 
-            if (termId != null)
-            {
-                var selectedTerm = Terms.Where(t => t.Value == termId.ToString()).FirstOrDefault();
-                selectedTerm.Selected = true;
-                TermId = termId;
-            }
             if (studentId != null)
             {
                 var selectedStudent = StudentsSelectList.Where(s => s.Value == studentId.ToString()).FirstOrDefault();
@@ -99,9 +104,6 @@ namespace Smart.Pages.ScheduleStudents
                         StudentId = studentId;           
                     }
                 }
-            }
-            if (termId != null && studentId != null)
-            {
                 Student student = Students.Where(s => s.StudentId == StudentId).FirstOrDefault();
                 ClassSchedules = await _db.ClassSchedule
                                    .Include(cs => cs.ScheduleAvailability)

@@ -7,55 +7,114 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+    <div class="container">
 
-    <div class="row py-3">
-        <h2>Schedule Availablility</h2>
-    </div>
-    <form method="post">
         <div class="row py-3">
-            <h5>Add New Availability:</h5>
+            <h2>Schedule Availablility</h2>
         </div>
-        <div class="row py-3">
-            <div class="pr-1">
-                <label asp-for="ScheduleAvailability.DayOfWeek"></label>
-            </div>
-            <div class="pr-2">
-                <select asp-for="ScheduleAvailability.DayOfWeek" asp-items="Html.GetEnumSelectList<SD.EDayOfWeek>()"></select>
-            </div>
-            <div class="pr-1">
-                <label asp-for="ScheduleAvailability.StartTime"></label>
-            </div>
-            <div class="pr-2">
-                <input asp-for="ScheduleAvailability.StartTime" />
-            </div>
-            <div class="pr-1">
-                <label asp-for="ScheduleAvailability.EndTime"></label>
-            </div>
-            <div class="pr-2">
-                <input asp-for="ScheduleAvailability.EndTime" />
-            </div>
-            <div>
-                <input class="btn btn-primary" type="submit" value="Save" />
-            </div>
+        <div class="row">
+            <h6>Select Term:</h6>
         </div>
-    </form>
-    @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
-    {
-        var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
-        var dayAvailability = new List<ScheduleAvailability>();
-        @foreach(var sa in Model.ScheduleAvailabilities)
+        <form method="get" id="TermForm">
+            <div class="row pb-3">
+                <select name="termId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+            </div>
+        </form>
+            <form method="post">
+                <div class="row py-3">
+                    <h5>Add New Availability:</h5>
+                </div>
+                <div class="row py-3">
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.DayOfWeek"></label>
+                    </div>
+                    <div class="pr-2">
+                        <select asp-for="ScheduleAvailability.DayOfWeek" asp-items="Html.GetEnumSelectList<SD.EDayOfWeek>()"></select>
+                    </div>
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.StartTime"></label>
+                    </div>
+                    <div class="pr-2">
+                        <input id="StartTime" asp-for="ScheduleAvailability.StartTime" />
+                    </div>
+                    <div class="pr-1">
+                        <label asp-for="ScheduleAvailability.EndTime"></label>
+                    </div>
+                    <div class="pr-2">
+                        <input id="EndTime" asp-for="ScheduleAvailability.EndTime" />
+                    </div>
+                    <input hidden asp-for="ScheduleAvailability.TermId" value="@Model.TermId"/>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Save" />
+                    </div>
+                </div>
+            </form>
+        @if (Model.ScheduleAvailabilities != null && Model.ScheduleAvailabilities.Count > 0)
         {
-            if (currentDay != sa.DayOfWeek)
+            var currentDay = Model.ScheduleAvailabilities[0].DayOfWeek;
+            var dayAvailability = new List<ScheduleAvailability>();
+            @foreach (var sa in Model.ScheduleAvailabilities)
             {
-                <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
-                currentDay = sa.DayOfWeek;
-                dayAvailability.Clear();
+                if (currentDay != sa.DayOfWeek)
+                {
+                    <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
+                    currentDay = sa.DayOfWeek;
+                    dayAvailability.Clear();
+                }
+                dayAvailability.Add(sa);
             }
-            dayAvailability.Add(sa);
+            <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
         }
-        <partial name="_ScheduleAvailabilityDay" model="dayAvailability" />
-    }
+        else
+        {
+            <div class="row">
+                <h5>It looks like there aren't any availabilities created yet. Would you like to copy a previous terms schedule availability to this term?</h5>
+            </div>
+            <div class="row">
+                <h6>Select Term To Copy:</h6>
+            </div>
+            <form method="post" id="TermCopyForm" asp-page-handler="CopyTermSchedule">
+                <div class="row pb-3">
+                    <select name="termToCopyId" id="TermId" asp-items="Model.Terms" class="form-control"></select>
+                </div>
+                <input hidden asp-for="TermId" />
+                <div class="row pb-3">
+                    <input class="btn btn-primary" type="submit" value="Copy Selected Term" />
+                </div>
+            </form>
+        }
 
-</div>
-
+    </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#TermId').change(function () {
+                $('#TermForm').submit();
+            });
+            $('#StartTime').change(function () {
+                console.log(this.valueAsDate);
+                var start = new Date(this.valueAsDate);
+                console.log(start.getUTCHours());
+                //console.log((start.getHours() + 1) + ":" + start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
+                var minPad = "";
+                var hourPad = "";
+                var hoursIncremented;
+                if (start.getMinutes() < 10) {
+                    minPad = "0";
+                }
+                if (start.getUTCHours() < 9) {
+                    hourPad = "0";
+                }
+                if (start.getUTCHours() > 22) {
+                    hoursIncremented = "00";
+                }
+                else {
+                    hoursIncremented = start.getUTCHours() + 1;
+                }
+                
+                $('#EndTime').val(hourPad + hoursIncremented + ":" + minPad + start.getMinutes());
+            });
+            $('#TermCopyForm option[value=' + @Model.TermId + ']').remove();
+        });
+    </script>
+}
