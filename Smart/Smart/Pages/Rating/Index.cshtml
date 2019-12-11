@@ -109,17 +109,19 @@
                             <a class="btn btn-primary text-white" asp-page="Rating" asp-route-Id="@item.StudentId">
                                 Rate Student
                             </a>
+                            <a class="btn btn-primary text-white" asp-page="/Notes/Create" asp-route-id="@item.StudentId">Create Note</a>
                         </div>
                     </td>
                 }
 
                 @if (User.IsInRole("Admin"))
                 {
-                    <td style="width:150px">
-                        <a class="btn btn-primary text-white" asp-page="/Students/Edit" asp-route-id="@item.StudentId">
-                            Edit Student
-                        </a>
-                    </td>
+            <td style="width:150px">
+                <a class="btn btn-primary text-white" asp-page="/Students/Edit" asp-route-id="@item.StudentId">
+                    Edit Student
+                </a>
+                <a class="btn btn-primary text-white" asp-page="/Notes/Create" asp-route-id="@item.StudentId">Create Note</a>
+            </td>
                 }
 
                 @*<a class="btn btn-success text-white" asp-page="Details" asp-route-Id="@item.StudentId">

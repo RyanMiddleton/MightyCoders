@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Smart.Data;
 using Smart.Models;
 
@@ -21,11 +22,12 @@ namespace Smart.Pages.Notes
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "UserName");
-        ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "Description");
-        ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FullName");
+            ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "UserName");
+            ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "Description");
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FullName");
+
             return Page();
         }
 

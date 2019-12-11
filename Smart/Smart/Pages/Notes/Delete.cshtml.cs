@@ -59,7 +59,28 @@ namespace Smart.Pages.Notes
 
             _context.Attach(Note).State = EntityState.Modified;
 
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!NoteExists(Note.NoteId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return RedirectToPage("./Index");
+        }
+
+        private bool NoteExists(int id)
+        {
+            return _context.Note.Any(e => e.NoteId == id);
         }
     }
 }
