@@ -55,6 +55,7 @@ namespace Smart.Pages.ScheduleStudents
             selectedTerm.Selected = true;
             TermId = termId;
             Students = await _db.Student
+                                .Include(s => s.StudentStatus)
                                 .Where(s => s.StudentStatus.Description == "Student")
                                 .OrderBy(s => s.LastName)
                                 .ToListAsync();
