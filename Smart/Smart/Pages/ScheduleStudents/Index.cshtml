@@ -74,6 +74,7 @@
                             }
                             <div class="py-2 border p-1 ClassSchedule">
                                 <input hidden asp-for="@Model.ClassSchedules[i].ClassScheduleId" />
+                                <input hidden asp-for="@Model.ClassSchedules[i].ClassId" />
                                 Instructor: @Model.ClassSchedules[i].Class.ApplicationUser.LastName <br />
                                 Course: @Model.ClassSchedules[i].Class.Course.Name <br />
                                 Section: @Model.ClassSchedules[i].Section.Name <br />
