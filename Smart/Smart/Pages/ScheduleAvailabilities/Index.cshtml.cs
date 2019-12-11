@@ -106,8 +106,13 @@ namespace Smart.Pages.ScheduleAvailabilities
                                               .ToListAsync();
             foreach (var sa in ScheduleAvailabilities)
             {
-                sa.TermId = TermId;
-                _db.Add(sa);
+                _db.Add(new ScheduleAvailability()
+                {
+                    TermId = TermId,
+                    StartTime = sa.StartTime,
+                    EndTime = sa.EndTime,
+                    DayOfWeek = sa.DayOfWeek
+                });
             }
             await _db.SaveChangesAsync();
             return await OnGetAsync(TermId);
