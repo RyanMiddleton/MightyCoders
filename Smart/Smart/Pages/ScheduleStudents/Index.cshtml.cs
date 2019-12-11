@@ -153,9 +153,10 @@ namespace Smart.Pages.ScheduleStudents
                         var newStudentClass = new StudentClass()
                         {
                             StudentId = (int)StudentId,
-                            ClassId = s.ClassScheduleId
+                            ClassId = s.ClassId
                         };
                         _db.StudentClass.Add(newStudentClass);
+                        await _db.SaveChangesAsync();
                     }
                 }
                 else
