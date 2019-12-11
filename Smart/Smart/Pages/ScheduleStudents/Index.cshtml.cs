@@ -148,6 +148,15 @@ namespace Smart.Pages.ScheduleStudents
                         };
                         _db.StudentClassSchedule.Add(newStudentClassSchedule);
                     }
+                    if (!_db.StudentClass.Any(sc => sc.ClassId == s.ClassId && sc.StudentId == StudentId))
+                    {
+                        var newStudentClass = new StudentClass()
+                        {
+                            StudentId = (int)StudentId,
+                            ClassId = s.ClassScheduleId
+                        };
+                        _db.StudentClass.Add(newStudentClass);
+                    }
                 }
                 else
                 {
