@@ -1,9 +1,10 @@
 ﻿@page
 @using System.Linq;
+@using Smart.Utility;
 @model Smart.Pages.Notes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Note Portal";
 }
 
 <h1>Index</h1>
@@ -12,17 +13,75 @@
     <a asp-page="Create" class="btn btn-info">Create New</a>
 </div>
 <div class="backgroundWhite container">
-    <ul id="menu-filters" class="menu-filter-list list-inline text-center">
+
+
+    @if (true)
+    {
+        List<string> list = new List<string>();
+
         @foreach (var item in Model.Note)
         {
-            <li class="btn btn-secondary ml-1 mr-1" data-filter=".@item.NoteType.Description.Replace(" ",string.Empty)">@item.NoteType.Description</li>
+
+            @if (User.IsInRole(SD.AdminUser))
+            {
+                if (!list.Contains(item.NoteType.Description))
+                {
+                    <div class="row" id="menu-wrapper">
+                        <partial name="_NotePartialView"
+                                 model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
+                    </div>
+                    list.Add(item.NoteType.Description);
+                }
+            }
+
+            else
+            {
+                @if (User.IsInRole(SD.InstructorUser))
+                {
+                    if (item.NoteType.Description.Equals("InstructorNote"))
+                    {
+                        if (!list.Contains(item.NoteType.Description))
+                        {
+                            <div class="row" id="menu-wrapper">
+                                <partial name="_NotePartialView"
+                                         model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
+                            </div>
+                            list.Add(item.NoteType.Description);
+                        }
+                    }
+                }
+
+                @if (User.IsInRole(SD.SocialWorkerUser))
+                {
+                    if (item.NoteType.Description.Equals("SocialWorkerNote"))
+                    {
+                        if (!list.Contains(item.NoteType.Description))
+                        {
+                            <div class="row" id="menu-wrapper">
+                                <partial name="_NotePartialView"
+                                         model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
+                            </div>
+                            list.Add(item.NoteType.Description);
+                        }
+                    }
+                }
+
+                @if (User.IsInRole(SD.RaterUser))
+                {
+                    if (item.NoteType.Description.Equals("Rating"))
+                    {
+                        if (!list.Contains(item.NoteType.Description))
+                        {
+                            <div class="row" id="menu-wrapper">
+                                <partial name="_NotePartialView"
+                                         model="@Model.Note.Where(m => m.NoteType.Description.Equals(item.NoteType.Description))" />
+                            </div>
+                            list.Add(item.NoteType.Description);
+                        }
+                    }
+                }
+            }
         }
-    </ul>
-    @foreach (var item in Model.Note)
-    {
-        <div class="row" id="menu-wrapper">
-            <partial name="_NotePartialView"
-                     model="@Model.Note.Where(m=>m.NoteType.Description.Equals(item.NoteType.Description))" />
-        </div>
+
     }
 </div>

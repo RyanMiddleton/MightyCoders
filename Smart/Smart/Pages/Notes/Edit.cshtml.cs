@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using Smart.Data;
 using Smart.Models;
 
@@ -41,18 +42,16 @@ namespace Smart.Pages.Notes
             {
                 return NotFound();
             }
-           ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "Id");
-           ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "NoteTypeId");
-           ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FirstName");
+            ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "UserName");
+            ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "Description");
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FullName");
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            
+            Note.Disabled = false;
 
             _context.Attach(Note).State = EntityState.Modified;
 
@@ -74,6 +73,7 @@ namespace Smart.Pages.Notes
 
             return RedirectToPage("./Index");
         }
+
 
         private bool NoteExists(int id)
         {

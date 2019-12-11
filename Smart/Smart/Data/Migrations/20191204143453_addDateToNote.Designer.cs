@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.Data;
 
 namespace Smart.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191204143453_addDateToNote")]
+    partial class addDateToNote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -444,11 +446,7 @@ namespace Smart.Data.Migrations
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<int>("TermId");
-
                     b.HasKey("ScheduleAvailabilityId");
-
-                    b.HasIndex("TermId");
 
                     b.ToTable("ScheduleAvailability");
                 });
@@ -758,14 +756,6 @@ namespace Smart.Data.Migrations
                     b.HasOne("Smart.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Notes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Smart.Models.ScheduleAvailability", b =>
-                {
-                    b.HasOne("Smart.Models.Term", "Term")
-                        .WithMany("ScheduleAvailabilities")
-                        .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
