@@ -22,12 +22,11 @@ namespace Smart.Pages.Notes
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             ViewData["UserId"] = new SelectList(_context.ApplicationUser, "Id", "UserName");
             ViewData["NoteTypeId"] = new SelectList(_context.NoteType, "NoteTypeId", "Description");
             ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "FullName");
-
             return Page();
         }
 

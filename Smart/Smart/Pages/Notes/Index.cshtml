@@ -38,7 +38,7 @@
             {
                 @if (User.IsInRole(SD.InstructorUser))
                 {
-                    if (item.NoteType.Description.Equals("Instructor Note"))
+                    if (item.NoteType.Description.Equals("InstructorNote"))
                     {
                         if (!list.Contains(item.NoteType.Description))
                         {
@@ -53,7 +53,7 @@
 
                 @if (User.IsInRole(SD.SocialWorkerUser))
                 {
-                    if (item.NoteType.Description.Equals("SocialWorker Note"))
+                    if (item.NoteType.Description.Equals("SocialWorkerNote"))
                     {
                         if (!list.Contains(item.NoteType.Description))
                         {
@@ -68,7 +68,7 @@
 
                 @if (User.IsInRole(SD.RaterUser))
                 {
-                    if (item.NoteType.Description.Equals("Rating Note"))
+                    if (item.NoteType.Description.Equals("Rating"))
                     {
                         if (!list.Contains(item.NoteType.Description))
                         {
